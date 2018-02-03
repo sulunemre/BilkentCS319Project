@@ -10,10 +10,8 @@ TA name:GULDEN OLGUN
 
 Group members:EMRE SULUN
 
-
-              ADAHAN YALCINKAYA
-              
-              
+             ADAHAN YALCINKAYA
+                
               MIHRI NUR CEREN
               
               
