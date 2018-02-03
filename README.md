@@ -6,14 +6,10 @@ Section no:1
 TA name:GULDEN OLGUN
 
 Group members:
-
-              EMRE SULUN
-
-              ADAHAN YALCINKAYA
-              
-              MIHRI NUR CEREN
-              
-              BERK ERZIN
+* [ADAHAN YALÇINKAYA](https://github.com/adahan96)
+* [MİHRİ NUR CEREN](https://github.com/mncrn)
+* [EMRE SÜLÜN](https://github.com/sulunemre)
+* BERK ERZİN
              
 DESCRIPTION:
 
