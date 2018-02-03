@@ -4,7 +4,7 @@ We will make a 2D multiplayer desktop game. We are inspired by [Gravity Guy](htt
 * Emre Sülün - [GitHub](https://github.com/sulunemre)
 * Adahan Yalçınkaya - [GitHub](https://github.com/adahan96)
 * Mihri Nur Ceren - [GitHub](https://github.com/mncrn)
-* Berk Erzin
+* Berk Erzin - [GitHub](https://github.com/BerkErzin)
   * **Instructor:** Eray Tüzün
   * **TA:** Gülden Olgun
 
