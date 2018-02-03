@@ -6,9 +6,7 @@ Section no:1
 TA name:GULDEN OLGUN
 
 Group members:EMRE SULUN
-
               ADAHAN YALCINKAYA
-                
               MIHRI NUR CEREN
               
               BERK ERZIN
