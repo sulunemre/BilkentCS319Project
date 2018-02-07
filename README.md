@@ -4,9 +4,9 @@ The project will be a 2D singleplayer/multiplayer game which will combine shoote
 
 We are inspired by 2D sidescrolling shooters and runner games.
 
-[Gravity Guy](https://www.youtube.com/watch?v=iVTqXnJAotQ) 
+[Gravity Guy](https://www.youtube.com/watch?v=iVTqXnJAotQ) A mobile runner game.
 
-[Pixel Gladiators](http://store.steampowered.com/app/542400/Pixel_Gladiator/)
+[Pixel Gladiators](http://store.steampowered.com/app/542400/Pixel_Gladiator/) A 2D sidescroller shooter game.
 ## People
 * Emre Sülün - [GitHub](https://github.com/sulunemre)
 * Adahan Yalçınkaya - [GitHub](https://github.com/adahan96)
