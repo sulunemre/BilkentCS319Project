@@ -1,6 +1,12 @@
 # CS 319 Project Group 1D
-dfkdkjfjdfjkdj
-We will make a 2D multiplayer desktop game. We are inspired by [Gravity Guy](https://www.youtube.com/watch?v=iVTqXnJAotQ) and planning to add some extra features like weapons and enemies. :gun::guardsman:
+
+The project will be a 2D singleplayer/multiplayer game which will combine shooter and runner genres. The game will be composed of multiple levels which will alternate between shooter and runner levels. In runner levels, player will be in constant motion while avoiding various kinds of obstacles and enemies in an accelerating death race. Shooter levels will instead give players more control over the character's movement while pitting them against numerous waves of enemies in a battle for survival. As players progress through levels, new weapons and abilities will become available to them. To offset this, new kinds of obstacles and enemies will also start to appear, increasing the difficulty.
+
+We are inspired by 2D sidescrolling shooters and runner games.
+
+[Gravity Guy](https://www.youtube.com/watch?v=iVTqXnJAotQ) 
+
+[Pixel Gladiators](http://store.steampowered.com/app/542400/Pixel_Gladiator/)
 ## People
 * Emre Sülün - [GitHub](https://github.com/sulunemre)
 * Adahan Yalçınkaya - [GitHub](https://github.com/adahan96)
