@@ -1,4 +1,4 @@
-# CS 319 Project Group 1D
+# Group 1D: FIGHT OR FLIGHT
 
 The project will be a 2D singleplayer/multiplayer game which will combine shooter and runner genres. The game will be composed of multiple levels which will alternate between shooter and runner levels. In runner levels, player will be in constant motion while avoiding various kinds of obstacles and enemies in an accelerating death race. Shooter levels will instead give players more control over the character's movement while pitting them against numerous waves of enemies in a battle for survival. As players progress through levels, new weapons and abilities will become available to them. To offset this, new kinds of obstacles and enemies will also start to appear, increasing the difficulty.
 
