@@ -14,3 +14,10 @@ Participants: Everybody
 Results:
 - Final object design distributed among members.
 - Subsystems will be explained in the report.
+
+Date: 03/03/2018
+Location: Lab
+Participants: Everybody
+
+Results:
+- Design report (1st iteration) completed and uploaded.
