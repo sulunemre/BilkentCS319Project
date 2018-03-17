@@ -11,8 +11,8 @@ public class Rock {
     private static final int LOWEST_OPENING = 120;
 
     public Rock(float x) {
-        rock1 = new Texture("paladin.jpg");
-        rock2 = new Texture("paladin.jpg");
+        rock1 = new Texture("rock.png");
+        rock2 = new Texture("rock.png");
         rand = new Random();
         rock1Pos = new Vector2(x, rand.nextInt(FLUCTUATION) + LOWEST_OPENING);
 

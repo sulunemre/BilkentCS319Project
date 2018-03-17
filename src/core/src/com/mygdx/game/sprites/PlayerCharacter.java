@@ -14,7 +14,7 @@ public class PlayerCharacter {
 
         position = new Vector2(x, y);
         velocity = new Vector2(0,0);
-        playerCharacter = new Texture("paladin.jpg");
+        playerCharacter = new Texture("paladin.png");
         acc= 0;
     }
 
