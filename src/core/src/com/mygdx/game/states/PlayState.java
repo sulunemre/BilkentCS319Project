@@ -58,6 +58,9 @@ public class PlayState extends State {
             if(cam.position.x - (cam.viewportWidth / 2)> rock.getRock1Pos().x + rock.getRock1().getWidth()){
                 rock.reposition(rock.getRock1Pos().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
             }
+
+            if(rock.collision(playerCharacter.getBounds()))
+                gsm.set(new PlayState(gsm));
         }
         cam.update();
     }
