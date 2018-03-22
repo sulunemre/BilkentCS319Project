@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.MyGdxGame;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
 public class MenuState extends State {
 
@@ -27,7 +29,7 @@ public class MenuState extends State {
 
     private Skin skin;
     private Stage stage;
-
+    private Music music;
     public MenuState(GameStateManager gam) {
         super(gam);
         stage = new Stage();
@@ -55,11 +57,13 @@ public class MenuState extends State {
         stage.addActor(optionsBtn);
         stage.addActor(creditsBtn);
         stage.addActor(exitBtn);
+        music = Gdx.audio.newMusic(Gdx.files.internal("stormwind.mp3"));
 
         playBtn.addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                music.pause();
                 gsm.set(new PlayState(gsm));
             }
         });
@@ -68,6 +72,7 @@ public class MenuState extends State {
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                music.pause();
                 gsm.set(new CreditsState(gsm));
             }
         });
@@ -89,6 +94,12 @@ public class MenuState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+
+        music.setLooping(true);
+        music.setVolume(0.1f);
+        music.play();
+        Gdx.gl.glClearColor(1,0,0,1);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.mygdx.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
@@ -21,6 +22,7 @@ public class PlayState extends State {
 
     private static final int ROCK_SPACING = 125;
     private static final int ROCK_COUNT = 4;
+    private Music music;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -30,7 +32,7 @@ public class PlayState extends State {
         backgroundPos1 = new Vector2(cam.position.x - cam.viewportWidth / 2, BACKGROUND_Y_OFFSET);
         backgroundPos2 = new Vector2((cam.position.x - cam.viewportWidth / 2) + backgroundImage.getWidth(), BACKGROUND_Y_OFFSET);
         rocks = new Array<Rock>();
-
+        music = Gdx.audio.newMusic(Gdx.files.internal("flightStageMusic.mp3"));
         for(int i =1; i < ROCK_COUNT; i++){
 
             rocks.add(new Rock(i * (ROCK_SPACING + Rock.TUBE_WIDTH)));
@@ -56,6 +58,12 @@ public class PlayState extends State {
         updateBackground();
         playerCharacter.update(dt);
         cam.position.x = playerCharacter.getPosition().x + 80;
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+
+        music.setLooping(true);
+        music.setVolume(0.1f);
+        music.play();
+        Gdx.gl.glClearColor(1,0,0,1);
 
         for(Rock rock : rocks){
 

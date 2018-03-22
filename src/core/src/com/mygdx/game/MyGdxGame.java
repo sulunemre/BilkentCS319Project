@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.states.GameStateManager;
 import com.mygdx.game.states.MenuState;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
 public class MyGdxGame extends ApplicationAdapter {
 	public static final int WIDTH = 800;
@@ -17,13 +19,14 @@ public class MyGdxGame extends ApplicationAdapter {
 	private GameStateManager gsm;
 	private SpriteBatch batch;
 	Texture img;
+	
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		img = new Texture("menuBackground.png");
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+
 		gsm.push(new MenuState(gsm));
 	}
 
