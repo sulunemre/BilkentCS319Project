@@ -17,7 +17,7 @@ public class PlayState extends State {
     private Texture backgroundImage;
     private Vector2 backgroundPos1, backgroundPos2;
     private static final int BACKGROUND_Y_OFFSET = -30;
-
+    private double score;
     private Array<Rock> rocks;
 
     private static final int ROCK_SPACING = 125;
@@ -26,6 +26,7 @@ public class PlayState extends State {
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
+        score = 1;
         playerCharacter = new PlayerCharacter(50,100);
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         backgroundImage = new Texture("background1.png");
@@ -33,6 +34,23 @@ public class PlayState extends State {
         backgroundPos2 = new Vector2((cam.position.x - cam.viewportWidth / 2) + backgroundImage.getWidth(), BACKGROUND_Y_OFFSET);
         rocks = new Array<Rock>();
         music = Gdx.audio.newMusic(Gdx.files.internal("flightStageMusic.mp3"));
+        for(int i =1; i < ROCK_COUNT; i++){
+
+            rocks.add(new Rock(i * (ROCK_SPACING + Rock.TUBE_WIDTH)));
+        }
+
+    }
+    public PlayState(GameStateManager gsm, float xLoc, float yLoc, float bgposx1, float  bgposy1, float bgposx2, float bgposy2) {
+        super(gsm);
+        playerCharacter = new PlayerCharacter(xLoc,yLoc);
+        playerCharacter.changeMode();
+        cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
+        backgroundImage = new Texture("background1.png");
+        backgroundPos1 = new Vector2(bgposx1, bgposy1);
+        backgroundPos2 = new Vector2(bgposx2, bgposy2);
+        rocks = new Array<Rock>();
+        music = Gdx.audio.newMusic(Gdx.files.internal("flightStageMusic.mp3"));
+
         for(int i =1; i < ROCK_COUNT; i++){
 
             rocks.add(new Rock(i * (ROCK_SPACING + Rock.TUBE_WIDTH)));
@@ -48,6 +66,14 @@ public class PlayState extends State {
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
             playerCharacter.movedown();
         }
+        if(Gdx.input.isKeyPressed(Input.Keys.TAB)){
+            gsm.set(new PlayStateFight(gsm, playerCharacter.getPosition().x, playerCharacter.getPosition().y, backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y));
+
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            gsm.set(new MenuState(gsm));
+        }
+
 
 
     }
@@ -59,7 +85,8 @@ public class PlayState extends State {
         playerCharacter.update(dt);
         cam.position.x = playerCharacter.getPosition().x + 80;
         Gdx.gl.glClearColor(1, 0, 0, 1);
-
+        increaseScore();
+        System.out.println(score);
         music.setLooping(true);
         music.setVolume(0.1f);
         music.play();
@@ -72,7 +99,7 @@ public class PlayState extends State {
             }
 
             if(rock.collision(playerCharacter.getBounds()))
-                gsm.set(new PlayState(gsm));
+                gsm.set(new MenuState(gsm));
         }
         cam.update();
     }
@@ -106,5 +133,10 @@ public class PlayState extends State {
 
 
 
+    }
+    private void increaseScore(){
+        score = score + playerCharacter.getAcc();
+        System.out.println("scoredaki acc: " + playerCharacter.getAcc());
+        score = score / 10;
     }
 }
