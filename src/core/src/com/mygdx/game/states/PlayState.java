@@ -45,20 +45,25 @@ public class PlayState extends State {
             rocksM.add(new RockMoving((i * ( ROCK_SPACING + 52) + ROCK_SPACING/2)));
         }
     }
-    public PlayState(GameStateManager gsm, float xLoc, float yLoc, float bgposx1, float  bgposy1, float bgposx2, float bgposy2) {
+    public PlayState(GameStateManager gsm, float xLoc, float yLoc, float bgposx1, float  bgposy1, float bgposx2, float bgposy2, double prevScore) {
         super(gsm);
         playerCharacter = new PlayerCharacter(xLoc,yLoc);
-        playerCharacter.changeMode();
+        score = prevScore ;
+        //playerCharacter.changeMode();
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         backgroundImage = new Texture("background1.png");
         backgroundPos1 = new Vector2(bgposx1, bgposy1);
         backgroundPos2 = new Vector2(bgposx2, bgposy2);
         rocks = new Array<Rock>();
+        rocksM = new Array<RockMoving>();
         music = Gdx.audio.newMusic(Gdx.files.internal("flightStageMusic.mp3"));
 
         for(int i =1; i < ROCK_COUNT; i++){
 
             rocks.add(new Rock(i * (ROCK_SPACING + Rock.TUBE_WIDTH)));
+        }
+        for(int i =1; i < ROCKMOVING_COUNT; i++){
+            rocksM.add(new RockMoving((i * ( ROCK_SPACING + 52) + ROCK_SPACING/2)));
         }
 
     }
@@ -72,7 +77,7 @@ public class PlayState extends State {
             playerCharacter.movedown();
         }
         if(Gdx.input.isKeyPressed(Input.Keys.TAB)){
-            gsm.set(new PlayStateFight(gsm, playerCharacter.getPosition().x, playerCharacter.getPosition().y, backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y));
+            gsm.set(new PlayStateFight(gsm, playerCharacter.getPosition().x, playerCharacter.getPosition().y, backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y, score));
 
         }
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
@@ -90,8 +95,9 @@ public class PlayState extends State {
         playerCharacter.update(dt);
         cam.position.x = playerCharacter.getPosition().x + 80;
         Gdx.gl.glClearColor(1, 0, 0, 1);
-        increaseScore();
         System.out.println(score);
+        increaseScore();
+
         music.setLooping(true);
         music.setVolume(0.1f);
         music.play();
@@ -171,6 +177,6 @@ public class PlayState extends State {
     private void increaseScore(){
         score = score + playerCharacter.getAcc();
         System.out.println("scoredaki acc: " + playerCharacter.getAcc());
-        score = score / 10;
+       // score = score / 10;
     }
 }
