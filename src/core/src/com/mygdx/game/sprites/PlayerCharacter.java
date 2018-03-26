@@ -93,4 +93,8 @@ public class PlayerCharacter extends Character{
     public int getAcceleration(){
         return acceleration;
     }
+    public boolean collides(Rectangle enemy){
+        return enemy.overlaps(bounds);
+
+    }
 }

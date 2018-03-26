@@ -133,8 +133,6 @@ public class PlayStateFight extends State {
 
 
 
-                currentEnemy.update();
-
                 for(int j=0; j<enemiesArray.size; j++) {
                     Enemy secondEnemy = enemiesArray.get(j);
 
@@ -142,14 +140,22 @@ public class PlayStateFight extends State {
                     {
                         if(currentEnemy.collides(secondEnemy.getBounds()))
                         {
-                            currentEnemy.setVelocity(new Vector2(0,0));
+                            System.out.println("collide var i: " + i + " j: " + j);
+                            currentEnemy.setPosition(currentEnemy.getPosition());
                         }
+                    //    if(currentEnemy.collides(secondEnemy.getBounds()) && playerCharacter.collides(currentEnemy.getBounds()))
+                       // {
+                       //     System.out.println("collide var i: " + i + " j: " + j);
+                     //       currentEnemy.setPosition(currentEnemy.getPosition().add(-0.4f,-0.4f));
+                     //   }
                         else
                         {
                             currentEnemy.chase(playerCharacter.getPosition().x, playerCharacter.getPosition().y);
                         }
 
                     }
+                    currentEnemy.update();
+                    System.out.println("enemy velocity x: " + currentEnemy.getVelocity().x + " y: " + currentEnemy.getVelocity().y);
                 }
             }
 
@@ -165,7 +171,7 @@ public class PlayStateFight extends State {
 
         for(int i=0; i<enemyCount; i++)
         {
-            Grunt grunt = new Grunt(100, 100, 1, 10, 5, 5);
+            Grunt grunt = new Grunt(100, 100, 0.7, 10, 5, 5);
             float yLocation = (float) Math.random()*260;
 
             grunt.setPosition(new Vector2(0, yLocation));

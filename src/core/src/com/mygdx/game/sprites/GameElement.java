@@ -12,6 +12,7 @@ public abstract class GameElement {
     protected Rectangle bounds;
 
     public GameElement() {
+        velocity = new Vector2(0,0);
         //TODO: sil
     }
 
