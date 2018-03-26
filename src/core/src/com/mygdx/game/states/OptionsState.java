@@ -32,8 +32,8 @@ public class OptionsState extends State  {
     private Music music;
     private TextButton back;
 
-    protected OptionsState(GameStateManager gsm) {
-        super(gsm);
+    protected OptionsState(GameStateManager gam) {
+        super(gam);
         stage =new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();

@@ -16,6 +16,20 @@ public abstract class GameElement {
         //TODO: sil
     }
 
+    public void update()
+    {
+        position.add(velocity);
+        bounds.setPosition(position);
+        if (position.y < 0)
+            position.y = 0;
+        if (position.y > 260)
+            position.y = 260;
+        if (position.x < 0)
+            position.x = 0;
+        if (position.x > 500)
+            position.x = 500;
+    }
+
     public Vector2 getPosition() {
         return position;
     }

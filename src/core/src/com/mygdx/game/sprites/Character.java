@@ -19,19 +19,7 @@ public abstract class Character extends GameElement{
 
     public abstract void attack(int damage);
     public abstract void move();
-    public void update()
-    {
-        position.add(velocity);
-        bounds.setPosition(position);
-        if (position.y < 0)
-            position.y = 0;
-        if (position.y > 260)
-            position.y = 260;
-        if (position.x < 0)
-            position.x = 0;
-        if (position.x > 500)
-            position.x = 500;
-    }
+
 
     public int getHealth() {
         return health;

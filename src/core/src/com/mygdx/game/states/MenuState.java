@@ -68,6 +68,7 @@ public class MenuState extends State {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 music.pause();
+                dispose();
                 gsm.set(new PlayState(gsm));
             }
         });
@@ -135,6 +136,7 @@ public class MenuState extends State {
     @Override
     public void dispose() {
        background.dispose();
+       stage.dispose();
     }
 
 

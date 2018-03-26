@@ -85,7 +85,6 @@ public class PlayStateFight extends State {
             music.pause();
             gsm.set(new PlayState(gsm, playerCharacter.getPosition().x, playerCharacter.getPosition().y, backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y, score));
 
-            //   gsm.set(new PlayState(gsm, playerCharacter.getPosition().x, playerCharacter.getPosition().y, backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y));
         }
     }
 

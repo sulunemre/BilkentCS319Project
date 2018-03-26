@@ -30,8 +30,9 @@ public class HelpState extends State  {
     private Skin skin;
     private Texture background;
     private Music music;
-    protected HelpState(GameStateManager gsm) {
-        super(gsm);
+
+    public HelpState(GameStateManager gam) {
+        super(gam);
         stage =new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();
@@ -42,6 +43,7 @@ public class HelpState extends State  {
         backBtn.setPosition(340 , 90);
         stage.addActor(backBtn);
         music = Gdx.audio.newMusic(Gdx.files.internal("stormwind.mp3"));
+
         backBtn.addListener(new ClickListener()
         {
             @Override
