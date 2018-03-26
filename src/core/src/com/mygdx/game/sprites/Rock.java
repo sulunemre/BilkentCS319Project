@@ -38,6 +38,15 @@ public class Rock {
         rock1Bounds.setPosition(rock1Pos.x, rock1Pos.y);
 
     }
+
+    public void setRockPosY(int x){
+        rock1Pos.y = rock1Pos.y + x;
+    }
+
+    public void setRockBound(){
+        rock1Bounds = new Rectangle(rock1Pos.x, rock1Pos.y, rock1.getWidth(), rock1.getHeight());
+    }
+
     public boolean collision(Rectangle player){
         return player.overlaps(rock1Bounds);
 

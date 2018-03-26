@@ -21,3 +21,11 @@ Participants: Everybody
 
 Results:
 - Design report (1st iteration) completed and uploaded.
+
+Date: 25/03/2018
+Location: Lab
+Participants: Everybody
+
+Results:
+- Moving rocks are implemented.
+- Class hierarchy is an absolute mess. Plans to fix it are made.
