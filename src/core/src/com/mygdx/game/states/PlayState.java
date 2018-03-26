@@ -3,6 +3,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.PlayerCharacter;
@@ -20,6 +21,7 @@ public class PlayState extends State {
     private Vector2 backgroundPos1, backgroundPos2;
     private static final int BACKGROUND_Y_OFFSET = -30;
     private double score;
+    private BitmapFont scoreText;
     private Array<Rock> rocks;
     private Array<RockMoving> rocksM;
 
@@ -31,6 +33,7 @@ public class PlayState extends State {
     public PlayState(GameStateManager gsm) {
         super(gsm);
         score = 1;
+        scoreText = new BitmapFont();
         playerCharacter = new PlayerCharacter(50,100);
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         backgroundImage = new Texture("background1.png");
@@ -50,6 +53,7 @@ public class PlayState extends State {
         super(gsm);
         playerCharacter = new PlayerCharacter(xLoc,yLoc);
         score = prevScore ;
+        scoreText = new BitmapFont();
         //playerCharacter.changeMode();
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         backgroundImage = new Texture("background1.png");
@@ -155,6 +159,8 @@ public class PlayState extends State {
 
             sb.draw(rock.getElementTexture(), rock.getPosition().x, rock.getPosition().y);
         }
+        scoreText.getData().setScale(0.5f);
+        scoreText.draw(sb, "Score:" + score, playerCharacter.getPosition().x - 80, 20);
         sb.end();
     }
 
