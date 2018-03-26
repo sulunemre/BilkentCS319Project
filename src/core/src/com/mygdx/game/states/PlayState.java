@@ -12,9 +12,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.RockMoving;
 
-
-import java.util.WeakHashMap;
-
 public class PlayState extends State {
     private PlayerCharacter playerCharacter;
     private Texture backgroundImage;
@@ -149,7 +146,7 @@ public class PlayState extends State {
        // sb.draw(backgroundImage, cam.position.x - (cam.viewportWidth /2 ), 0);
         sb.draw(backgroundImage, backgroundPos1.x, backgroundPos1.y);
         sb.draw(backgroundImage, backgroundPos2.x, backgroundPos2.y);
-        sb.draw(playerCharacter.getPlayerCharacter(), playerCharacter.getPosition().x, playerCharacter.getPosition().y );
+        sb.draw(playerCharacter.getElementTexture(), playerCharacter.getPosition().x, playerCharacter.getPosition().y );
      //   sb.draw(rock.getRock1(), rock.getRock1Pos().x, rock.getRock1Pos().y);
         for(Rock rock: rocks){
 
@@ -179,8 +176,8 @@ public class PlayState extends State {
 
     }
     private void increaseScore(){
-        score = score + playerCharacter.getAcc();
-        System.out.println("scoredaki acc: " + playerCharacter.getAcc());
+        score = score + playerCharacter.getAcceleration();
+        System.out.println("scoredaki acc: " + playerCharacter.getAcceleration());
        // score = score / 10;
     }
 }

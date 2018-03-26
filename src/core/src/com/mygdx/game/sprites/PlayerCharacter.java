@@ -1,35 +1,38 @@
 package com.mygdx.game.sprites;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
-public class PlayerCharacter {
+public class PlayerCharacter extends Character{
 
-    private Vector2 position;
-    private Vector2 velocity;
-    private Texture playerCharacter;
+//    private Texture playerCharacter;
     private static final int MOVEMENT = 20;
-    private int acc;
-    private Rectangle bounds;
+    private int acceleration;
     public boolean fightOrFlight;
+
     public PlayerCharacter(float x, float y){
+        super(100, 100, 5,25);
 
         position = new Vector2(x, y);
         velocity = new Vector2(0,0);
-        playerCharacter = new Texture("paladin.png");
-        acc= 0;
-        bounds = new Rectangle(x,y,playerCharacter.getWidth(), playerCharacter.getHeight());
+        elementTexture = new Texture("paladin.png");
+        acceleration = 0;
+        bounds = new Rectangle(x,y,elementTexture.getWidth(), elementTexture.getHeight());
         fightOrFlight = false;
     }
     public PlayerCharacter(float x, float y, boolean wtf){
+        super(100, 100, 5,25);
 
         position = new Vector2(x, y);
         velocity = new Vector2(0,0);
-        playerCharacter = new Texture("paladin.png");
-        acc= 0;
-        bounds = new Rectangle(x,y,playerCharacter.getWidth(), playerCharacter.getHeight());
+        elementTexture = new Texture("paladin.png");
+        acceleration = 0;
+        bounds = new Rectangle(x,y,elementTexture.getWidth(), elementTexture.getHeight());
         fightOrFlight = wtf;
     }
+    @Override
+    public void move(){} //TODO: implement
+    @Override
+    public void attack(int damage){}; //TODO: implement
 
 
     public void moveup(){
@@ -41,11 +44,14 @@ public class PlayerCharacter {
         velocity.y = -5;
 
     }
+
+
     public void moveright(){
         velocity.x = 5;
         //position.add(velocity.x, velocity.y);
 
     }
+
     public void moveleft(){
         velocity.x = -5;
       //  position.add(velocity.x, velocity.y);
@@ -55,9 +61,9 @@ public class PlayerCharacter {
     public void update(float dt){
         if(fightOrFlight == false) {
             velocity.add(0, 0);
-            acc++;
-            System.out.println("acc: " + acc);
-            position.add(MOVEMENT * dt + (acc / 100), velocity.y);
+            acceleration++;
+            System.out.println("acceleration: " + acceleration);
+            position.add(MOVEMENT * dt + (acceleration / 100), velocity.y);
             if (position.y < 0)
                 position.y = 0;
             if (position.y > 260)
@@ -83,26 +89,8 @@ public class PlayerCharacter {
         }
 
     }
-    public Rectangle getBounds(){
-        return bounds;
-    }
 
-    public Vector2 getPosition() {
-        return position;
-    }
-
-    public Texture getPlayerCharacter() {
-        return playerCharacter;
-    }
-    public void changeMode(){
-        if(fightOrFlight == false){
-            fightOrFlight = true;
-        }
-        else{
-            fightOrFlight = false;
-        }
-    }
-    public int getAcc(){
-        return acc;
+    public int getAcceleration(){
+        return acceleration;
     }
 }

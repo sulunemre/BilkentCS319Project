@@ -9,7 +9,7 @@ public abstract class GameElement {
     protected Vector2 position;
     protected Vector2 velocity;
     protected Texture elementTexture;
-    private Rectangle bounds;
+    protected Rectangle bounds;
 
     public Vector2 getPosition() {
         return position;

@@ -1,5 +1,6 @@
 package com.mygdx.game.sprites.enemies;
 
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.Character;
 
 public abstract class Enemy extends Character{
@@ -26,7 +27,17 @@ public abstract class Enemy extends Character{
 
     @Override
     public void move(){
+    }
 
+    public void chase(int xLocation, int yLocation)
+    {
+        float xDifference = xLocation - getPosition().x;
+        float yDifference = yLocation - getPosition().y;
+        Vector2 distance = new Vector2(xDifference, yDifference);
+        Vector2 unitVector = new Vector2(xDifference / distance.len(), yDifference / distance.len());
+        Vector2 newVelocity = unitVector.scl(speed);
+
+        setVelocity(newVelocity);
     }
 
     public void setCoolDown(int coolDown) {

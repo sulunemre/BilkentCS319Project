@@ -88,7 +88,7 @@ public class PlayStateFight extends State {
 
 
             handleInput();
-
+            updateBackground();
             playerCharacter.update(dt);
             cam.position.x = playerCharacter.getPosition().x + 80;
             Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -135,7 +135,7 @@ public class PlayStateFight extends State {
             // sb.draw(backgroundImage, cam.position.x - (cam.viewportWidth /2 ), 0);
             sb.draw(backgroundImage, backgroundPos1.x, backgroundPos1.y);
             sb.draw(backgroundImage, backgroundPos2.x, backgroundPos2.y);
-            sb.draw(playerCharacter.getPlayerCharacter(), playerCharacter.getPosition().x, playerCharacter.getPosition().y);
+            sb.draw(playerCharacter.getElementTexture(), playerCharacter.getPosition().x, playerCharacter.getPosition().y);
             //   sb.draw(rock.getRock1(), rock.getRock1Pos().x, rock.getRock1Pos().y);
             for (Rock rock : rocks) {
 
@@ -148,7 +148,6 @@ public class PlayStateFight extends State {
             scoreText.getData().setScale(0.5f);
             scoreText.draw(sb, "Score:" + score, playerCharacter.getPosition().x - 80, 20);
             sb.end();
-
 
     }
 

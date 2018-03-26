@@ -1,6 +1,8 @@
 package com.mygdx.game.sprites;
 
-public abstract class Character {
+import com.badlogic.gdx.math.Vector2;
+
+public abstract class Character extends GameElement{
     protected int health;
     protected int maxHealth;
     protected int speed;
@@ -15,7 +17,10 @@ public abstract class Character {
 
     public abstract void attack(int damage);
     public abstract void move();
-    public abstract void update();
+    public void update()
+    {
+        position.add(velocity);
+    }
 
     public int getHealth() {
         return health;
