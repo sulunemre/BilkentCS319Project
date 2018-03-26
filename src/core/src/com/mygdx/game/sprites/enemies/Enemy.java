@@ -1,5 +1,6 @@
 package com.mygdx.game.sprites.enemies;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.Character;
 
@@ -29,7 +30,7 @@ public abstract class Enemy extends Character{
     public void move(){
     }
 
-    public void chase(int xLocation, int yLocation)
+    public void chase(float xLocation, float yLocation)
     {
         float xDifference = xLocation - getPosition().x;
         float yDifference = yLocation - getPosition().y;
@@ -42,5 +43,9 @@ public abstract class Enemy extends Character{
 
     public void setCoolDown(int coolDown) {
         this.coolDown = coolDown;
+    }
+    public boolean collides(Rectangle enemy){
+        return enemy.overlaps(bounds);
+
     }
 }

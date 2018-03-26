@@ -13,6 +13,7 @@ public class Rock extends GameElement{
     private Rectangle rock1Bounds;
 
     public Rock(float x) {
+        super();
         elementTexture = new Texture("rock.png");
 
         rand = new Random();

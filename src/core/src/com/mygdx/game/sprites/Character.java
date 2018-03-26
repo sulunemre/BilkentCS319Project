@@ -1,5 +1,6 @@
 package com.mygdx.game.sprites;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class Character extends GameElement{
@@ -9,6 +10,7 @@ public abstract class Character extends GameElement{
     protected int damage;
 
     public Character(int health, int maxHealth, int speed, int damage) {
+        super();
         this.health = health;
         this.maxHealth = maxHealth;
         this.speed = speed;

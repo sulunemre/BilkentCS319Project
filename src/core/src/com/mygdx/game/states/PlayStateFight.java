@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.PlayerCharacter;
 import com.mygdx.game.sprites.Rock;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.RockMoving;
 import com.mygdx.game.sprites.enemies.Enemy;
+import com.mygdx.game.sprites.enemies.Grunt;
 
 import java.util.WeakHashMap;
 
@@ -25,8 +27,10 @@ public class PlayStateFight extends State {
     private Array<RockMoving> rocksM;
     private Array<Enemy> enemiesArray;
     private BitmapFont scoreText;
+    private BitmapFont waveText;
     private double score;
     private int wave;
+    private boolean waveCleared;
     private static final int ROCK_SPACING = 125;
     private static final int ROCK_COUNT = 4;
     private static final int ROCKMOVING_COUNT = 3;
@@ -38,8 +42,10 @@ public class PlayStateFight extends State {
        // playerCharacter.changeMode();
         score = prevScore;
         wave = 1;
+        waveCleared = true;
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         scoreText = new BitmapFont();
+        waveText = new BitmapFont();
         backgroundImage = new Texture("background1.png");
         backgroundPos1 = new Vector2(bgposx1, bgposy1);
         backgroundPos2 = new Vector2(bgposx2, bgposy2);
@@ -85,46 +91,90 @@ public class PlayStateFight extends State {
 
     @Override
     public void update(float dt) {
-
-
             handleInput();
             updateBackground();
             playerCharacter.update(dt);
             cam.position.x = playerCharacter.getPosition().x + 80;
             Gdx.gl.glClearColor(1, 0, 0, 1);
-            System.out.println(score);
             music.setLooping(true);
             music.setVolume(0.1f);
             music.play();
             Gdx.gl.glClearColor(1, 0, 0, 1);
             for (RockMoving rock : rocksM ){
-            if(rock.getVelocity().y == 0)
-                rock.setVelocity(new Vector2(0,5));
+                if(rock.getVelocity().y == 0)
+                    rock.setVelocity(new Vector2(0,5));
 
-            if ((rock.getPosition()).y > 250){
-                rock.setVelocity(new Vector2(0,-5));
+                if ((rock.getPosition()).y > 250){
+                    rock.setVelocity(new Vector2(0,-5));
+                }
+
+                if ((rock.getPosition()).y < 15){
+                    rock.setVelocity(new Vector2(0,5));
+                }
+
+                if(cam.position.x - (cam.viewportWidth / 2)> rock.getPosition().x + rock.getElementTexture().getWidth()){
+                    rock.reposition(rock.getPosition().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
+                }
+
+                rock.move();
+                rock.setRockBound();
+
+                if(rock.collision(playerCharacter.getBounds()))
+                    gsm.set(new PlayState(gsm));
+
             }
 
-            if ((rock.getPosition()).y < 15){
-                rock.setVelocity(new Vector2(0,5));
-            }
-
-            if(cam.position.x - (cam.viewportWidth / 2)> rock.getPosition().x + rock.getElementTexture().getWidth()){
-                rock.reposition(rock.getPosition().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
-            }
-
-            rock.move();
-            rock.setRockBound();
-
-            if(rock.collision(playerCharacter.getBounds()))
-                gsm.set(new PlayState(gsm));
-
-            }
 
             cam.update();
 
+            for(int i=0; i<enemiesArray.size; i++)
+            {
+                Enemy currentEnemy = enemiesArray.get(i);
 
 
+
+                currentEnemy.update();
+
+                for(int j=0; j<enemiesArray.size; j++) {
+                    Enemy secondEnemy = enemiesArray.get(j);
+
+                    if (j != i)
+                    {
+                        if(currentEnemy.collides(secondEnemy.getBounds()))
+                        {
+                            currentEnemy.setVelocity(new Vector2(0,0));
+                        }
+                        else
+                        {
+                            currentEnemy.chase(playerCharacter.getPosition().x, playerCharacter.getPosition().y);
+                        }
+
+                    }
+                }
+            }
+
+            if(waveCleared)
+            {
+                sendNewWave();
+            }
+    }
+
+    private void sendNewWave() {
+
+        int enemyCount = wave * 5;
+
+        for(int i=0; i<enemyCount; i++)
+        {
+            Grunt grunt = new Grunt(100, 100, 1, 10, 5, 5);
+            float yLocation = (float) Math.random()*260;
+
+            grunt.setPosition(new Vector2(0, yLocation));
+            grunt.setBounds(new Rectangle(grunt.getPosition().x, grunt.getPosition().y, grunt.getElementTexture().getWidth(), grunt.getElementTexture().getHeight())); //Wrap enemy with rectangle
+            enemiesArray.add(grunt);
+        }
+
+        waveCleared = false;
+        wave++;
     }
 
     @Override
@@ -138,15 +188,19 @@ public class PlayStateFight extends State {
             sb.draw(playerCharacter.getElementTexture(), playerCharacter.getPosition().x, playerCharacter.getPosition().y);
             //   sb.draw(rock.getRock1(), rock.getRock1Pos().x, rock.getRock1Pos().y);
             for (Rock rock : rocks) {
-
                 sb.draw(rock.getElementTexture(), rock.getPosition().x, rock.getPosition().y);
             }
             for(RockMoving rock: rocksM){
-
-            sb.draw(rock.getElementTexture(), rock.getPosition().x, rock.getPosition().y);
+                sb.draw(rock.getElementTexture(), rock.getPosition().x, rock.getPosition().y);
+            }
+            for(Enemy enemy : enemiesArray)
+            {
+                sb.draw(enemy.getElementTexture(), enemy.getPosition().x, enemy.getPosition().y);
             }
             scoreText.getData().setScale(0.5f);
+            waveText.getData().setScale(0.5f);
             scoreText.draw(sb, "Score:" + score, playerCharacter.getPosition().x - 80, 20);
+            waveText.draw(sb, "Wave number:" + wave, playerCharacter.getPosition().x - 80, 40);
             sb.end();
 
     }

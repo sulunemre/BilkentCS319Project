@@ -11,6 +11,10 @@ public abstract class GameElement {
     protected Texture elementTexture;
     protected Rectangle bounds;
 
+    public GameElement() {
+        //TODO: sil
+    }
+
     public Vector2 getPosition() {
         return position;
     }
