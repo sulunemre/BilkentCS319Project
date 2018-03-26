@@ -25,6 +25,7 @@ public class MenuState extends State {
     private TextButton highScoresBtn;
     private TextButton optionsBtn;
     private TextButton creditsBtn;
+    private TextButton helpBtn;
     private TextButton exitBtn;
 
     private Skin skin;
@@ -43,13 +44,15 @@ public class MenuState extends State {
         optionsBtn = new TextButton("Options", skin);
         creditsBtn = new TextButton("Credits", skin);
         exitBtn = new TextButton("Exit", skin);
+        helpBtn=new TextButton("Help",skin);
 
         //Set positions of buttons
         playBtn.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/16 , Gdx.graphics.getHeight()/2 + 20);
         highScoresBtn.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/16 , Gdx.graphics.getHeight()/2 - 25);
         optionsBtn.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/16 , Gdx.graphics.getHeight()/2 - 70);
         creditsBtn.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/16 , Gdx.graphics.getHeight()/2 - 115);
-        exitBtn.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/16 , Gdx.graphics.getHeight()/2 - 160);
+        helpBtn.setPosition(Gdx.graphics.getWidth()/2-Gdx.graphics.getWidth()/16, Gdx.graphics.getHeight()/2-155);
+        exitBtn.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/16 , Gdx.graphics.getHeight()/2 - 190);
 
         //Add buttons to stage
         stage.addActor(playBtn);
@@ -57,6 +60,7 @@ public class MenuState extends State {
         stage.addActor(optionsBtn);
         stage.addActor(creditsBtn);
         stage.addActor(exitBtn);
+        stage.addActor(helpBtn);
         music = Gdx.audio.newMusic(Gdx.files.internal("stormwind.mp3"));
 
         playBtn.addListener(new ClickListener()
@@ -76,7 +80,22 @@ public class MenuState extends State {
                 gsm.set(new CreditsState(gsm));
             }
         });
-
+        helpBtn.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                music.pause();
+                gsm.set(new HelpState(gsm));
+            }
+        });
+        optionsBtn.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                music.pause();
+                gsm.set(new OptionsState(gsm));
+            }
+        });
         exitBtn.addListener(new ClickListener()
         {
             @Override
@@ -84,6 +103,7 @@ public class MenuState extends State {
                 Gdx.app.exit();
             }
         });
+
 
 
     }
