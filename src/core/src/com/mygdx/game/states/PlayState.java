@@ -83,9 +83,6 @@ public class PlayState extends State {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             gsm.set(new MenuState(gsm));
         }
-
-
-
     }
 
     @Override
