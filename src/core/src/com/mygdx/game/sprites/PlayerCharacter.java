@@ -35,6 +35,7 @@ public class PlayerCharacter {
     public void moveup(){
         velocity.y = 5;
 
+
     }
     public void movedown(){
         velocity.y = -5;
@@ -42,10 +43,12 @@ public class PlayerCharacter {
     }
     public void moveright(){
         velocity.x = 5;
+        //position.add(velocity.x, velocity.y);
 
     }
     public void moveleft(){
         velocity.x = -5;
+      //  position.add(velocity.x, velocity.y);
 
     }
 

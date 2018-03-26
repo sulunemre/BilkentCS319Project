@@ -1,27 +1,23 @@
 package com.mygdx.game.sprites;
 
 
+import com.badlogic.gdx.math.Vector2;
+
 public class RockMoving extends Rock {
 
-    private int velocity;
+
 
     public RockMoving(float x) {
         super(x);
-        this.velocity = 0;
+        velocity = new Vector2(0,0);
     }
 
-    public int getVelocity(){
-        return velocity;
 
-    }
 
-    public void setVelocity(int x){
-        velocity = x;
 
-    }
 
     public void move(){
-        setRockPosY(velocity);
+        setPosition(new Vector2(getPosition().x,getPosition().y + getVelocity().y));
     }
 
     /*public void update(float dt){

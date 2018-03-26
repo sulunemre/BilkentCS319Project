@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.RockMoving;
 
+
 import java.util.WeakHashMap;
 
 public class PlayState extends State {
@@ -102,8 +103,8 @@ public class PlayState extends State {
 
         for(Rock rock : rocks){
 
-            if(cam.position.x - (cam.viewportWidth / 2)> rock.getRock1Pos().x + rock.getRock1().getWidth()){
-                rock.reposition(rock.getRock1Pos().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
+            if(cam.position.x - (cam.viewportWidth / 2)> rock.getPosition().x + rock.getElementTexture().getWidth()){
+                rock.reposition(rock.getPosition().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
             }
 
             if(rock.collision(playerCharacter.getBounds()))
@@ -111,19 +112,19 @@ public class PlayState extends State {
         }
 
         for (RockMoving rock : rocksM ){
-            if(rock.getVelocity() == 0)
-                rock.setVelocity(5);
+            if(rock.getVelocity().y == 0)
+                rock.setVelocity(new Vector2(0,5));
 
-            if ((rock.getRock1Pos()).y > 250){
-                rock.setVelocity(-5);
+            if ((rock.getPosition()).y > 250){
+                rock.setVelocity(new Vector2(0,-5));
             }
 
-            if ((rock.getRock1Pos()).y < 15){
-                rock.setVelocity(5);
+            if ((rock.getPosition()).y < 15){
+                rock.setVelocity(new Vector2(0,5));
             }
 
-            if(cam.position.x - (cam.viewportWidth / 2)> rock.getRock1Pos().x + rock.getRock1().getWidth()){
-                rock.reposition(rock.getRock1Pos().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
+            if(cam.position.x - (cam.viewportWidth / 2)> rock.getPosition().x + rock.getElementTexture().getWidth()){
+                rock.reposition(rock.getPosition().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
             }
 
             rock.move();
@@ -148,11 +149,11 @@ public class PlayState extends State {
      //   sb.draw(rock.getRock1(), rock.getRock1Pos().x, rock.getRock1Pos().y);
         for(Rock rock: rocks){
 
-            sb.draw(rock.getRock1(), rock.getRock1Pos().x, rock.getRock1Pos().y);
+            sb.draw(rock.getElementTexture(), rock.getPosition().x, rock.getPosition().y);
         }
         for(RockMoving rock: rocksM){
 
-            sb.draw(rock.getRock1(), rock.getRock1Pos().x, rock.getRock1Pos().y);
+            sb.draw(rock.getElementTexture(), rock.getPosition().x, rock.getPosition().y);
         }
         sb.end();
     }
