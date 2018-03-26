@@ -3,6 +3,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.PlayerCharacter;
@@ -21,6 +22,7 @@ public class PlayStateFight extends State {
     private Array<Rock> rocks;
     private Array<RockMoving> rocksM;
     private double score;
+    private BitmapFont scoreText;
     private static final int ROCK_SPACING = 125;
     private static final int ROCK_COUNT = 4;
     private static final int ROCKMOVING_COUNT = 3;
@@ -31,6 +33,7 @@ public class PlayStateFight extends State {
         playerCharacter = new PlayerCharacter(xLoc,yLoc, true);
        // playerCharacter.changeMode();
         score = prevScore;
+        scoreText = new BitmapFont();
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         backgroundImage = new Texture("background1.png");
         backgroundPos1 = new Vector2(bgposx1, bgposy1);
@@ -133,6 +136,9 @@ public class PlayStateFight extends State {
 
             sb.draw(rock.getRock1(), rock.getRock1Pos().x, rock.getRock1Pos().y);
             }
+
+            scoreText.getData().setScale(0.5f);
+            scoreText.draw(sb, "Score:" + score, playerCharacter.getPosition().x - 80, 20);
             sb.end();
 
 
