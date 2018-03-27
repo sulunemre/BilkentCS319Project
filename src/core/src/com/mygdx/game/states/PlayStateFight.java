@@ -153,7 +153,7 @@ public class PlayStateFight extends State {
                         }
 
                     }
-                    currentEnemy.update();
+                    currentEnemy.update(playerCharacter.getBounds());
                     System.out.println("enemy velocity x: " + currentEnemy.getVelocity().x + " y: " + currentEnemy.getVelocity().y);
                 }
             }
