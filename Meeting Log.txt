@@ -29,3 +29,11 @@ Participants: Everybody
 Results:
 - Moving rocks are implemented.
 - Class hierarchy is an absolute mess. Plans to fix it are made.
+
+Date: 30/03/2018
+Location: Library
+Participants: Everybody
+
+Results: 
+- Work distribution is made for 2nd iteration analysis report.
+- Deadline is set as Monday 02.04.2018
