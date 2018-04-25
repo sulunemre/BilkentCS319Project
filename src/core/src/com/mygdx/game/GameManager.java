@@ -6,6 +6,8 @@ import com.badlogic.gdx.audio.Music;
 public class GameManager {
     private static GameManager gameManager = new GameManager();
 
+    private FileSystemManager fileSystemManager = FileSystemManager.getInstance();
+
     private String playerName;
     private Music currentMusic;
     private double score;
@@ -18,7 +20,8 @@ public class GameManager {
     }
 
     public void saveHighScore(){
-        //TODO: implement
+        Score scoreToBeSaved = new Score(playerName, score);
+        fileSystemManager.saveScoreToTxt(scoreToBeSaved);
     }
 
     public void loadHighScoreTable(){
