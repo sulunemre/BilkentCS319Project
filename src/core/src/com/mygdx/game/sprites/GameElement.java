@@ -16,6 +16,10 @@ public abstract class GameElement {
         //TODO: sil
     }
 
+    /**
+     * Updates element location according to velocity.
+     * Also checks position bounds.
+     */
     public void update()
     {
         position.add(velocity);

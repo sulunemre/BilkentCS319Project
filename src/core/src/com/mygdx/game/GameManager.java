@@ -1,3 +1,6 @@
+package com.mygdx.game;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
 public class GameManager {
@@ -34,5 +37,13 @@ public class GameManager {
      */
     public void unmuteMusic(){
         currentMusic.setVolume(1);
+    }
+
+    /**
+     * Changes the music.
+     * @param musicPath name of the music file in the assets folder
+     */
+    public void setMusic(String musicPath){
+        currentMusic = Gdx.audio.newMusic(Gdx.files.internal(musicPath));
     }
 }
