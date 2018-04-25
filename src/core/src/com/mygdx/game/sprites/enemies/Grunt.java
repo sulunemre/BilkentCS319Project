@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Grunt extends Enemy {
     public Grunt(int health, int maxHealth, double speed, int damage, int spawnRate, int coolDown){
-        super(health, maxHealth, speed, damage, spawnRate, coolDown);
+        super(health, maxHealth, speed, damage, spawnRate, coolDown, new MeleeAttack());
         elementTexture = new Texture("paladin.png");
     }
 

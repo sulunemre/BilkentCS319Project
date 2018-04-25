@@ -5,13 +5,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.Character;
 
 public abstract class Enemy extends Character{
-    private int spawnRate;
-    private int coolDown;
+    protected int spawnRate;
+    protected int coolDown;
+    protected AttackStrategy attackStrategy;
 
-    public Enemy(int health, int maxHealth, double speed, int damage, int spawnRate, int coolDown){
+    public Enemy(int health, int maxHealth, double speed, int damage, int spawnRate, int coolDown, AttackStrategy attackStrategy){
         super(health, maxHealth, speed, damage);
         this.spawnRate = spawnRate;
         this.coolDown = coolDown;
+        this.attackStrategy = attackStrategy;
     }
 
     public int getSpawnRate() {
@@ -38,9 +40,6 @@ public abstract class Enemy extends Character{
             Vector2 unitVector = new Vector2(xDifference / distance.len(), yDifference / distance.len());
             Vector2 newVelocity = unitVector.scl((float) speed);
             setVelocity(newVelocity);
-
-
-
     }
 
     public void update(Rectangle enemy)
@@ -71,7 +70,12 @@ public abstract class Enemy extends Character{
     }
 
     public boolean collides(Rectangle enemy){
+        //TODO: collision detection, controller classa taşınacak
         return enemy.overlaps(bounds);
 
+    }
+
+    public void attack(Vector2 positionToBeAttacked){
+        attackStrategy.attack(positionToBeAttacked);
     }
 }
