@@ -3,6 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
+import java.io.IOException;
+
 public class GameManager {
     private static GameManager gameManager = new GameManager();
 
@@ -19,7 +21,7 @@ public class GameManager {
     private GameManager() {
     }
 
-    public void saveHighScore(){
+    public void saveHighScore() throws IOException, ClassNotFoundException {
         Score scoreToBeSaved = new Score(playerName, score);
         fileSystemManager.saveScoreToTxt(scoreToBeSaved);
     }
