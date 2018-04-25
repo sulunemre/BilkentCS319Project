@@ -37,8 +37,7 @@ public class PlayStateFight extends State {
     private static final int ROCKMOVING_COUNT = 3;
     private Music music;
 
-    public PlayStateFight(GameStateManager gsm, float xLoc, float yLoc, float bgposx1, float  bgposy1, float bgposx2, float bgposy2, double prevScore) {
-        super(gsm);
+    public PlayStateFight(float xLoc, float yLoc, float bgposx1, float  bgposy1, float bgposx2, float bgposy2, double prevScore) {
         playerCharacter = new PlayerCharacter(xLoc,yLoc, true);
        // playerCharacter.changeMode();
         score = prevScore;
@@ -84,7 +83,7 @@ public class PlayStateFight extends State {
         }
         if(Gdx.input.isKeyPressed(Input.Keys.Q)){
             music.pause();
-            gsm.set(new PlayState(gsm, playerCharacter.getPosition().x, playerCharacter.getPosition().y, backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y, score));
+            gsm.set(new PlayState(playerCharacter.getPosition().x, playerCharacter.getPosition().y, backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y, score));
 
         }
     }
@@ -120,7 +119,7 @@ public class PlayStateFight extends State {
                 rock.setRockBound();
 
                 if(rock.collision(playerCharacter.getBounds()))
-                    gsm.set(new PlayState(gsm));
+                    gsm.set(new PlayState());
 
             }
 

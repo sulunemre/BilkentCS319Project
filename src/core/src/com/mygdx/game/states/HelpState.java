@@ -23,32 +23,30 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.stateControllers.HelpStateController;
+
 import java.util.List;
 public class HelpState extends State  {
+    private HelpStateController controller;
     private TextButton backBtn;
     private Stage stage;
     private Skin skin;
     private Texture background;
-    private Music music;
 
-    public HelpState(GameStateManager gam) {
-        super(gam);
-        stage =new Stage();
+    public HelpState() {
+        stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();
         background = new Texture("help.jpg");
-        //helpBackground=new Texture("help2.png");
-        backBtn=new TextButton("BACK",skin);
+        backBtn =new TextButton("BACK",skin);
         stage.act();
         backBtn.setPosition(340 , 90);
         stage.addActor(backBtn);
-        music = Gdx.audio.newMusic(Gdx.files.internal("stormwind.mp3"));
 
         backBtn.addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                music.pause();
                 gsm.set(new MenuState(gsm));
             }
         });
@@ -64,19 +62,13 @@ public class HelpState extends State  {
     public void update(float dt) {
         handleInput();
         Gdx.gl.glClearColor(1, 0, 0, 0);
-
-        music.setLooping(true);
-        music.setVolume(0.1f);
-        music.play();
         Gdx.gl.glClearColor(0,0,1,1);
-
     }
 
     @Override
     public void render(SpriteBatch ab) {
         ab.begin();
         ab.draw(background, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        //.draw(helpBackground,0,0,MyGdxGame.WIDTH,MyGdxGame.HEIGHT);
         ab.end();
         stage.act();
         stage.draw();
@@ -87,6 +79,7 @@ public class HelpState extends State  {
     public void dispose() {
 
     }
+
     private void createBasicSkin(){
         //Create a font
         BitmapFont font = new BitmapFont();

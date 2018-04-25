@@ -27,8 +27,7 @@ public class PlayState extends State {
     private static final int ROCKMOVING_COUNT = 3;
     private Music music;
 
-    public PlayState(GameStateManager gsm) {
-        super(gsm);
+    public PlayState() {
         score = 1;
         scoreText = new BitmapFont();
         playerCharacter = new PlayerCharacter(50,100);
@@ -46,8 +45,7 @@ public class PlayState extends State {
             rocksM.add(new RockMoving((i * ( ROCK_SPACING + 52) + ROCK_SPACING/2)));
         }
     }
-    public PlayState(GameStateManager gsm, float xLoc, float yLoc, float bgposx1, float  bgposy1, float bgposx2, float bgposy2, double prevScore) {
-        super(gsm);
+    public PlayState(float xLoc, float yLoc, float bgposx1, float  bgposy1, float bgposx2, float bgposy2, double prevScore) {
         playerCharacter = new PlayerCharacter(xLoc,yLoc);
         score = prevScore ;
         scoreText = new BitmapFont();
@@ -79,7 +77,7 @@ public class PlayState extends State {
             playerCharacter.movedown();
         }
         if(Gdx.input.isKeyPressed(Input.Keys.TAB)){
-            gsm.set(new PlayStateFight(gsm, playerCharacter.getPosition().x, playerCharacter.getPosition().y, backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y, score));
+            gsm.set(new PlayStateFight(playerCharacter.getPosition().x, playerCharacter.getPosition().y, backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y, score));
 
         }
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
@@ -132,7 +130,7 @@ public class PlayState extends State {
             rock.setRockBound();
 
             if(rock.collision(playerCharacter.getBounds()))
-                gsm.set(new PlayState(gsm));
+                gsm.set(new PlayState());
 
         }
 

@@ -3,13 +3,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Stack;
 public class GameStateManager {
+    private static GameStateManager gameStateManager = new GameStateManager();
 
+    private Stack<State> states = new Stack<State>();;
 
-    private Stack<State> states;
+    public static GameStateManager getInstance(){
+        return gameStateManager;
+    }
 
     public GameStateManager(){
-
-        states = new Stack<State>();
     }
 
     public void push(State state){

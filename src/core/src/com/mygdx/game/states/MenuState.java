@@ -32,7 +32,6 @@ public class MenuState extends State {
     private Stage stage;
     private Music music;
     public MenuState(GameStateManager gam) {
-        super(gam);
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();
@@ -69,7 +68,7 @@ public class MenuState extends State {
             public void clicked(InputEvent event, float x, float y) {
                 music.pause();
                 dispose();
-                gsm.set(new PlayState(gsm));
+                gsm.set(new PlayState());
             }
         });
 
@@ -78,7 +77,7 @@ public class MenuState extends State {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 music.pause();
-                gsm.set(new CreditsState(gsm));
+                gsm.set(new CreditsState());
             }
         });
         helpBtn.addListener(new ClickListener()
@@ -86,7 +85,7 @@ public class MenuState extends State {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 music.pause();
-                gsm.set(new HelpState(gsm));
+                gsm.set(new HelpState());
             }
         });
         optionsBtn.addListener(new ClickListener()
@@ -94,7 +93,7 @@ public class MenuState extends State {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 music.pause();
-                gsm.set(new OptionsState(gsm));
+                gsm.set(new OptionsState());
             }
         });
         exitBtn.addListener(new ClickListener()

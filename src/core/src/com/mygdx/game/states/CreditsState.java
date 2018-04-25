@@ -18,9 +18,7 @@ public class CreditsState extends State{
     private Texture backgroundImage;
 
 
-    public CreditsState(GameStateManager gsm) {
-        super(gsm);
-
+    public CreditsState() {
         backgroundImage = new Texture("creditsBackground.png");
     }
 

@@ -24,7 +24,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		gsm = new GameStateManager();
+		gsm = GameStateManager.getInstance();
 		img = new Texture("menuBackground.png");
 
 		gsm.push(new MenuState(gsm));

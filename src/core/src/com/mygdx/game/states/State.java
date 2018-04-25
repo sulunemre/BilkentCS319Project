@@ -8,12 +8,10 @@ public abstract class State {
     protected Vector3 mouse;
     protected GameStateManager gsm;
 
-    protected State(GameStateManager gsm){
-        this.gsm = gsm;
+    protected State(){
+        gsm = GameStateManager.getInstance();
         cam = new OrthographicCamera();
         mouse = new Vector3();
-
-
     }
     protected abstract void handleInput();
     public abstract void update(float dt);
