@@ -1,8 +1,10 @@
 package com.mygdx.game;
 
-public class Score implements Comparable<Score>{
-    public String playerName;
-    public double score;
+import java.io.Serializable;
+
+public class Score implements Comparable<Score>, Serializable{
+    String playerName;
+    double score;
 
     public Score(String playerName, double score) {
         this.playerName = playerName;
