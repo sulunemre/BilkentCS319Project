@@ -17,7 +17,6 @@ public abstract class Character extends GameElement{
         this.damage = damage;
     }
 
-    public abstract void attack(int damage);
     public abstract void move();
 
 

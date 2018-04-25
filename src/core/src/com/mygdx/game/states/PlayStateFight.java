@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.RockMoving;
 import com.mygdx.game.sprites.enemies.Enemy;
+import com.mygdx.game.sprites.enemies.EnemyFactory;
 import com.mygdx.game.sprites.enemies.Grunt;
 
 import java.util.WeakHashMap;
@@ -167,12 +168,14 @@ public class PlayStateFight extends State {
     private void sendNewWave() {
 
         int enemyCount = wave * 5;
+        EnemyFactory enemyFactory = new EnemyFactory();
 
         for(int i=0; i<enemyCount; i++)
         {
-            Grunt grunt = new Grunt(100, 100, 0.7, 10, 5, 5);
-            float yLocation = (float) Math.random()*260;
 
+            Grunt grunt = (Grunt) enemyFactory.getEnemy("grunt");
+
+            float yLocation = (float) Math.random()*260;
             grunt.setPosition(new Vector2(0, yLocation));
             grunt.setBounds(new Rectangle(grunt.getPosition().x, grunt.getPosition().y, grunt.getElementTexture().getWidth(), grunt.getElementTexture().getHeight())); //Wrap enemy with rectangle
             enemiesArray.add(grunt);

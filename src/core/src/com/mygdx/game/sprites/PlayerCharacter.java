@@ -31,8 +31,6 @@ public class PlayerCharacter extends Character{
     }
     @Override
     public void move(){} //TODO: implement
-    @Override
-    public void attack(int damage){}; //TODO: implement
 
 
     public void moveup(){
