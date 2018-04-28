@@ -32,6 +32,8 @@ public class FlightStateController extends AbstractStateController{
     private static final int ROCKMOVING_COUNT = 3;
     private static final int BACKGROUND_Y_OFFSET = -30;
 
+    private double flightSpeed;
+
     public FlightStateController(){
         super();
         gameWorld = GameWorld.getInstance();
@@ -71,20 +73,27 @@ public class FlightStateController extends AbstractStateController{
 
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         gameManager.setMusic("flightStageMusic.mp3");
+
+        flightSpeed = 1;
     }
 
     @Override
     public void handleInput() {
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
             playerCharacter.moveUp();
-            playerCharacter.setSpeed(0);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
             playerCharacter.moveDown();
         }
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){ //TODO: test için yazıldı, sonra sil
+            playerCharacter.moveLeft();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.D)){ //TODO: test için yazıldı, sonra sil
+            playerCharacter.moveRight();
+        }
         if(Gdx.input.isKeyPressed(Input.Keys.TAB)){
             gameStateManager.set(new PlayStateFight());
-            
+
 
         }
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
@@ -101,7 +110,8 @@ public class FlightStateController extends AbstractStateController{
         cam.position.x = gameWorld.getPlayerCharacter().getPosition().x + 80;
         Gdx.gl.glClearColor(1, 0, 0, 1);
 
-        System.out.println(gameManager.getScore());
+        flightSpeed++;
+        playerCharacter.setSpeed((flightSpeed / 10));
         increaseScore();
 
         gameManager.getCurrentMusic().setLooping(true);
@@ -121,15 +131,15 @@ public class FlightStateController extends AbstractStateController{
         }
 
         for (RockMoving rock : rocksMoving ){
-            if(rock.getVelocity().y == 0)
-                rock.setVelocity(new Vector2(0,0));
+            if(rock.getDirection().y == 0)
+                rock.setDirection(new Vector2(0,0));
 
             if ((rock.getPosition()).y > 250){
-                rock.setVelocity(new Vector2(0,0));
+                rock.setDirection(new Vector2(0,0));
             }
 
             if ((rock.getPosition()).y < 15){
-                rock.setVelocity(new Vector2(0,0));
+                rock.setDirection(new Vector2(0,0));
             }
 
             if(cam.position.x - (cam.viewportWidth / 2)> rock.getPosition().x + rock.getElementTexture().getWidth()){
@@ -157,7 +167,6 @@ public class FlightStateController extends AbstractStateController{
 
     private void increaseScore(){
         gameManager.setScore(gameManager.getScore() + playerCharacter.getAcceleration());
-        System.out.println("scoredaki acc: " + playerCharacter.getAcceleration());
         // score = score / 10;
     }
 }

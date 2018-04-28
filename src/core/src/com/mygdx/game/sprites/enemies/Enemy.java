@@ -36,20 +36,20 @@ public abstract class Enemy extends Character{
             Vector2 distance = new Vector2(xDifference, yDifference);
             Vector2 unitVector = new Vector2(xDifference / distance.len(), yDifference / distance.len());
             Vector2 newVelocity = unitVector.scl((float) speed);
-            setVelocity(newVelocity);
+            setDirection(newVelocity);
     }
 
     public void update(Rectangle enemy)
     {
-        //position.add(velocity);
+        //position.add(direction);
 
         Vector2 positionTemp = new Vector2(position);
         Rectangle boundsTemp = new Rectangle(bounds);
 
-        positionTemp.add(velocity);
+        positionTemp.add(direction);
 
         if ( !enemy.overlaps( boundsTemp.setPosition(positionTemp))) {
-            position.add(velocity);
+            position.add(direction);
             bounds.setPosition(position);
         }
         if (position.y < 0)

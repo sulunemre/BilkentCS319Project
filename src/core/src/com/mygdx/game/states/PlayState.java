@@ -37,11 +37,9 @@ public class PlayState extends State {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(controller.getCam().combined);
         sb.begin();
-       // sb.draw(backgroundImage, cam.position.x - (cam.viewportWidth /2 ), 0);
         sb.draw(backgroundImage, backgroundPos1.x, backgroundPos1.y);
         sb.draw(backgroundImage, backgroundPos2.x, backgroundPos2.y);
-        sb.draw(playerCharacter.getElementTexture(), playerCharacter.getPosition().x, playerCharacter.getPosition().y );
-     //   sb.draw(rock.getRock1(), rock.getRock1Pos().x, rock.getRock1Pos().y);
+      //  sb.draw(playerCharacter.getElementTexture(), playerCharacter.getPosition().x, playerCharacter.getPosition().y );
 
         for(GameElement ge: gameWorld.getGameElementsArray()){
             sb.draw(ge.getElementTexture(), ge.getPosition().x, ge.getPosition().y);

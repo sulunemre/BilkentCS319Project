@@ -3,7 +3,6 @@ package com.mygdx.game.stateControllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameManager;
@@ -12,7 +11,6 @@ import com.mygdx.game.sprites.PlayerCharacter;
 import com.mygdx.game.sprites.Rock;
 import com.mygdx.game.sprites.RockMoving;
 import com.mygdx.game.sprites.enemies.Enemy;
-import com.mygdx.game.states.PlayState;
 
 
 public class FightStateController extends AbstractStateController {
@@ -118,7 +116,7 @@ public class FightStateController extends AbstractStateController {
 
                 }
                 currentEnemy.update(playerCharacter.getBounds());
-                System.out.println("enemy velocity x: " + currentEnemy.getVelocity().x + " y: " + currentEnemy.getVelocity().y);
+                System.out.println("enemy direction x: " + currentEnemy.getDirection().x + " y: " + currentEnemy.getDirection().y);
             }
         }
 
