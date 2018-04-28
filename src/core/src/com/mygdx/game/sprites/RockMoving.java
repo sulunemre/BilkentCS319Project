@@ -7,8 +7,8 @@ public class RockMoving extends Rock {
 
 
 
-    public RockMoving(float x) {
-        super(x);
+    public RockMoving(float x, float y) {
+        super(x,y);
         velocity = new Vector2(0,0);
     }
 

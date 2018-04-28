@@ -8,30 +8,40 @@ public abstract class GameElement {
 
     protected Vector2 position;
     protected Vector2 velocity;
+    protected double speed;
     protected Texture elementTexture;
     protected Rectangle bounds;
 
-    public GameElement() {
+//    public GameElement() {
+//        velocity = new Vector2(0,0);
+//        //TODO: sil
+//    }
+
+    public GameElement(float x, float y, String texturePath){
+        position = new Vector2(x, y);
         velocity = new Vector2(0,0);
-        //TODO: sil
+        elementTexture = new Texture(texturePath);
+        bounds = new Rectangle(x, y, elementTexture.getWidth(), elementTexture.getHeight());
     }
 
     /**
      * Updates element location according to velocity.
      * Also checks position bounds.
+     * @param dt
      */
-    public void update()
+    public void update(float dt)
     {
+        velocity = velocity.scl((float) speed);
         position.add(velocity);
         bounds.setPosition(position);
         if (position.y < 0)
             position.y = 0;
         if (position.y > 260) //TODO: sayılar düzenlenecek
             position.y = 260;
-        if (position.x < 0)
-            position.x = 0;
-        if (position.x > 500)
-            position.x = 500;
+//        if (position.x < 0)
+//            position.x = 0;
+//        if (position.x > 500)
+//            position.x = 500;
     }
 
     public Vector2 getPosition() {
@@ -64,5 +74,13 @@ public abstract class GameElement {
 
     public void setBounds(Rectangle bounds) {
         this.bounds = bounds;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 }

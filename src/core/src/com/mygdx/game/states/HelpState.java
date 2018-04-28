@@ -47,18 +47,16 @@ public class HelpState extends State  {
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gsm.set(new MenuState(gsm));
+                gsm.set(new MenuState());
             }
         });
 
     }
 
-    @Override
     protected void handleInput() {
 
     }
 
-    @Override
     public void update(float dt) {
         handleInput();
         Gdx.gl.glClearColor(1, 0, 0, 0);

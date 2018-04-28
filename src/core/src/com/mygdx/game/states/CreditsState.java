@@ -22,15 +22,13 @@ public class CreditsState extends State{
         backgroundImage = new Texture("creditsBackground.png");
     }
 
-    @Override
     protected void handleInput() {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-            gsm.set(new MenuState(gsm));
+            gsm.set(new MenuState());
         }
 
     }
 
-    @Override
     public void update(float dt) {
         handleInput();
     }

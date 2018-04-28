@@ -31,7 +31,7 @@ public class MenuState extends State {
     private Skin skin;
     private Stage stage;
     private Music music;
-    public MenuState(GameStateManager gam) {
+    public MenuState() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();
@@ -108,10 +108,8 @@ public class MenuState extends State {
 
     }
 
-    @Override
     public void handleInput() {}
 
-    @Override
     public void update(float dt) {
         handleInput();
         Gdx.gl.glClearColor(1, 0, 0, 1);

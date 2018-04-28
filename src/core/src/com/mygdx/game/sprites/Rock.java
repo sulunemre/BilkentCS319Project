@@ -10,15 +10,14 @@ public class Rock extends GameElement{
     private Random rand;
     private static final int FLUCTUATION = 130;
     private static final int LOWEST_OPENING = 120;
-    private Rectangle rock1Bounds;
+  //  private Rectangle rock1Bounds;
 
-    public Rock(float x) {
-        super();
-        elementTexture = new Texture("rock.png");
+    public Rock(float x, float y) {
+        super(x, y, "rock.png");
 
         rand = new Random();
         position = new Vector2(x, rand.nextInt(FLUCTUATION) + LOWEST_OPENING);
-        rock1Bounds = new Rectangle(position.x, position.y, elementTexture.getWidth(), elementTexture.getHeight());
+        bounds = new Rectangle(position.x, position.y, elementTexture.getWidth(), elementTexture.getHeight());
 
     }
 
@@ -30,18 +29,17 @@ public class Rock extends GameElement{
 
     public void reposition(float x) {
         position.set(x, rand.nextInt(FLUCTUATION) + LOWEST_OPENING);
-        rock1Bounds.setPosition(position.x, position.y);
-
+        bounds.setPosition(position.x, position.y);
     }
 
 
 
     public void setRockBound(){
-        rock1Bounds = new Rectangle(position.x, position.y, elementTexture.getWidth(), elementTexture.getHeight());
+        bounds = new Rectangle(position.x, position.y, elementTexture.getWidth(), elementTexture.getHeight());
     }
 
     public boolean collision(Rectangle player){
-        return player.overlaps(rock1Bounds);
+        return player.overlaps(bounds);
 
     }
 }

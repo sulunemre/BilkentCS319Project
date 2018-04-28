@@ -9,6 +9,7 @@ import com.mygdx.game.states.GameStateManager;
 import com.mygdx.game.states.MenuState;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.mygdx.game.states.PlayState;
 
 public class MyGdxGame extends ApplicationAdapter {
 	public static final int WIDTH = 800;
@@ -27,7 +28,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		gsm = GameStateManager.getInstance();
 		img = new Texture("menuBackground.png");
 
-		gsm.push(new MenuState(gsm));
+		gsm.push(new PlayState());
 	}
 
 	@Override

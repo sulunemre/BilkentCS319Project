@@ -1,6 +1,8 @@
 package com.mygdx.game.sprites;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.sprites.enemies.Enemy;
 
 import java.io.Serializable;
 
@@ -8,6 +10,12 @@ public class GameWorld implements Serializable {
     private static GameWorld gameWorld = new GameWorld();
 
     private Array<GameElement> gameElementsArray  = new Array<GameElement>();
+    private PlayerCharacter playerCharacter;
+    private Array<Rock> rocks;
+    private Array<RockMoving> rocksMoving;
+    private Array<Enemy> enemyArray;
+
+    private Vector2 backgroundPos1, backgroundPos2;
 
     public static GameWorld getInstance() {
         return gameWorld;
@@ -34,5 +42,58 @@ public class GameWorld implements Serializable {
 
     public Array<GameElement> getGameElementsArray() {
         return gameElementsArray;
+    }
+    public void updateAll(float dt){
+        for(GameElement ge : gameElementsArray){
+            ge.update(dt);
+        }
+    }
+
+    public PlayerCharacter getPlayerCharacter() {
+        return playerCharacter;
+    }
+
+    public void setPlayerCharacter(PlayerCharacter playerCharacter) {
+        this.playerCharacter = playerCharacter;
+    }
+
+    public Array<Rock> getRocks() {
+        return rocks;
+    }
+
+    public void setRocks(Array<Rock> rocks) {
+        this.rocks = rocks;
+    }
+
+    public Array<RockMoving> getRocksMoving() {
+        return rocksMoving;
+    }
+
+    public void setRocksMoving(Array<RockMoving> rocksMoving) {
+        this.rocksMoving = rocksMoving;
+    }
+
+    public Vector2 getBackgroundPos1() {
+        return backgroundPos1;
+    }
+
+    public void setBackgroundPos1(Vector2 backgroundPos1) {
+        this.backgroundPos1 = backgroundPos1;
+    }
+
+    public Vector2 getBackgroundPos2() {
+        return backgroundPos2;
+    }
+
+    public void setBackgroundPos2(Vector2 backgroundPos2) {
+        this.backgroundPos2 = backgroundPos2;
+    }
+
+    public Array<Enemy> getEnemyArray() {
+        return enemyArray;
+    }
+
+    public void setEnemyArray(Array<Enemy> enemyArray) {
+        this.enemyArray = enemyArray;
     }
 }

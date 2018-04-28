@@ -5,155 +5,48 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.GameManager;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.sprites.PlayerCharacter;
-import com.mygdx.game.sprites.Rock;
+import com.mygdx.game.sprites.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.sprites.RockMoving;
+import com.mygdx.game.stateControllers.FlightStateController;
 
 public class PlayState extends State {
     private PlayerCharacter playerCharacter;
     private Texture backgroundImage;
     private Vector2 backgroundPos1, backgroundPos2;
-    private static final int BACKGROUND_Y_OFFSET = -30;
+    private GameWorld gameWorld;
+
     private double score;
     private BitmapFont scoreText;
-    private Array<Rock> rocks;
-    private Array<RockMoving> rocksM;
 
-    private static final int ROCK_SPACING = 125;
-    private static final int ROCK_COUNT = 3;
-    private static final int ROCKMOVING_COUNT = 3;
-    private Music music;
 
     public PlayState() {
+        controller = new FlightStateController();
+        gameWorld = GameWorld.getInstance();
         score = 1;
         scoreText = new BitmapFont();
-        playerCharacter = new PlayerCharacter(50,100);
-        cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
+        playerCharacter = gameWorld.getPlayerCharacter();
+        backgroundPos1 = gameWorld.getBackgroundPos1();
+        backgroundPos2 = gameWorld.getBackgroundPos2();
         backgroundImage = new Texture("background1.png");
-        backgroundPos1 = new Vector2(cam.position.x - cam.viewportWidth / 2, BACKGROUND_Y_OFFSET);
-        backgroundPos2 = new Vector2((cam.position.x - cam.viewportWidth / 2) + backgroundImage.getWidth(), BACKGROUND_Y_OFFSET);
-        rocks = new Array<Rock>();
-        rocksM = new Array<RockMoving>();
-        music = Gdx.audio.newMusic(Gdx.files.internal("flightStageMusic.mp3"));
-        for(int i =1; i < ROCK_COUNT; i++){
-            rocks.add(new Rock(i * ( ROCK_SPACING + 52)));
-        }
-        for(int i =1; i < ROCKMOVING_COUNT; i++){
-            rocksM.add(new RockMoving((i * ( ROCK_SPACING + 52) + ROCK_SPACING/2)));
-        }
-    }
-    public PlayState(float xLoc, float yLoc, float bgposx1, float  bgposy1, float bgposx2, float bgposy2, double prevScore) {
-        playerCharacter = new PlayerCharacter(xLoc,yLoc);
-        score = prevScore ;
-        scoreText = new BitmapFont();
-        //playerCharacter.changeMode();
-        cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
-        backgroundImage = new Texture("background1.png");
-        backgroundPos1 = new Vector2(bgposx1, bgposy1);
-        backgroundPos2 = new Vector2(bgposx2, bgposy2);
-        rocks = new Array<Rock>();
-        rocksM = new Array<RockMoving>();
-        music = Gdx.audio.newMusic(Gdx.files.internal("flightStageMusic.mp3"));
-
-        for(int i =1; i < ROCK_COUNT; i++){
-
-            rocks.add(new Rock(i * (ROCK_SPACING + Rock.TUBE_WIDTH)));
-        }
-        for(int i =1; i < ROCKMOVING_COUNT; i++){
-            rocksM.add(new RockMoving((i * ( ROCK_SPACING + 52) + ROCK_SPACING/2)));
-        }
-
-    }
-
-    @Override
-    protected void handleInput() {
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            playerCharacter.moveup();
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)){
-            playerCharacter.movedown();
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.TAB)){
-            gsm.set(new PlayStateFight(playerCharacter.getPosition().x, playerCharacter.getPosition().y, backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y, score));
-
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-            gsm.set(new MenuState(gsm));
-        }
-    }
-
-    @Override
-    public void update(float dt) {
-        handleInput();
-        updateBackground();
-        playerCharacter.update(dt);
-        cam.position.x = playerCharacter.getPosition().x + 80;
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        System.out.println(score);
-        increaseScore();
-
-        music.setLooping(true);
-        music.setVolume(0.1f);
-        music.play();
-        Gdx.gl.glClearColor(1,0,0,1);
-
-        for(Rock rock : rocks){
-
-            if(cam.position.x - (cam.viewportWidth / 2)> rock.getPosition().x + rock.getElementTexture().getWidth()){
-                rock.reposition(rock.getPosition().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
-            }
-
-            if(rock.collision(playerCharacter.getBounds()))
-                gsm.set(new MenuState(gsm));
-        }
-
-        for (RockMoving rock : rocksM ){
-            if(rock.getVelocity().y == 0)
-                rock.setVelocity(new Vector2(0,5));
-
-            if ((rock.getPosition()).y > 250){
-                rock.setVelocity(new Vector2(0,-5));
-            }
-
-            if ((rock.getPosition()).y < 15){
-                rock.setVelocity(new Vector2(0,5));
-            }
-
-            if(cam.position.x - (cam.viewportWidth / 2)> rock.getPosition().x + rock.getElementTexture().getWidth()){
-                rock.reposition(rock.getPosition().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
-            }
-
-            rock.move();
-            rock.setRockBound();
-
-            if(rock.collision(playerCharacter.getBounds()))
-                gsm.set(new PlayState());
-
-        }
-
-        cam.update();
     }
 
     @Override
     public void render(SpriteBatch sb) {
-        sb.setProjectionMatrix(cam.combined);
+        sb.setProjectionMatrix(controller.getCam().combined);
         sb.begin();
        // sb.draw(backgroundImage, cam.position.x - (cam.viewportWidth /2 ), 0);
         sb.draw(backgroundImage, backgroundPos1.x, backgroundPos1.y);
         sb.draw(backgroundImage, backgroundPos2.x, backgroundPos2.y);
         sb.draw(playerCharacter.getElementTexture(), playerCharacter.getPosition().x, playerCharacter.getPosition().y );
      //   sb.draw(rock.getRock1(), rock.getRock1Pos().x, rock.getRock1Pos().y);
-        for(Rock rock: rocks){
 
-            sb.draw(rock.getElementTexture(), rock.getPosition().x, rock.getPosition().y);
+        for(GameElement ge: gameWorld.getGameElementsArray()){
+            sb.draw(ge.getElementTexture(), ge.getPosition().x, ge.getPosition().y);
         }
-        for(RockMoving rock: rocksM){
 
-            sb.draw(rock.getElementTexture(), rock.getPosition().x, rock.getPosition().y);
-        }
         scoreText.getData().setScale(0.5f);
         scoreText.draw(sb, "Score:" + score, playerCharacter.getPosition().x - 80, 20);
         sb.end();
@@ -163,19 +56,6 @@ public class PlayState extends State {
     public void dispose() {
 
     }
-    private void updateBackground(){
-        if(cam.position.x - (cam.viewportWidth / 2) > backgroundPos1.x + backgroundImage.getWidth())
-           backgroundPos1.add(backgroundImage.getWidth() * 2, 0);
-        if(cam.position.x - (cam.viewportWidth / 2) > backgroundPos2.x + backgroundImage.getWidth())
-            backgroundPos2.add(backgroundImage.getWidth() * 2, 0);
 
 
-
-
-    }
-    private void increaseScore(){
-        score = score + playerCharacter.getAcceleration();
-        System.out.println("scoredaki acc: " + playerCharacter.getAcceleration());
-       // score = score / 10;
-    }
 }

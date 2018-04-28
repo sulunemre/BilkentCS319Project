@@ -6,19 +6,12 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Character extends GameElement{
     protected int health;
     protected int maxHealth;
-    protected double speed;
     protected int damage;
 
-    public Character(int health, int maxHealth, double speed, int damage) {
-        super();
-        this.health = health;
-        this.maxHealth = maxHealth;
-        this.speed = speed;
-        this.damage = damage;
+    public Character(float x, float y, String texturePath) {
+        super(x,y, texturePath);
+        health = maxHealth;
     }
-
-    public abstract void move();
-
 
     public int getHealth() {
         return health;
@@ -36,13 +29,7 @@ public abstract class Character extends GameElement{
         this.maxHealth = maxHealth;
     }
 
-    public double getSpeed() {
-        return speed;
-    }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
 
     public int getDamage() {
         return damage;

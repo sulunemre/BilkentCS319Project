@@ -2,12 +2,12 @@ package com.mygdx.game.stateControllers;
 
 public class HelpStateController extends AbstractStateController {
     @Override
-    void handleInput() {
+    public void handleInput() {
 
     }
 
     @Override
-    void update(float dt) {
+    public void update(float dt) {
 
     }
 }

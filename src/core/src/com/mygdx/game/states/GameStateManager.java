@@ -5,13 +5,13 @@ import java.util.Stack;
 public class GameStateManager {
     private static GameStateManager gameStateManager = new GameStateManager();
 
-    private Stack<State> states = new Stack<State>();;
+    private Stack<State> states = new Stack<State>();
 
     public static GameStateManager getInstance(){
         return gameStateManager;
     }
 
-    public GameStateManager(){
+    private GameStateManager(){
     }
 
     public void push(State state){
@@ -29,7 +29,7 @@ public class GameStateManager {
 
     }
     public void update(float dt){
-        states.peek().update(dt);
+        states.peek().getController().update(dt);
     }
     public void render(SpriteBatch ab){
         states.peek().render(ab);

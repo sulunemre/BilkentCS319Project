@@ -9,8 +9,8 @@ public abstract class Enemy extends Character{
     protected int coolDown;
     protected AttackStrategy attackStrategy;
 
-    public Enemy(int health, int maxHealth, double speed, int damage, int spawnRate, int coolDown, AttackStrategy attackStrategy){
-        super(health, maxHealth, speed, damage);
+    public Enemy(float x, float y, int spawnRate, int coolDown, String texturePath, AttackStrategy attackStrategy){
+        super(x, y, texturePath);
         this.spawnRate = spawnRate;
         this.coolDown = coolDown;
         this.attackStrategy = attackStrategy;
@@ -28,9 +28,6 @@ public abstract class Enemy extends Character{
         return coolDown;
     }
 
-    @Override
-    public void move(){
-    }
 
     public void chase(float xLocation, float yLocation)
     {

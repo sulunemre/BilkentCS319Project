@@ -51,4 +51,20 @@ public class GameManager {
     public void setMusic(String musicPath){
         currentMusic = Gdx.audio.newMusic(Gdx.files.internal(musicPath));
     }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public Music getCurrentMusic() {
+        return currentMusic;
+    }
+
+    public void setCurrentMusic(Music currentMusic) {
+        this.currentMusic = currentMusic;
+    }
 }
