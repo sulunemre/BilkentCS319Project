@@ -29,8 +29,7 @@ public abstract class Enemy extends Character{
     }
 
 
-    public void chase(float xLocation, float yLocation)
-    {
+    public void chase(float xLocation, float yLocation) {
             float xDifference = xLocation - getPosition().x;
             float yDifference = yLocation - getPosition().y;
             Vector2 distance = new Vector2(xDifference, yDifference);

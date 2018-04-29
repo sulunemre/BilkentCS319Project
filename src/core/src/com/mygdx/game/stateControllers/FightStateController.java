@@ -30,7 +30,8 @@ public class FightStateController extends AbstractStateController {
         gameWorld = GameWorld.getInstance();
         gameManager = GameManager.getInstance();
         playerCharacter = gameWorld.getPlayerCharacter();
-        enemyArray = gameWorld.getEnemyArray();
+        enemyArray = new Array<Enemy>();
+        gameWorld.setEnemyArray(enemyArray);
 
         wave = 1;
         waveCleared = true;
@@ -99,40 +100,44 @@ public class FightStateController extends AbstractStateController {
 
         cam.update();
 
-        for(int i=0; i<enemyArray.size; i++)
-        {
-            Enemy currentEnemy = enemyArray.get(i);
-
-
-
-            for(int j=0; j<enemyArray.size; j++) {
-                Enemy secondEnemy = enemyArray.get(j);
-
-                if (j != i)
-                {
-                    if(currentEnemy.collides(secondEnemy.getBounds()))
-                    {
-                        System.out.println("collide var i: " + i + " j: " + j);
-                        currentEnemy.setPosition(currentEnemy.getPosition());
-                    }
-                    //    if(currentEnemy.collides(secondEnemy.getBounds()) && playerCharacter.collides(currentEnemy.getBounds()))
-                    // {
-                    //     System.out.println("collide var i: " + i + " j: " + j);
-                    //       currentEnemy.setPosition(currentEnemy.getPosition().add(-0.4f,-0.4f));
-                    //   }
-                    else
-                    {
-                        currentEnemy.chase(playerCharacter.getPosition().x, playerCharacter.getPosition().y);
-                    }
-
-                }
-                System.out.println("enemy direction x: " + currentEnemy.getDirection().x + " y: " + currentEnemy.getDirection().y);
-            }
-        }
+//        for(int i=0; i<enemyArray.size; i++)
+//        {
+//            Enemy currentEnemy = enemyArray.get(i);
+//
+//
+//
+//            for(int j=0; j<enemyArray.size; j++) {
+//                Enemy secondEnemy = enemyArray.get(j);
+//
+//                if (j != i)
+//                {
+//                    if(currentEnemy.collides(secondEnemy.getBounds()))
+//                    {
+//                        System.out.println("collide var i: " + i + " j: " + j);
+//                        currentEnemy.setPosition(currentEnemy.getPosition());
+//                    }
+//                    //    if(currentEnemy.collides(secondEnemy.getBounds()) && playerCharacter.collides(currentEnemy.getBounds()))
+//                    // {
+//                    //     System.out.println("collide var i: " + i + " j: " + j);
+//                    //       currentEnemy.setPosition(currentEnemy.getPosition().add(-0.4f,-0.4f));
+//                    //   }
+//                    else
+//                    {
+//                        currentEnemy.chase(playerCharacter.getPosition().x, playerCharacter.getPosition().y);
+//                    }
+//
+//                }
+//                System.out.println("enemy direction x: " + currentEnemy.getDirection().x + " y: " + currentEnemy.getDirection().y);
+//            }
+//        }
 
         if(waveCleared) {
             sendNewWave();
         }
+        for(Enemy enemy : enemyArray){
+            enemy.chase( gameWorld.getPlayerCharacter().getPosition().x , gameWorld.getPlayerCharacter().getPosition().y);
+        }
+        //gameWorld.getEnemyArray().get(1).chase(gameWorld.getPlayerCharacter().getPosition().x, gameWorld.getPlayerCharacter().getPosition().y );
     }
 
 //    private void updateBackground(){
