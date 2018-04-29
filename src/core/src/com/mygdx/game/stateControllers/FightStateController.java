@@ -4,12 +4,10 @@ package com.mygdx.game.stateControllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameManager;
-import com.mygdx.game.sprites.GameWorld;
-import com.mygdx.game.sprites.PlayerCharacter;
-import com.mygdx.game.sprites.Rock;
-import com.mygdx.game.sprites.RockMoving;
+import com.mygdx.game.sprites.*;
 import com.mygdx.game.sprites.enemies.Enemy;
 
 
@@ -50,26 +48,41 @@ public class FightStateController extends AbstractStateController {
 //        backgroundPos2 = new Vector2((cam.position.x - cam.viewportWidth / 2) + backgroundImage.getWidth(), BACKGROUND_Y_OFFSET);
 //        gameWorld.setBackgroundPos1(backgroundPos1);
 //        gameWorld.setBackgroundPos2(backgroundPos2);
+
+        playerCharacter.setDirection(new Vector2(0,0)); // At the beginning of the state, player stops
     }
 
     @Override
     public void handleInput() {
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+        Input input = Gdx.input;
+
+        if(input.isKeyPressed(Input.Keys.W)){
             playerCharacter.moveUp();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)){
+        if(input.isKeyPressed(Input.Keys.S)){
             playerCharacter.moveDown();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+        if(input.isKeyPressed(Input.Keys.A)){
             playerCharacter.moveLeft();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+        if(input.isKeyPressed(Input.Keys.D)){
             playerCharacter.moveRight();
         }
-//        if(Gdx.input.isKeyPressed(Input.Keys.Q)){
-//            music.pause();
-//            // gsm.set(new PlayState(playerCharacter.getPosition().x, playerCharacter.getPosition().y,  backgroundPos1.x , backgroundPos1.y, backgroundPos2.x, backgroundPos2.y, score));
 
+        if(input.justTouched()){
+            // Click coordinate system is different from game world coordinates
+            // Firstly, they are transformed.
+            Vector3 unprojected3DClick = cam.unproject(new Vector3(input.getX(), input.getY(), 0));
+            Vector2 unprojected2DClick = new Vector2(unprojected3DClick.x, unprojected3DClick.y);
+
+            // Calculate the direction
+            HolyLight holyLight = new HolyLight(playerCharacter.getPosition().x, playerCharacter.getPosition().y);
+            Vector2 holyLightDirection = unprojected2DClick.mulAdd(playerCharacter.getPosition(), -1).nor();
+            holyLight.setDirection(holyLightDirection);
+
+            // Add holy light to the game world
+            gameWorld.addGameElements(holyLight);
+        }
 
     }
 
