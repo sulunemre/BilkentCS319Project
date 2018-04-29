@@ -1,6 +1,7 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.MyGdxGame;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.mygdx.game.stateControllers.MenuStateController;
 
 public class MenuState extends State {
 
@@ -30,8 +32,9 @@ public class MenuState extends State {
 
     private Skin skin;
     private Stage stage;
-    private Music music;
     public MenuState() {
+        controller = new MenuStateController();
+
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();
@@ -43,7 +46,7 @@ public class MenuState extends State {
         optionsBtn = new TextButton("Options", skin);
         creditsBtn = new TextButton("Credits", skin);
         exitBtn = new TextButton("Exit", skin);
-        helpBtn=new TextButton("Help",skin);
+        helpBtn = new TextButton("Help",skin);
 
         //Set positions of buttons
         playBtn.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/16 , Gdx.graphics.getHeight()/2 + 20);
@@ -60,23 +63,36 @@ public class MenuState extends State {
         stage.addActor(creditsBtn);
         stage.addActor(exitBtn);
         stage.addActor(helpBtn);
-        music = Gdx.audio.newMusic(Gdx.files.internal("stormwind.mp3"));
+
 
         playBtn.addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                music.pause();
-                dispose();
+                //dispose();
+//                Gdx.input.getTextInput(new Input.TextInputListener() {
+//                    @Override
+//                    public void input(String text) {
+//                        gameManager.setPlayerName(text);
+//                        Thread.currentThread().interrupt();
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void canceled() {
+//
+//                    }
+//                }, "Type your name", "", "");
                 gsm.set(new PlayState());
             }
+
         });
 
         creditsBtn.addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                music.pause();
                 gsm.set(new CreditsState());
             }
         });
@@ -84,7 +100,6 @@ public class MenuState extends State {
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                music.pause();
                 gsm.set(new HelpState());
             }
         });
@@ -92,7 +107,6 @@ public class MenuState extends State {
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                music.pause();
                 gsm.set(new OptionsState());
             }
         });
@@ -108,17 +122,7 @@ public class MenuState extends State {
 
     }
 
-    public void handleInput() {}
 
-    public void update(float dt) {
-        handleInput();
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-
-        music.setLooping(true);
-        music.setVolume(0.1f);
-        music.play();
-        Gdx.gl.glClearColor(1,0,0,1);
-    }
 
     @Override
     public void render(SpriteBatch sb) {

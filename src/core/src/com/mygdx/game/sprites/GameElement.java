@@ -17,6 +17,11 @@ public abstract class GameElement {
 //        //TODO: sil
 //    }
 
+    /**
+     * @param x Spawn location x coordinate
+     * @param y Spawn location y coordinate
+     * @param texturePath Path of the texture image in the assets folder
+     */
     public GameElement(float x, float y, String texturePath){
         position = new Vector2(x, y);
         direction = new Vector2(1,0);
@@ -27,7 +32,7 @@ public abstract class GameElement {
     /**
      * Updates element location according to direction.
      * Also checks position bounds.
-     * @param dt
+     * @param dt Time difference between two frames
      */
     public void update(float dt){
         Vector2 velocity = direction.scl((float) speed); // Transform unit vector to velocity
@@ -39,8 +44,8 @@ public abstract class GameElement {
         // Check bounds
         if (position.y < 0)
             position.y = 0;
-        if (position.y > 260) //TODO: sayılar düzenlenecek
-            position.y = 260;
+        if (position.y > 400) //TODO: sayılar düzenlenecek
+            position.y = 400;
     }
 
     public Vector2 getPosition() {

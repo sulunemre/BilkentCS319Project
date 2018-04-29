@@ -18,14 +18,12 @@ public class PlayState extends State {
     private Vector2 backgroundPos1, backgroundPos2;
     private GameWorld gameWorld;
 
-    private double score;
     private BitmapFont scoreText;
 
 
     public PlayState() {
         controller = new FlightStateController();
         gameWorld = GameWorld.getInstance();
-        score = 1;
         scoreText = new BitmapFont();
         playerCharacter = gameWorld.getPlayerCharacter();
         backgroundPos1 = gameWorld.getBackgroundPos1();
@@ -39,14 +37,13 @@ public class PlayState extends State {
         sb.begin();
         sb.draw(backgroundImage, backgroundPos1.x, backgroundPos1.y);
         sb.draw(backgroundImage, backgroundPos2.x, backgroundPos2.y);
-      //  sb.draw(playerCharacter.getElementTexture(), playerCharacter.getPosition().x, playerCharacter.getPosition().y );
 
         for(GameElement ge: gameWorld.getGameElementsArray()){
             sb.draw(ge.getElementTexture(), ge.getPosition().x, ge.getPosition().y);
         }
 
         scoreText.getData().setScale(0.5f);
-        scoreText.draw(sb, "Score:" + score, playerCharacter.getPosition().x - 80, 20);
+        scoreText.draw(sb, "Score:" + gameManager.getScore(), playerCharacter.getPosition().x - 80, 20);
         sb.end();
     }
 

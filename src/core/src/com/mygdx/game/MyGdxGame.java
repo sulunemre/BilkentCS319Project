@@ -19,16 +19,14 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	private GameStateManager gsm;
 	private SpriteBatch batch;
-	Texture img;
 	
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		gsm = GameStateManager.getInstance();
-		img = new Texture("menuBackground.png");
 
-		gsm.push(new PlayState());
+		gsm.push(new MenuState());
 	}
 
 	@Override
@@ -42,6 +40,5 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 	}
 }

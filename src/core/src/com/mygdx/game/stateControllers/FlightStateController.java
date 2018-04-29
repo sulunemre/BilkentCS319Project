@@ -166,7 +166,7 @@ public class FlightStateController extends AbstractStateController{
     }
 
     private void increaseScore(){
-        gameManager.setScore(gameManager.getScore() + playerCharacter.getAcceleration());
+        //gameManager.setScore(gameManager.getScore() + playerCharacter.getAcceleration());
         // score = score / 10;
     }
 }
