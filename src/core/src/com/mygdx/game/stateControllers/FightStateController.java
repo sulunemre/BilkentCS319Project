@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameManager;
 import com.mygdx.game.sprites.*;
 import com.mygdx.game.sprites.enemies.Enemy;
+import com.mygdx.game.sprites.enemies.EnemyFactory;
+import com.mygdx.game.sprites.enemies.Grunt;
 
 
 public class FightStateController extends AbstractStateController {
@@ -21,12 +23,8 @@ public class FightStateController extends AbstractStateController {
 
     private Array<Rock> rocks;
     private Array<RockMoving> rocksM;
-    private Vector2 backgroundPos1, backgroundPos2;
-//    private static final int BACKGROUND_Y_OFFSET = -30;
- //   private Texture backgroundImage;
     private static final int ROCK_SPACING = 125;
     private static final int ROCK_COUNT = 3;
-    private static final int ROCKMOVING_COUNT = 3;
 
     public FightStateController() {
         gameWorld = GameWorld.getInstance();
@@ -128,15 +126,13 @@ public class FightStateController extends AbstractStateController {
                     }
 
                 }
-                currentEnemy.update(playerCharacter.getBounds());
                 System.out.println("enemy direction x: " + currentEnemy.getDirection().x + " y: " + currentEnemy.getDirection().y);
             }
         }
 
-//            if(waveCleared)
-//            {
-//                sendNewWave();
-//            }
+        if(waveCleared) {
+            sendNewWave();
+        }
     }
 
 //    private void updateBackground(){
@@ -146,4 +142,25 @@ public class FightStateController extends AbstractStateController {
 //            backgroundPos2.add(backgroundImage.getWidth() * 2, 0);
 //
 //    }
+
+    private void sendNewWave() {
+
+        int gruntCount = wave * 5;
+        int skeletonWarriorCount = wave * 3;
+
+        EnemyFactory enemyFactory = new EnemyFactory();
+
+        for(int i=0; i<gruntCount; i++){
+            float yLocation = (float) Math.random()*260;
+            Grunt grunt = (Grunt) enemyFactory.getEnemy("grunt", 0, yLocation);
+
+
+            grunt.setDirection(new Vector2(1,0));
+            enemyArray.addAll(grunt);
+            gameWorld.addGameElements(grunt);
+        }
+
+        waveCleared = false;
+        wave++;
+    }
 }

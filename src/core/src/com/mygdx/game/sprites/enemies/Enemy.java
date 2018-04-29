@@ -39,28 +39,28 @@ public abstract class Enemy extends Character{
             setDirection(newVelocity);
     }
 
-    public void update(Rectangle enemy)
-    {
-        //position.add(direction);
-
-        Vector2 positionTemp = new Vector2(position);
-        Rectangle boundsTemp = new Rectangle(bounds);
-
-        positionTemp.add(direction);
-
-        if ( !enemy.overlaps( boundsTemp.setPosition(positionTemp))) {
-            position.add(direction);
-            bounds.setPosition(position);
-        }
-        if (position.y < 0)
-            position.y = 0;
-        if (position.y > 260)
-            position.y = 260;
-        if (position.x < 0)
-            position.x = 0;
-        if (position.x > 500)
-            position.x = 500;
-    }
+//    public void update(Rectangle enemy)
+//    {
+//        //position.add(direction);
+//
+//        Vector2 positionTemp = new Vector2(position);
+//        Rectangle boundsTemp = new Rectangle(bounds);
+//
+//        positionTemp.add(direction);
+//
+//        if ( !enemy.overlaps( boundsTemp.setPosition(positionTemp))) {
+//            position.add(direction);
+//            bounds.setPosition(position);
+//        }
+//        if (position.y < 0)
+//            position.y = 0;
+//        if (position.y > 260)
+//            position.y = 260;
+//        if (position.x < 0)
+//            position.x = 0;
+//        if (position.x > 500)
+//            position.x = 500;
+//    }
 
     public void setCoolDown(int coolDown) {
         this.coolDown = coolDown;

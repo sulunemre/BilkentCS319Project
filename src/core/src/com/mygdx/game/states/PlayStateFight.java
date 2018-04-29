@@ -36,25 +36,7 @@ public class PlayStateFight extends State {
 
     }
 
-//    private void sendNewWave() {
-//
-//        int enemyCount = wave * 5;
-//        EnemyFactory enemyFactory = new EnemyFactory();
-//
-//        for(int i=0; i<enemyCount; i++)
-//        {
-//
-//            Grunt grunt = (Grunt) enemyFactory.getEnemy("grunt");
-//
-//            float yLocation = (float) Math.random()*260;
-//            grunt.setPosition(new Vector2(0, yLocation));
-//            grunt.setBounds(new Rectangle(grunt.getPosition().x, grunt.getPosition().y, grunt.getElementTexture().getWidth(), grunt.getElementTexture().getHeight())); //Wrap enemy with rectangle
-//            enemiesArray.add(grunt);
-//        }
-//
-//        waveCleared = false;
-//        wave++;
-//    }
+
 
     @Override
     public void render(SpriteBatch sb) {
