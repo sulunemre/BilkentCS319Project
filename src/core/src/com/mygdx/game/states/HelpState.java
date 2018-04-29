@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.mygdx.game.stateControllers.HelpStateController;
 //import com.badlogic.gdx.scenes.scene2d.ui.List<T>;
 
 import javax.swing.*;
@@ -27,13 +28,14 @@ import com.mygdx.game.stateControllers.HelpStateController;
 
 import java.util.List;
 public class HelpState extends State  {
-    private HelpStateController controller;
+   
     private TextButton backBtn;
     private Stage stage;
     private Skin skin;
     private Texture background;
 
     public HelpState() {
+        controller = new HelpStateController();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();
@@ -53,15 +55,9 @@ public class HelpState extends State  {
 
     }
 
-    protected void handleInput() {
 
-    }
 
-    public void update(float dt) {
-        handleInput();
-        Gdx.gl.glClearColor(1, 0, 0, 0);
-        Gdx.gl.glClearColor(0,0,1,1);
-    }
+
 
     @Override
     public void render(SpriteBatch ab) {
