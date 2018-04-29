@@ -28,7 +28,7 @@ import com.mygdx.game.stateControllers.HelpStateController;
 
 import java.util.List;
 public class HelpState extends State  {
-   
+
     private TextButton backBtn;
     private Stage stage;
     private Skin skin;

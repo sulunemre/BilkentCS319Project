@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.stateControllers.CreditsStateController;
 
 public class CreditsState extends State{
 
@@ -20,19 +21,10 @@ public class CreditsState extends State{
 
     public CreditsState() {
         backgroundImage = new Texture("creditsBackground.png");
-
+        controller = new CreditsStateController();
     }
 
-    protected void handleInput() {
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-            gsm.set(new MenuState());
-        }
 
-    }
-
-    public void update(float dt) {
-        handleInput();
-    }
 
     @Override
     public void render(SpriteBatch sb) {
