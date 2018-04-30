@@ -125,10 +125,9 @@ public class FlightStateController extends AbstractStateController{
             if(cam.position.x - (cam.viewportWidth / 2)> rock.getPosition().x + rock.getElementTexture().getWidth()){
                 rock.reposition(rock.getPosition().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
             }
-
-            if(rock.collision(playerCharacter.getBounds()))
-                gameStateManager.set(new MenuState());
         }
+
+        collision();
 
         for (RockMoving rock : rocksMoving ){
             if(rock.getDirection().y == 0)
@@ -168,5 +167,23 @@ public class FlightStateController extends AbstractStateController{
     private void increaseScore(){
         //gameManager.setScore(gameManager.getScore() + playerCharacter.getAcceleration());
         // score = score / 10;
+    }
+
+    private void collision(){
+        for(Rock rock: gameWorld.getRocks()) {
+            if (rock.collision(playerCharacter.getBounds()))
+                gameStateManager.set(new MenuState());
+        }
+        for(Rock rock: gameWorld.getRocks()) {
+            if (rock.collision(playerCharacter.getBounds()))
+                gameStateManager.set(new MenuState());
+        }
+        /**
+         * Powerups need to extend GameElement.
+         */
+        /*for(Powerups powerup: gameWorld.getPowerups()) {
+            if (powerup.collision(playerCharacter.getBounds()))
+                gameStateManager.set(new MenuState());
+        }*/
     }
 }

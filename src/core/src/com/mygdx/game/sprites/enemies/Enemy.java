@@ -3,6 +3,9 @@ package com.mygdx.game.sprites.enemies;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.Character;
+import com.mygdx.game.sprites.GameWorld;
+import com.mygdx.game.sprites.PlayerCharacter;
+import com.mygdx.game.sprites.Rock;
 
 public abstract class Enemy extends Character{
     protected int spawnRate;

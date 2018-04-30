@@ -11,9 +11,14 @@ public class GameWorld implements Serializable {
 
     private Array<GameElement> gameElementsArray  = new Array<GameElement>();
     private PlayerCharacter playerCharacter;
+    private Array<PlayerCharacter> playerCharacterArray;
     private Array<Rock> rocks;
     private Array<RockMoving> rocksMoving;
     private Array<Enemy> enemyArray;
+    //private Array<Powerups> powerupsArray;
+    private Array<HolyLight> playerProjectiles;
+    private Array<HolyLight> enemyProjectiles;
+
 
     private Vector2 backgroundPos1, backgroundPos2;
 
@@ -40,9 +45,10 @@ public class GameWorld implements Serializable {
         gameElementsArray.removeValue(ge, false);
     }
 
-    public Array<GameElement> getGameElementsArray() {
+    public Array<GameElement> getGameElementsArray(){
         return gameElementsArray;
     }
+
     public void updateAll(float dt){
         for(GameElement ge : gameElementsArray){
             ge.update(dt);
@@ -55,6 +61,10 @@ public class GameWorld implements Serializable {
 
     public void setPlayerCharacter(PlayerCharacter playerCharacter) {
         this.playerCharacter = playerCharacter;
+    }
+
+    public Array<PlayerCharacter> getplayerCharacterArray() {
+        return playerCharacterArray;
     }
 
     public Array<Rock> getRocks() {
@@ -73,6 +83,23 @@ public class GameWorld implements Serializable {
         this.rocksMoving = rocksMoving;
     }
 
+    public Array<Enemy> getEnemyArray() {
+        return enemyArray;
+    }
+
+    public void setEnemyArray(Array<Enemy> enemyArray) {
+        this.enemyArray = enemyArray;
+    }
+
+    public Array<HolyLight> getPlayerProjectiles(){
+        return playerProjectiles;
+    }
+
+    public Array<HolyLight> getEnemyProjectiles(){
+        return enemyProjectiles;
+    }
+
+
     public Vector2 getBackgroundPos1() {
         return backgroundPos1;
     }
@@ -87,13 +114,5 @@ public class GameWorld implements Serializable {
 
     public void setBackgroundPos2(Vector2 backgroundPos2) {
         this.backgroundPos2 = backgroundPos2;
-    }
-
-    public Array<Enemy> getEnemyArray() {
-        return enemyArray;
-    }
-
-    public void setEnemyArray(Array<Enemy> enemyArray) {
-        this.enemyArray = enemyArray;
     }
 }

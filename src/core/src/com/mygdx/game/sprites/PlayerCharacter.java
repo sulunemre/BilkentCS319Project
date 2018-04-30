@@ -1,5 +1,7 @@
 package com.mygdx.game.sprites;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.sprites.enemies.Enemy;
+
 public class PlayerCharacter extends Character{
 
     public PlayerCharacter(float x, float y){
@@ -25,8 +27,10 @@ public class PlayerCharacter extends Character{
     public void moveLeft(){
         position.x -= speed;
     }
+
     public boolean collides(Rectangle enemy){
         return enemy.overlaps(bounds);
 
     }
+
 }

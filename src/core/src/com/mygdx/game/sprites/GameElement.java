@@ -52,6 +52,14 @@ public abstract class GameElement {
         return position;
     }
 
+    public float getPositionx() {
+        return position.x;
+    }
+
+    public float getPositiony() {
+        return position.y;
+    }
+
     public void setPosition(Vector2 position) {
         this.position = position;
     }
@@ -86,5 +94,13 @@ public abstract class GameElement {
 
     public void setSpeed(double speed) {
         this.speed = speed;
+    }
+
+    public boolean collision(Rectangle victim){
+        return victim.overlaps(bounds);
+    }
+
+    public boolean collision(Rectangle victim1, Rectangle victim2){
+        return victim1.overlaps(victim2);
     }
 }

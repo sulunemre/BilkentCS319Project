@@ -3,6 +3,7 @@ package com.mygdx.game.stateControllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -75,7 +76,7 @@ public class FightStateController extends AbstractStateController {
             Vector2 unprojected2DClick = new Vector2(unprojected3DClick.x, unprojected3DClick.y);
 
             // Calculate the direction
-            HolyLight holyLight = new HolyLight(playerCharacter.getPosition().x, playerCharacter.getPosition().y);
+            HolyLight holyLight = new HolyLight(playerCharacter.getPosition().x, playerCharacter.getPosition().y, playerCharacter.getDamage());
             Vector2 holyLightDirection = unprojected2DClick.mulAdd(playerCharacter.getPosition(), -1).nor();
             holyLight.setDirection(holyLightDirection);
 
@@ -167,5 +168,52 @@ public class FightStateController extends AbstractStateController {
 
         waveCleared = false;
         wave++;
+    }
+
+    public void collisionTrigger(){
+        for(HolyLight pp : gameWorld.getPlayerProjectiles()) {
+            for(Enemy enemy : gameWorld.getEnemyArray()) {
+                if (pp.collision(enemy.getBounds())){
+                    enemy.reduceHealth(pp.getDamage());
+                }
+            }
+        }
+        for(HolyLight ep : gameWorld.getEnemyProjectiles()) {
+            for(PlayerCharacter player : gameWorld.getplayerCharacterArray()) {
+                if (ep.collision(player.getBounds())){
+                    player.reduceHealth(ep.getDamage());
+                }
+            }
+        }
+        /**
+         * Powerups need to extend GameElement.
+         */
+        /*for(Powerups powerup: gameWorld.getPowerups()) {
+            if (powerup.collision(playerCharacter.getBounds()))
+                gameStateManager.set(new MenuState());
+        }*/
+    }
+
+    public boolean moveCheck(GameElement element, float x, float y){
+        Rectangle temp = new Rectangle (element.getBounds());
+        temp.setPosition( temp.getX() + x, temp.getY() + y);
+
+        for (Enemy enemy : gameWorld.getEnemyArray()){
+            if ( enemy != element) {
+                if (enemy.collision(temp))
+                    return false;
+            }
+        }
+        for (Rock rock : gameWorld.getRocks()){
+            if ( rock.collision(temp))
+                return false;
+        }
+        for (PlayerCharacter player : gameWorld.getplayerCharacterArray()){
+            if ( player != element) {
+                if (player.collision(temp))
+                    return false;
+            }
+        }
+        return true;
     }
 }

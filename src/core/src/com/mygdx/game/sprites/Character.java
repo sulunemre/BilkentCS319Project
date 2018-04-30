@@ -29,7 +29,9 @@ public abstract class Character extends GameElement{
         this.maxHealth = maxHealth;
     }
 
-
+    public void reduceHealth(int damage) {
+        health = health - damage;
+    }
 
     public int getDamage() {
         return damage;
@@ -38,4 +40,13 @@ public abstract class Character extends GameElement{
     public void setDamage(int damage) {
         this.damage = damage;
     }
+
+    /*public void move(float x, float y, GameWorld world){
+        if (moveCheck(x,y,world)){
+            position.x = position.x + x;
+            position.y = position.y + y;
+        }
+    };*/
+
+    //abstract boolean moveCheck(float x, float y, GameWorld world);
 }
