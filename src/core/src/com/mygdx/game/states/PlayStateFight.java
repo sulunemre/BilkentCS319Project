@@ -23,7 +23,6 @@ public class PlayStateFight extends State {
     private Texture backgroundImage;
     private Vector2 backgroundPos1, backgroundPos2;
     private PlayerCharacter player;
-    private int wave=1;
 
     public PlayStateFight() {
         controller = new FightStateController();
@@ -62,7 +61,7 @@ public class PlayStateFight extends State {
             waveText.getData().setScale(0.5f);
             healthText.getData().setScale(0.5f);
             scoreText.draw(sb, "Score:" + score, player.getPosition().x - 120, 10);
-            waveText.draw(sb, "Wave:" + wave, player.getPosition().x - 70, 10);
+            waveText.draw(sb, "Wave:" + ((FightStateController) controller).getWave(), player.getPosition().x - 70, 10);
             healthText.draw(sb, "Health:" + player.getHealth(), player.getPosition().x - 20, 10);
             sb.end();
 

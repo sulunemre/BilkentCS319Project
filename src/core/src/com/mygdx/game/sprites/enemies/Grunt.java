@@ -7,5 +7,7 @@ public class Grunt extends Enemy {
     public Grunt(float x, float y) {
         super(x, y, 1, 5, "paladin.png", new MeleeAttack());
         speed = 1;
+        maxHealth = 100;
+        health = maxHealth;
     }
 }
