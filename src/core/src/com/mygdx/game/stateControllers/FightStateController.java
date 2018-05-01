@@ -31,15 +31,13 @@ public class FightStateController extends AbstractStateController {
         gameWorld = GameWorld.getInstance();
         gameManager = GameManager.getInstance();
         playerCharacter = gameWorld.getPlayerCharacter();
-        enemyArray = new Array<Enemy>();
-        gameWorld.setEnemyArray(enemyArray);
+        enemyArray = gameWorld.getEnemyArray();
 
         wave = 1;
         waveCleared = true;
 
         rocks = new Array<Rock>();
         rocksM = new Array<RockMoving>();
-        enemyArray = new Array<Enemy>();
         for(int i =1; i < ROCK_COUNT; i++){
 
             rocks.add(new Rock(i * (ROCK_SPACING + Rock.TUBE_WIDTH), 5));
@@ -176,7 +174,7 @@ public class FightStateController extends AbstractStateController {
     public void collisionTrigger(){
         for(HolyLight pp : gameWorld.getPlayerProjectiles()) {
             for(Enemy enemy : gameWorld.getEnemyArray()) {
-                if (pp.collision(enemy.getBounds())){
+                if (pp.getBounds().overlaps(enemy.getBounds())){
                     enemy.reduceHealth(pp.getDamage());
                     gameWorld.removeGameElements(pp);
                 }
