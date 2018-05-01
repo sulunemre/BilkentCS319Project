@@ -93,7 +93,8 @@ public class FlightStateController extends AbstractStateController{
         }
         if(Gdx.input.isKeyPressed(Input.Keys.TAB)){
             gameStateManager.set(new PlayStateFight());
-
+         //   for(int i = 0; i < game)
+          //  gameWorld.removeGameElements(gameWorld.getEnemyArray());
 
         }
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){

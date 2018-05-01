@@ -20,6 +20,7 @@ public class PlayStateFight extends State {
     private BitmapFont waveText;
     private double score;
     private Texture backgroundImage;
+    private Vector2 backgroundPos1, backgroundPos2;
 
     public PlayStateFight() {
         controller = new FightStateController();
@@ -28,6 +29,9 @@ public class PlayStateFight extends State {
         controller.getCam().setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         scoreText = new BitmapFont();
         waveText = new BitmapFont();
+
+        backgroundPos1 = GameWorld.getInstance().getBackgroundPos1();
+        backgroundPos2 = GameWorld.getInstance().getBackgroundPos2();
 
 
        // for(int i =1; i < wave*5; i++){
@@ -43,9 +47,9 @@ public class PlayStateFight extends State {
 
             sb.setProjectionMatrix(controller.getCam().combined);
             sb.begin();
-             sb.draw(backgroundImage, controller.getCam().position.x - (controller.getCam().viewportWidth /2 ), 0);
-         //  sb.draw(backgroundImage, GameWorld.getInstance().getBackgroundPos1().x, GameWorld.getInstance().getBackgroundPos2().y);
-      //      sb.draw(backgroundImage, GameWorld.getInstance().getBackgroundPos1().x, GameWorld.getInstance().getBackgroundPos2().y);
+       //      sb.draw(backgroundImage, controller.getCam().position.x - (controller.getCam().viewportWidth /2 ), 0);
+        sb.draw(backgroundImage, backgroundPos1.x, backgroundPos1.y);
+        sb.draw(backgroundImage, backgroundPos2.x, backgroundPos2.y);
             for(GameElement ge : GameWorld.getInstance().getGameElementsArray()){
                 sb.draw(ge.getElementTexture(), ge.getPosition().x, ge.getPosition().y);
             }
