@@ -13,9 +13,8 @@ public class LightswornArmor extends PaladinArmor {
     /**
      * @param x           Spawn location x coordinate
      * @param y           Spawn location y coordinate
-     * @param texturePath Path of the texture image in the assets folder
      */
-    public LightswornArmor(float x, float y, String texturePath) {
+    public LightswornArmor(float x, float y) {
         super(x, y, "lightsworn.png");
     }
 

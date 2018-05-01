@@ -11,6 +11,8 @@ import com.mygdx.game.sprites.GameWorld;
 import com.mygdx.game.sprites.PlayerCharacter;
 import com.mygdx.game.sprites.Rock;
 import com.mygdx.game.sprites.RockMoving;
+import com.mygdx.game.sprites.powerups.PowerupFactory;
+import com.mygdx.game.sprites.powerups.Powerups;
 import com.mygdx.game.states.GameStateManager;
 import com.mygdx.game.states.MenuState;
 import com.mygdx.game.states.PlayState;
@@ -111,6 +113,7 @@ public class FlightStateController extends AbstractStateController{
 
     @Override
     public void update(float dt) {
+        System.out.println(flightSpeed);
         handleInput();
         updateBackground();
         gameWorld.updateAll(dt);
@@ -119,7 +122,7 @@ public class FlightStateController extends AbstractStateController{
         Gdx.gl.glClearColor(1, 0, 0, 1);
 
         flightSpeed++;
-        playerCharacter.setSpeed((flightSpeed / 10));
+        playerCharacter.setSpeed((flightSpeed / 20));
         increaseScore();
         if(!gameManager.isFirstClicked())
 
@@ -165,6 +168,10 @@ public class FlightStateController extends AbstractStateController{
         }
 
         cam.update();
+
+        // Powerup cration logic
+        if(flightSpeed < 500 && flightSpeed % 100 == 0)
+            createPowerup(0 );
     }
 
     private void updateBackground(){
@@ -196,5 +203,32 @@ public class FlightStateController extends AbstractStateController{
             if (powerup.collision(playerCharacter.getBounds()))
                 gameStateManager.set(new MenuState());
         }*/
+    }
+
+    /**
+     * @param level 0 for low level, 1 for medium, 2 for high level powerups
+     */
+    private void createPowerup(int level){
+        int yLocation = (int) (Math.random()*260);
+        int xLocation = (int) (Math.random()*300 + playerCharacter.getPosition().x + 50);
+        PowerupFactory powerupFactory = new PowerupFactory();
+        Powerups powerup;
+
+        if(level == 0){
+            powerup = powerupFactory.getLowLevelPowerup();
+        }
+        else if(level == 1){
+            powerup = powerupFactory.getMediumLevelPowerup();
+        }
+        else if(level == 2){
+            powerup = powerupFactory.getHighLevelPowerup();
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
+
+        powerup.setPosition(new Vector2(xLocation, yLocation));
+        gameWorld.addGameElements(powerup);
+        gameWorld.getPowerupsArray().add(powerup);
     }
 }

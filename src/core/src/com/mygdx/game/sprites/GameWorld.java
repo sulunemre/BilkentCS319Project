@@ -3,6 +3,7 @@ package com.mygdx.game.sprites;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.sprites.enemies.Enemy;
+import com.mygdx.game.sprites.powerups.Powerups;
 
 import java.io.Serializable;
 
@@ -15,7 +16,7 @@ public class GameWorld implements Serializable {
     private Array<Rock> rocks = new Array<Rock>();;
     private Array<RockMoving> rocksMoving = new Array<RockMoving>();;
     private Array<Enemy> enemyArray = new Array<Enemy>();;
-    //private Array<Powerups> powerupsArray;
+    private Array<Powerups> powerupsArray = new Array<Powerups>();
     private Array<HolyLight> playerProjectiles = new Array<HolyLight>();
     private Array<HolyLight> enemyProjectiles = new Array<HolyLight>();
 
@@ -121,5 +122,9 @@ public class GameWorld implements Serializable {
 
     public void setBackgroundPos2(Vector2 backgroundPos2) {
         this.backgroundPos2 = backgroundPos2;
+    }
+
+    public Array<Powerups> getPowerupsArray() {
+        return powerupsArray;
     }
 }
