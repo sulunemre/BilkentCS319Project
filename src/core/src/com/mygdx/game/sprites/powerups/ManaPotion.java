@@ -17,19 +17,19 @@ public class ManaPotion extends Powerups {
      * @param y           Spawn location y coordinate
      */
     public ManaPotion(float x, float y, int type) {
-        super(x, y, "lesserManaPot.png");
+        super(x, y, "lesserManaPotion.png");
 
         String texturePath;
         if(type == 0) {
-            texturePath = "lesserManaPot.png";
+            texturePath = "lesserManaPotion.png";
             manaIncrease = 25;
         }
         else if(type == 1) {
-            texturePath = "mediumManaPot.png";
+            texturePath = "mediumManaPotion.png";
             manaIncrease = 50;
         }
         else {
-            texturePath = "largerManaPot.png";
+            texturePath = "largerManaPotion.png";
             manaIncrease = 75;
         }
 

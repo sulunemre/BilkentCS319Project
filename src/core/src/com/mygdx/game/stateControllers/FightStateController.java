@@ -141,7 +141,20 @@ public class FightStateController extends AbstractStateController {
         if (gameWorld.getPlayerCharacter().getPosition().x > 500)
             gameWorld.getPlayerCharacter().getPosition().x = 500;
         collisionTrigger();
-        //gameWorld.getEnemyArray().get(1).chase(gameWorld.getPlayerCharacter().getPosition().x, gameWorld.getPlayerCharacter().getPosition().y );
+
+        // Remove dead enemies
+        for(Enemy enemy : enemyArray){
+            if(enemy.getHealth() <= 0){
+                gameWorld.removeGameElements(enemy);
+                enemyArray.removeValue(enemy, false);
+            }
+        }
+
+        // If all enemies are dead, send new wave
+        if(enemyArray.size == 0)
+            waveCleared = true;
+
+        System.out.println(wave);
     }
 
    private void updateBackground(){
@@ -179,6 +192,7 @@ public class FightStateController extends AbstractStateController {
                 if (pp.getBounds().overlaps(enemy.getBounds())){
                     enemy.reduceHealth(pp.getDamage());
                     gameWorld.removeGameElements(pp);
+                    gameWorld.getPlayerProjectiles().removeValue(pp,false);
                 }
             }
         }
@@ -221,5 +235,9 @@ public class FightStateController extends AbstractStateController {
             }
         }
         return true;
+    }
+
+    public int getWave() {
+        return wave;
     }
 }

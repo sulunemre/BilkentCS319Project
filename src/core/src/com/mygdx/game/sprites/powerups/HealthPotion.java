@@ -18,19 +18,19 @@ public class HealthPotion extends Powerups {
      * @param y           Spawn location y coordinate
      */
     public HealthPotion(float x, float y, int type) {
-        super(x, y, "healthPotion.png");
+        super(x, y, "lesserHealthPotion.png");
 
         String texturePath;
         if(type == 0) {
-            texturePath = "lesserPot.png";
+            texturePath = "lesserHealthPotion.png";
             healthIncrease = 25;
         }
         else if(type == 1) {
-            texturePath = "mediumPot.png";
+            texturePath = "mediumHealthPotion.png";
             healthIncrease = 50;
         }
         else {
-            texturePath = "largerPot.png";
+            texturePath = "largerHealthPotion.png";
             healthIncrease = 100;
         }
 
