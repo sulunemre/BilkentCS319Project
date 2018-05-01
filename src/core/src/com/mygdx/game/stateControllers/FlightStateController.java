@@ -72,7 +72,14 @@ public class FlightStateController extends AbstractStateController{
         gameWorld.setBackgroundPos2(backgroundPos2);
 
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
-        gameManager.setMusic("flightStageMusic.mp3");
+        if(!gameManager.isFirstClicked())
+        {
+
+            gameManager.getCurrentMusic().setLooping(true);
+            //gameManager.setMusic("flightStageMusic.mp3");
+            gameManager.getCurrentMusic().play();
+        }
+
 
         flightSpeed = 1;
     }
@@ -114,10 +121,13 @@ public class FlightStateController extends AbstractStateController{
         flightSpeed++;
         playerCharacter.setSpeed((flightSpeed / 10));
         increaseScore();
+        if(!gameManager.isFirstClicked())
 
-        gameManager.getCurrentMusic().setLooping(true);
-        gameManager.getCurrentMusic().setVolume(0.1f);
-        gameManager.getCurrentMusic().play();
+        {
+            gameManager.getCurrentMusic().setLooping(true);
+            gameManager.getCurrentMusic().play();
+        }
+
 
         Gdx.gl.glClearColor(1,0,0,1);
 

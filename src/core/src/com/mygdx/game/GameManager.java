@@ -14,6 +14,39 @@ public class GameManager {
     private Music currentMusic;
     private double score;
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    private int count=0;
+    private boolean firstClicked=false;
+    private boolean secondClicked=false;
+
+
+
+    public boolean isSecondClicked() {
+        return secondClicked;
+    }
+
+    public void setSecondClicked(boolean secondClicked) {
+        this.secondClicked = secondClicked;
+    }
+
+
+    public boolean isFirstClicked() {
+        return firstClicked;
+    }
+
+    public void setFirstClicked(boolean firstClicked) {
+        this.firstClicked = firstClicked;
+    }
+
+
+
     public static GameManager getInstance() {
         return gameManager;
     }

@@ -5,9 +5,14 @@ import com.badlogic.gdx.Gdx;
 public class MenuStateController extends AbstractStateController {
 
     public MenuStateController() {
-        gameManager.setMusic("stormwind.mp3");
-        gameManager.getCurrentMusic().setLooping(true);
-        gameManager.getCurrentMusic().play();
+        if(!gameManager.isFirstClicked())
+        {
+            gameManager.setMusic("stormwind.mp3");
+            gameManager.getCurrentMusic().setLooping(true);
+            gameManager.getCurrentMusic().play();
+            gameManager.setSecondClicked(true);
+        }
+
     }
 
     @Override

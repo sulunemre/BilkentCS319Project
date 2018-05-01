@@ -104,7 +104,16 @@ public class FightStateController extends AbstractStateController {
 
         cam.position.x = playerCharacter.getPosition().x + 80;
         Gdx.gl.glClearColor(1, 0, 0, 1);
-        gameManager.setMusic("flightStageMusic.mp3");
+        //&& !gameManager.isSecondClicked()
+        if(!gameManager.isFirstClicked() )
+        {
+
+            gameManager.getCurrentMusic().pause();
+            gameManager.setMusic("flightStageMusic.mp3");
+            gameManager.getCurrentMusic().setLooping(true);
+            gameManager.getCurrentMusic().play();
+        }
+
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
 

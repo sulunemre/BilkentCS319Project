@@ -22,17 +22,25 @@ import java.lang.String;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.game.GameManager;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.stateControllers.OptionsStateController;
+
 import java.util.List;
 public class OptionsState extends State  {
     private TextButton volumeBtn;
     private Stage stage;
     private Skin skin;
     private Texture background;
-    private Music music;
+    private GameManager gameManager;
+    private  GameStateManager gsm;
+    private int num=0;
     private TextButton back;
 
     protected OptionsState() {
+        controller=new OptionsStateController();
+        gameManager=GameManager.getInstance();
+        gsm=GameStateManager.getInstance();
         stage =new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();
@@ -44,46 +52,39 @@ public class OptionsState extends State  {
         back.setPosition(360,300);
         stage.addActor(volumeBtn);
         stage.addActor(back);
-        music = Gdx.audio.newMusic(Gdx.files.internal("stormwind.mp3"));
+
         volumeBtn.addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                music.pause();
-                //gsm.set(new MenuState(gsm));
+                num++;
+                gameManager.setCount(num);
+                if(gameManager.getCount()%2==1)
+                {
+                    gameManager.setFirstClicked(true);
+                    gameManager.getCurrentMusic().pause();
+                }
+                else
+                {
+                    gameManager.setSecondClicked(true);
+                    gameManager.getCurrentMusic().play();
+                }
+
             }
         });
         back.addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                music.pause();
                 gsm.set(new MenuState());
             }
         });
 
     }
 
-    protected void handleInput() {
 
-    }
 
-    public void update(float dt) {
-        handleInput();
-        Gdx.gl.glClearColor(1, 0, 0, 0);
-        if(volumeBtn.isPressed()==true)
-            music.pause();
-        else
-        {
-            music.setLooping(true);
-            music.pause();
-            music.setVolume(0.1f);
-            music.play();
-        }
 
-        Gdx.gl.glClearColor(0,0,1,1);
-
-    }
 
     @Override
     public void render(SpriteBatch ab) {

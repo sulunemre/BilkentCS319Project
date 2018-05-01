@@ -11,7 +11,10 @@ public class PlayerCharacter extends Character{
         speed = 10;
     }
 
-
+    public int getHealth()
+    {
+        return maxHealth;
+    }
     public void moveUp(){
         position.y += (speed / 10);
     }

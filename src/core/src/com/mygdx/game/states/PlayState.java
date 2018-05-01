@@ -17,6 +17,7 @@ public class PlayState extends State {
     private Texture backgroundImage;
     private Vector2 backgroundPos1, backgroundPos2;
     private GameWorld gameWorld;
+    private BitmapFont healthText;
 
     private BitmapFont scoreText;
 
@@ -25,6 +26,7 @@ public class PlayState extends State {
         controller = new FlightStateController();
         gameWorld = GameWorld.getInstance();
         scoreText = new BitmapFont();
+        healthText=new BitmapFont();
         playerCharacter = gameWorld.getPlayerCharacter();
         backgroundPos1 = gameWorld.getBackgroundPos1();
         backgroundPos2 = gameWorld.getBackgroundPos2();
@@ -43,7 +45,9 @@ public class PlayState extends State {
         }
 
         scoreText.getData().setScale(0.5f);
-        scoreText.draw(sb, "Score:" + gameManager.getScore(), playerCharacter.getPosition().x - 80, 20);
+        healthText.getData().setScale(0.5f);
+        scoreText.draw(sb, "Score:" + gameManager.getScore(), playerCharacter.getPosition().x - 90, 20);
+        healthText.draw(sb, "Health:" + playerCharacter.getHealth(), playerCharacter.getPosition().x - 50, 20);
         sb.end();
     }
 
