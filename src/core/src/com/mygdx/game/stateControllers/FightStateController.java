@@ -88,6 +88,7 @@ public class FightStateController extends AbstractStateController {
 
     @Override
     public void update(float dt) {
+        collisionTrigger();
         handleInput();
       //  updateBackground();
         gameWorld.updateAll(dt);

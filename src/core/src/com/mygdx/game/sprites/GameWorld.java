@@ -16,8 +16,8 @@ public class GameWorld implements Serializable {
     private Array<RockMoving> rocksMoving;
     private Array<Enemy> enemyArray;
     //private Array<Powerups> powerupsArray;
-    private Array<HolyLight> playerProjectiles;
-    private Array<HolyLight> enemyProjectiles;
+    private Array<HolyLight> playerProjectiles = new Array<HolyLight>();
+    private Array<HolyLight> enemyProjectiles = new Array<HolyLight>();
 
 
     private Vector2 backgroundPos1, backgroundPos2;
