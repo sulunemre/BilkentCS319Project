@@ -1,18 +1,14 @@
 package com.mygdx.game.sprites.powerups;
 
-public class PaladinArmor extends Powerups {
+public abstract class PaladinArmor extends Powerups {
     private int holyLightIncrease;
 
-    public PaladinArmor(int spawnRate, int holyLightIncrease) {
-        super(spawnRate);
-        this.holyLightIncrease = holyLightIncrease;
-    }
-
-    public int getHolyLightIncrease() {
-        return holyLightIncrease;
-    }
-
-    public void setHolyLightIncrease(int holyLightIncrease) {
-        this.holyLightIncrease = holyLightIncrease;
+    /**
+     * @param x           Spawn location x coordinate
+     * @param y           Spawn location y coordinate
+     * @param texturePath Path of the texture image in the assets folder
+     */
+    public PaladinArmor(float x, float y, String texturePath) {
+        super(x, y, texturePath);
     }
 }

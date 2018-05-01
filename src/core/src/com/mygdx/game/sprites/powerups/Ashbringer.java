@@ -1,18 +1,20 @@
 package com.mygdx.game.sprites.powerups;
 
+/**
+ * Increases melee damage by 25
+ */
 public class Ashbringer extends PaladinArmor {
-    private int meleeDamageIncrease;
+    private static int meleeDamageIncrease = 25;
 
-    public Ashbringer(int spawnRate, int holyLightIncrease, int meleeDamageIncrease) {
-        super(spawnRate, holyLightIncrease);
-        this.meleeDamageIncrease = meleeDamageIncrease;
+    /**
+     * @param x           Spawn location x coordinate
+     * @param y           Spawn location y coordinate
+     */
+    public Ashbringer(float x, float y) {
+        super(x, y, "ashbringer.png");
     }
 
-    public int getMeleeDamageIncrease() {
+    public static int getMeleeDamageIncrease() {
         return meleeDamageIncrease;
-    }
-
-    public void setMeleeDamageIncrease(int meleeDamageIncrease) {
-        this.meleeDamageIncrease = meleeDamageIncrease;
     }
 }

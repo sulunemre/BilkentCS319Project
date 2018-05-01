@@ -1,18 +1,19 @@
 package com.mygdx.game.sprites.powerups;
 
+/**
+ * Altar makes health = maxHealth
+ */
 public class Altar extends Powerups {
+    /**
+     * type 0 is for paladins type 1 is for death knights
+     */
     private int type;
 
-    public Altar(int spawnRate, int type) {
-        super(spawnRate);
-        this.type = type;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
+    /**
+     * @param x           Spawn location x coordinate
+     * @param y           Spawn location y coordinate
+     */
+    public Altar(float x, float y) {
+        super(x, y, "altarOfKings.png");
     }
 }

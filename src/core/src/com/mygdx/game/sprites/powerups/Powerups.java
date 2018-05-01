@@ -1,21 +1,16 @@
 package com.mygdx.game.sprites.powerups;
 
-public class Powerups {
-    private int spawnRate;
+import com.mygdx.game.sprites.GameElement;
 
-    public Powerups(int spawnRate) {
-        this.spawnRate = spawnRate;
-    }
+public abstract class Powerups extends GameElement{
+    protected int spawnRate;
 
-    public int getSpawnRate() {
-        return spawnRate;
-    }
-
-    public void setSpawnRate(int spawnRate) {
-        this.spawnRate = spawnRate;
-    }
-    public void generateSpawnLoc()
-    {
-
+    /**
+     * @param x           Spawn location x coordinate
+     * @param y           Spawn location y coordinate
+     * @param texturePath Path of the texture image in the assets folder
+     */
+    public Powerups(float x, float y, String texturePath) {
+        super(x, y, texturePath);
     }
 }
