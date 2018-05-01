@@ -82,13 +82,14 @@ public class FightStateController extends AbstractStateController {
 
             // Add holy light to the game world
             gameWorld.addGameElements(holyLight);
+            gameWorld.addPlayerProjectile(holyLight);
         }
 
     }
 
     @Override
     public void update(float dt) {
-        collisionTrigger();
+
         handleInput();
       //  updateBackground();
         gameWorld.updateAll(dt);
@@ -139,6 +140,7 @@ public class FightStateController extends AbstractStateController {
         for(Enemy enemy : enemyArray){
             enemy.chase( gameWorld.getPlayerCharacter().getPosition().x , gameWorld.getPlayerCharacter().getPosition().y);
         }
+        collisionTrigger();
         //gameWorld.getEnemyArray().get(1).chase(gameWorld.getPlayerCharacter().getPosition().x, gameWorld.getPlayerCharacter().getPosition().y );
     }
 
@@ -176,6 +178,7 @@ public class FightStateController extends AbstractStateController {
             for(Enemy enemy : gameWorld.getEnemyArray()) {
                 if (pp.collision(enemy.getBounds())){
                     enemy.reduceHealth(pp.getDamage());
+                    gameWorld.removeGameElements(pp);
                 }
             }
         }
@@ -183,6 +186,7 @@ public class FightStateController extends AbstractStateController {
             for(PlayerCharacter player : gameWorld.getplayerCharacterArray()) {
                 if (ep.collision(player.getBounds())){
                     player.reduceHealth(ep.getDamage());
+                    gameWorld.removeGameElements(ep);
                 }
             }
         }
@@ -192,6 +196,7 @@ public class FightStateController extends AbstractStateController {
         /*for(Powerups powerup: gameWorld.getPowerups()) {
             if (powerup.collision(playerCharacter.getBounds()))
                 gameStateManager.set(new MenuState());
+                gameWorld.removeGameElements(powerup);
         }*/
     }
 

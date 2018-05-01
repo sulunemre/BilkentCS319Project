@@ -11,10 +11,10 @@ public class GameWorld implements Serializable {
 
     private Array<GameElement> gameElementsArray  = new Array<GameElement>();
     private PlayerCharacter playerCharacter;
-    private Array<PlayerCharacter> playerCharacterArray;
-    private Array<Rock> rocks;
-    private Array<RockMoving> rocksMoving;
-    private Array<Enemy> enemyArray;
+    private Array<PlayerCharacter> playerCharacterArray = new Array<PlayerCharacter>();;
+    private Array<Rock> rocks = new Array<Rock>();;
+    private Array<RockMoving> rocksMoving = new Array<RockMoving>();;
+    private Array<Enemy> enemyArray = new Array<Enemy>();;
     //private Array<Powerups> powerupsArray;
     private Array<HolyLight> playerProjectiles = new Array<HolyLight>();
     private Array<HolyLight> enemyProjectiles = new Array<HolyLight>();
@@ -95,10 +95,17 @@ public class GameWorld implements Serializable {
         return playerProjectiles;
     }
 
+    public void addPlayerProjectile(HolyLight... projectile){
+        playerProjectiles.addAll(projectile);
+    }
+
     public Array<HolyLight> getEnemyProjectiles(){
         return enemyProjectiles;
     }
 
+    public void addEnemyProjectile(HolyLight... projectile){
+        enemyProjectiles.addAll(projectile);
+    }
 
     public Vector2 getBackgroundPos1() {
         return backgroundPos1;
