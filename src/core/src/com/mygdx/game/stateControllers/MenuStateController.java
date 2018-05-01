@@ -22,7 +22,11 @@ public class MenuStateController extends AbstractStateController {
     public void update(float dt) {
         handleInput();
         Gdx.gl.glClearColor(1, 0, 0, 1);
-
+        if(!gameManager.isFirstClicked() )
+        {
+            gameManager.getCurrentMusic().setLooping(true);
+            gameManager.getCurrentMusic().play();
+        }
 
 
         Gdx.gl.glClearColor(1,0,0,1);
