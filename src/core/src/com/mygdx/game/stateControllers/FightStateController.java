@@ -13,6 +13,7 @@ import com.mygdx.game.sprites.*;
 import com.mygdx.game.sprites.enemies.Enemy;
 import com.mygdx.game.sprites.enemies.EnemyFactory;
 import com.mygdx.game.sprites.enemies.Grunt;
+import com.mygdx.game.sprites.enemies.SkeletonWarrior;
 import com.mygdx.game.states.PlayState;
 
 
@@ -25,7 +26,7 @@ public class FightStateController extends AbstractStateController {
     private int wave;
     private boolean waveCleared;
     private Texture backgroundImage;
-
+    private int initialPos;
     private Array<Rock> rocks;
     private Array<RockMoving> rocksM;
     private static final int ROCK_SPACING = 125;
@@ -39,9 +40,9 @@ public class FightStateController extends AbstractStateController {
         playerCharacter = gameWorld.getPlayerCharacter();
         enemyArray = gameWorld.getEnemyArray();
         backgroundImage = new Texture("background1.png");
-        wave = 1;
+        wave = 0;
         waveCleared = true;
-
+        initialPos = (int)playerCharacter.getPosition().x;
         rocks = new Array<Rock>();
         rocksM = new Array<RockMoving>();
         for(int i =1; i < ROCK_COUNT; i++){
@@ -131,15 +132,16 @@ public class FightStateController extends AbstractStateController {
 
 
         if(waveCleared) {
+            wave++;
             sendNewWave();
         }
         for(Enemy enemy : enemyArray){
             enemy.chase( gameWorld.getPlayerCharacter().getPosition().x , gameWorld.getPlayerCharacter().getPosition().y);
         }
-        if (gameWorld.getPlayerCharacter().getPosition().x < 0)
-            gameWorld.getPlayerCharacter().getPosition().x = 0;
-        if (gameWorld.getPlayerCharacter().getPosition().x > 500)
-            gameWorld.getPlayerCharacter().getPosition().x = 500;
+        if (gameWorld.getPlayerCharacter().getPosition().x < initialPos - 100)
+            gameWorld.getPlayerCharacter().getPosition().x = initialPos - 100;
+        if (gameWorld.getPlayerCharacter().getPosition().x > initialPos + 500)
+            gameWorld.getPlayerCharacter().getPosition().x = initialPos + 500;
         collisionTrigger();
 
         // Remove dead enemies
@@ -166,24 +168,42 @@ public class FightStateController extends AbstractStateController {
     }
 
     private void sendNewWave() {
+        int leftEdge = (int)playerCharacter.getPosition().x - 100;
+        int rightEdge = (int)playerCharacter.getPosition().x + 300;
 
-        int gruntCount = wave * 5;
-        int skeletonWarriorCount = wave * 3;
 
         EnemyFactory enemyFactory = new EnemyFactory();
 
-        for(int i=0; i<gruntCount; i++){
-            float yLocation = (float) Math.random()*260;
-            Grunt grunt = (Grunt) enemyFactory.getEnemy("grunt", 0, yLocation);
+        // In all levels, there are skeleton warriors and grunts
+        int enemyCount = wave * 5;
+        for (int i = 0; i < enemyCount; i++) {
+            float yLocation = (float) Math.random() * 260;
+            int random = (int) (Math.random() * 2);
+            Enemy enemy;
+            if (random == 0)
+                enemy = enemyFactory.getEnemy("grunt", leftEdge, yLocation);
+            else
+                enemy = enemyFactory.getEnemy("skeleton_warrior", leftEdge, yLocation);
 
+            enemy.setDirection(new Vector2(1, 0));
+            enemyArray.addAll(enemy);
+            gameWorld.addGameElements(enemy);
+        }
 
-            grunt.setDirection(new Vector2(1,0));
-            enemyArray.addAll(grunt);
-            gameWorld.addGameElements(grunt);
+        if(wave > 3){
+            int abominationCount = (int) (Math.random() * wave);
+            for(int i=0; i < abominationCount; i++){
+                float yLocation = (float) Math.random() * 260;
+                Enemy enemy = enemyFactory.getEnemy("abomination", rightEdge, yLocation);
+
+                enemy.setDirection(new Vector2(-1, 0));
+                enemyArray.addAll(enemy);
+                gameWorld.addGameElements(enemy);
+            }
         }
 
         waveCleared = false;
-        wave++;
+
     }
 
     public void collisionTrigger(){

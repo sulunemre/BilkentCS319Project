@@ -12,8 +12,8 @@ public abstract class Enemy extends Character{
     protected int coolDown;
     protected AttackStrategy attackStrategy;
 
-    public Enemy(float x, float y, int spawnRate, int coolDown, String texturePath, AttackStrategy attackStrategy){
-        super(x, y, texturePath);
+    public Enemy(float x, float y, int spawnRate, int coolDown, String texturePath, AttackStrategy attackStrategy, int maxHealth){
+        super(x, y, texturePath, maxHealth);
         this.spawnRate = spawnRate;
         this.coolDown = coolDown;
         this.attackStrategy = attackStrategy;

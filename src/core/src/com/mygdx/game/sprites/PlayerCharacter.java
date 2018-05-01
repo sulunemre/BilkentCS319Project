@@ -5,8 +5,7 @@ import com.mygdx.game.sprites.enemies.Enemy;
 public class PlayerCharacter extends Character{
 
     public PlayerCharacter(float x, float y){
-        super(100, 100, "paladin.png");
-        maxHealth = 100;
+        super(100, 100, "paladin.png",100);
         damage = 25;
         speed = 10;
     }

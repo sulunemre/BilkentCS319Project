@@ -18,19 +18,16 @@ public class OptionsStateController extends AbstractStateController {
     @Override
     public void update(float dt) {
         handleInput();
-        if(gameManager.getCount()%2 ==1)
-        {
+        if (gameManager.getCount() % 2 == 1) {
             gameManager.setFirstClicked(true);
             //gameManager.setSecondClicked(false);
             gameManager.getCurrentMusic().pause();
-        }
-        else
-        {
+        } else {
             gameManager.setSecondClicked(true);
             //gameManager.setFirstClicked(false);
             gameManager.getCurrentMusic().play();
         }
-        Gdx.gl.glClearColor(1,0,0,0);
-        Gdx.gl.glClearColor(0,0,1,1);
+        Gdx.gl.glClearColor(1, 0, 0, 0);
+        Gdx.gl.glClearColor(0, 0, 1, 1);
     }
-a
+}

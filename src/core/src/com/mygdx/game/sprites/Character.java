@@ -8,8 +8,9 @@ public abstract class Character extends GameElement{
     protected int maxHealth;
     protected int damage;
 
-    public Character(float x, float y, String texturePath) {
+    public Character(float x, float y, String texturePath, int maxHealth) {
         super(x,y, texturePath);
+        this.maxHealth = maxHealth;
         health = maxHealth;
     }
 
