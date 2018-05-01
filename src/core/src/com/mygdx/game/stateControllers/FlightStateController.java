@@ -74,9 +74,9 @@ public class FlightStateController extends AbstractStateController{
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         if(!gameManager.isFirstClicked())
         {
-
-            gameManager.getCurrentMusic().setLooping(true);
-            //gameManager.setMusic("flightStageMusic.mp3");
+           // gameManager.
+            //gameManager.getCurrentMusic().setLooping(true);
+            gameManager.setMusic("flightStageMusic.mp3");
             gameManager.getCurrentMusic().play();
         }
 

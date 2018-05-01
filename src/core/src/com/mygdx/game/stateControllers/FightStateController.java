@@ -108,7 +108,7 @@ public class FightStateController extends AbstractStateController {
         if(!gameManager.isFirstClicked() )
         {
 
-            gameManager.getCurrentMusic().pause();
+            //gameManager.getCurrentMusic().pause();
             gameManager.setMusic("flightStageMusic.mp3");
             gameManager.getCurrentMusic().setLooping(true);
             gameManager.getCurrentMusic().play();
