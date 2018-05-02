@@ -42,6 +42,10 @@ public abstract class Character extends GameElement{
         this.damage = damage;
     }
 
+    public boolean isAlive(){
+        return health > 0;
+    }
+
     /*public void move(float x, float y, GameWorld world){
         if (moveCheck(x,y,world)){
             position.x = position.x + x;

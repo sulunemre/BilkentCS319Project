@@ -8,11 +8,9 @@ import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameManager;
 import com.mygdx.game.sprites.*;
-import com.mygdx.game.sprites.enemies.Enemy;
-import com.mygdx.game.sprites.enemies.EnemyFactory;
-import com.mygdx.game.sprites.enemies.Grunt;
-import com.mygdx.game.sprites.enemies.SkeletonWarrior;
+import com.mygdx.game.sprites.enemies.*;
 import com.mygdx.game.sprites.powerups.Powerups;
+import com.mygdx.game.states.MenuState;
 import com.mygdx.game.states.PlayState;
 
 
@@ -206,6 +204,23 @@ public class FightStateController extends AbstractStateController {
         // If all enemies are dead, send new wave
         if(enemyArray.size == 0)
             waveCleared = true;
+
+        // Attacks of the enemies
+        for(Enemy enemy : enemyArray){
+            enemy.decrementCooldown();
+            System.out.println(enemy.getCoolDown());
+            if(enemy.getCoolDown() == 0){
+                enemy.attack(playerCharacter.getPosition());
+                enemy.resetCooldown();
+
+            }
+        }
+
+        // Check player's health, if it is <= 0 game over
+        if(!playerCharacter.isAlive()){
+            gameStateManager.set(new MenuState());
+        }
+
     }
 
    private void updateBackground(){
@@ -232,7 +247,7 @@ public class FightStateController extends AbstractStateController {
             int random = (int) (Math.random() * 2);
             Enemy enemy;
             if (random == 0)
-                enemy = enemyFactory.getEnemy("grunt", leftEdge, yLocation);
+                enemy = enemyFactory.getEnemy("gargoyle", leftEdge, yLocation);
             else
                 enemy = enemyFactory.getEnemy("skeleton_warrior", leftEdge, yLocation);
 
@@ -259,23 +274,25 @@ public class FightStateController extends AbstractStateController {
     }
 
     public void collisionTrigger(){
+        // Colision between player projectile and enemy
         for(HolyLight pp : gameWorld.getPlayerProjectiles()) {
             for(Enemy enemy : gameWorld.getEnemyArray()) {
                 if (pp.getBounds().overlaps(enemy.getBounds())){
                     enemy.reduceHealth(pp.getDamage());
                     gameWorld.removeGameElements(pp);
-                    gameWorld.getPlayerProjectiles().removeValue(pp,false);
+                    gameWorld.getPlayerProjectiles().removeValue(pp,true);
                 }
             }
         }
+        // Colision between enemy projectile and player
         for(HolyLight ep : gameWorld.getEnemyProjectiles()) {
-            for(PlayerCharacter player : gameWorld.getPlayerCharacterArray()) {
-                if (ep.collision(player.getBounds())){
-                    player.reduceHealth(ep.getDamage());
+                if (ep.collision(playerCharacter.getBounds())){
+                    playerCharacter.reduceHealth(ep.getDamage());
                     gameWorld.removeGameElements(ep);
+                    gameWorld.getEnemyProjectiles().removeValue(ep,true);
                 }
-            }
         }
+        // Colision between powerup and player
         for(Powerups powerup : gameWorld.getPowerups()) {
             if (powerup.collision(playerCharacter.getBounds())) {
                 powerup.activate(playerCharacter);

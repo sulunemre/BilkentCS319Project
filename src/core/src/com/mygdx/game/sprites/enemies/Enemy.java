@@ -2,18 +2,18 @@ package com.mygdx.game.sprites.enemies;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.sprites.*;
 import com.mygdx.game.sprites.Character;
 
 public abstract class Enemy extends Character{
     protected int spawnRate;
     protected int coolDown;
+    protected int maxCoolDown;
     protected AttackStrategy attackStrategy;
 
-    public Enemy(float x, float y, int spawnRate, int coolDown, String texturePath, AttackStrategy attackStrategy, int maxHealth){
+    public Enemy(float x, float y, int maxCoolDown, String texturePath, AttackStrategy attackStrategy, int maxHealth){
         super(x, y, texturePath, maxHealth);
-        this.spawnRate = spawnRate;
-        this.coolDown = coolDown;
+        this.maxCoolDown = maxCoolDown;
+        coolDown = maxCoolDown;
         this.attackStrategy = attackStrategy;
     }
 
@@ -74,7 +74,22 @@ public abstract class Enemy extends Character{
     }
 
     public void attack(Vector2 positionToBeAttacked){
-        attackStrategy.attack(positionToBeAttacked);
+        if(coolDown == 0)
+            attackStrategy.attack(getPosition(), positionToBeAttacked, damage);
     }
 
+    public AttackStrategy getAttackStrategy() {
+        return attackStrategy;
+    }
+
+    public void decrementCooldown(){
+        coolDown = coolDown - 1;
+        if(coolDown < 0)
+            coolDown = maxCoolDown;
+    }
+    public void resetCooldown(){
+        coolDown = maxCoolDown;
+
+
+    }
 }

@@ -12,7 +12,7 @@ public class GameWorld implements Serializable {
 
     private Array<GameElement> gameElementsArray  = new Array<GameElement>();
     private PlayerCharacter playerCharacter;
-    private Array<PlayerCharacter> playerCharacterArray = new Array<PlayerCharacter>();;
+    private Array<PlayerCharacter> playerCharacterArray = new Array<PlayerCharacter>();
     private Array<Rock> rocks = new Array<Rock>();;
     private Array<RockMoving> rocksMoving = new Array<RockMoving>();;
     private Array<Enemy> enemyArray = new Array<Enemy>();;

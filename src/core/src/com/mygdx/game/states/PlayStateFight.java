@@ -35,7 +35,7 @@ public class PlayStateFight extends State {
 
         backgroundPos1 = GameWorld.getInstance().getBackgroundPos1();
         backgroundPos2 = GameWorld.getInstance().getBackgroundPos2();
-        player=GameWorld.getInstance().getPlayerCharacter();
+        player = GameWorld.getInstance().getPlayerCharacter();
 
 
        // for(int i =1; i < wave*5; i++){

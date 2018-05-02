@@ -30,7 +30,7 @@ public class PlayerCharacter extends Character{
 
     public int getHealth()
     {
-        return maxHealth;
+        return health;
     }
 
     public void setHealth(int increase)

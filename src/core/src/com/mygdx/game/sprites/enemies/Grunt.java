@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Grunt extends Enemy {
     public Grunt(float x, float y) {
-        super(x, y, 1, 5, "grunt.png", new MeleeAttack(), 100);
+        super(x, y, 100, "grunt.png", new MeleeAttack(), 100);
         speed = 1;
     }
 }
