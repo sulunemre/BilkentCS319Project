@@ -72,19 +72,19 @@ public class FightStateController extends AbstractStateController {
         Input input = Gdx.input;
 
         if(input.isKeyPressed(Input.Keys.W)){
-            if ( moveCheck(playerCharacter, 0, 1))
+            if ( moveCheck(playerCharacter, 0, 10))
                 playerCharacter.moveUp();
         }
         if(input.isKeyPressed(Input.Keys.S)){
-            if ( moveCheck(playerCharacter, 0, -1))
+            if ( moveCheck(playerCharacter, 0, -10))
                 playerCharacter.moveDown();
         }
         if(input.isKeyPressed(Input.Keys.A)){
-            if ( moveCheck(playerCharacter, -1, 0))
+            if ( moveCheck(playerCharacter, -10, 0))
                 playerCharacter.moveLeft();
         }
         if(input.isKeyPressed(Input.Keys.D)){
-            if ( moveCheck(playerCharacter, 1, 0))
+            if ( moveCheck(playerCharacter, 10, 0))
                 playerCharacter.moveRight();
         }
         if(Gdx.input.isKeyPressed(Input.Keys.Q)) {
@@ -96,15 +96,18 @@ public class FightStateController extends AbstractStateController {
             // Firstly, they are transformed.
             Vector3 unprojected3DClick = cam.unproject(new Vector3(input.getX(), input.getY(), 0));
             Vector2 unprojected2DClick = new Vector2(unprojected3DClick.x, unprojected3DClick.y);
+            if(gameWorld.getPlayerCharacter().getMana()> 10) {
+                // Calculate the direction
+                HolyLight holyLight = new HolyLight(playerCharacter.getPosition().x, playerCharacter.getPosition().y, playerCharacter.getDamage());
+                Vector2 holyLightDirection = unprojected2DClick.mulAdd(playerCharacter.getPosition(), -1).nor();
+                holyLight.setDirection(holyLightDirection);
 
-            // Calculate the direction
-            HolyLight holyLight = new HolyLight(playerCharacter.getPosition().x, playerCharacter.getPosition().y, playerCharacter.getDamage());
-            Vector2 holyLightDirection = unprojected2DClick.mulAdd(playerCharacter.getPosition(), -1).nor();
-            holyLight.setDirection(holyLightDirection);
+                // Add holy light to the game world
+                gameWorld.addGameElements(holyLight);
+                gameWorld.addPlayerProjectile(holyLight);
 
-            // Add holy light to the game world
-            gameWorld.addGameElements(holyLight);
-            gameWorld.addPlayerProjectile(holyLight);
+                gameWorld.getPlayerCharacter().decreaseMana(10);
+            }
         }
 
     }
@@ -179,16 +182,18 @@ public class FightStateController extends AbstractStateController {
     }
 
     private void sendNewWave() {
-        int leftEdge = (int)playerCharacter.getPosition().x - 100;
-        int rightEdge = (int)playerCharacter.getPosition().x + 300;
+        int leftEdge = initialPos - 100;
+        int rightEdge = initialPos + 300;
 
 
         EnemyFactory enemyFactory = new EnemyFactory();
 
         // In all levels, there are skeleton warriors and grunts
         int enemyCount = wave * 5;
+        float yLocation = 0;
         for (int i = 0; i < enemyCount; i++) {
-            float yLocation = (float) Math.random() * 260;
+           // float yLocation = (float) Math.random() * 260;
+
             int random = (int) (Math.random() * 2);
             Enemy enemy;
             if (random == 0)
@@ -199,12 +204,13 @@ public class FightStateController extends AbstractStateController {
             enemy.setDirection(new Vector2(1, 0));
             enemyArray.addAll(enemy);
             gameWorld.addGameElements(enemy);
+            yLocation = yLocation + 50;
         }
 
         if(wave > 3){
             int abominationCount = (int) (Math.random() * wave);
             for(int i=0; i < abominationCount; i++){
-                float yLocation = (float) Math.random() * 260;
+                yLocation = (float) Math.random() * 260;
                 Enemy enemy = enemyFactory.getEnemy("abomination", rightEdge, yLocation);
 
                 enemy.setDirection(new Vector2(-1, 0));

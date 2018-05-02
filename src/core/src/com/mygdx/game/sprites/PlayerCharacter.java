@@ -4,11 +4,13 @@ import java.lang.reflect.Method;
 import com.mygdx.game.sprites.enemies.Enemy;
 
 public class PlayerCharacter extends Character{
+    private int mana;
 
     public PlayerCharacter(float x, float y){
         super(100, 100, "paladin.png",100);
         damage = 25;
         speed = 10;
+        mana = 100;
     }
 
     public int getHealth()
@@ -40,6 +42,18 @@ public class PlayerCharacter extends Character{
 
     public boolean collides(Rectangle enemy){
         return enemy.overlaps(bounds);
+    }
+
+    public int getMana(){
+        return mana;
+    }
+
+    public void increaseMana(int value){
+        mana = mana + value;
+    }
+
+    public void decreaseMana(int value){
+        mana = mana - value;
     }
 
 }
