@@ -1,5 +1,6 @@
 package com.mygdx.game.sprites;
 import com.badlogic.gdx.math.Rectangle;
+import java.lang.reflect.Method;
 import com.mygdx.game.sprites.enemies.Enemy;
 
 public class PlayerCharacter extends Character{
@@ -14,9 +15,16 @@ public class PlayerCharacter extends Character{
     {
         return maxHealth;
     }
-    public void moveUp(){
-        position.y += (speed / 10);
+
+    public void setHealth(int increase)
+    {
+        if (health + increase < maxHealth)
+            health = health + increase;
+        else
+            health = maxHealth;
     }
+
+    public void moveUp(){ position.y += (speed / 10); }
 
     public void moveDown(){
         position.y -= (speed / 10);
@@ -32,7 +40,6 @@ public class PlayerCharacter extends Character{
 
     public boolean collides(Rectangle enemy){
         return enemy.overlaps(bounds);
-
     }
 
 }

@@ -1,6 +1,7 @@
 package com.mygdx.game.sprites.powerups;
 
 import com.mygdx.game.sprites.GameElement;
+import com.mygdx.game.sprites.PlayerCharacter;
 
 public abstract class Powerups extends GameElement{
     protected int spawnRate;
@@ -13,4 +14,6 @@ public abstract class Powerups extends GameElement{
     public Powerups(float x, float y, String texturePath) {
         super(x, y, texturePath);
     }
+
+    public void activate(PlayerCharacter player){};
 }

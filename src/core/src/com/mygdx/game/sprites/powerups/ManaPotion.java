@@ -1,6 +1,7 @@
 package com.mygdx.game.sprites.powerups;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.sprites.PlayerCharacter;
 
 public class ManaPotion extends Powerups {
     private int manaIncrease;
@@ -43,5 +44,8 @@ public class ManaPotion extends Powerups {
 
     public int getType() {
         return type;
+    }
+
+    public void activate (PlayerCharacter player){
     }
 }

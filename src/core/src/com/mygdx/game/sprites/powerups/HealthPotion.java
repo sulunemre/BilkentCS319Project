@@ -2,6 +2,7 @@ package com.mygdx.game.sprites.powerups;
 
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.sprites.PlayerCharacter;
 
 public class HealthPotion extends Powerups {
     private int healthIncrease;
@@ -40,5 +41,9 @@ public class HealthPotion extends Powerups {
 
     public int getHealthIncrease() {
         return healthIncrease;
+    }
+
+    public void activate(PlayerCharacter player) {
+        player.setHealth( healthIncrease);
     }
 }

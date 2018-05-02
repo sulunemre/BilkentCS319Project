@@ -44,8 +44,10 @@ public class FlightStateController extends AbstractStateController{
 
         playerCharacter = gameWorld.getPlayerCharacter();
 
-        if(playerCharacter == null)
-            playerCharacter = new PlayerCharacter(50,100);
+        if(playerCharacter == null) {
+            playerCharacter = new PlayerCharacter(50, 100);
+            gameWorld.addPlayerCharacter(playerCharacter);
+        }
 
         gameWorld.setPlayerCharacter(playerCharacter);
         gameWorld.addGameElements(playerCharacter);
@@ -197,13 +199,12 @@ public class FlightStateController extends AbstractStateController{
             if (rock.collision(playerCharacter.getBounds()))
                 gameStateManager.set(new MenuState());
         }
-        /**
-         * Powerups need to extend GameElement.
-         */
-        /*for(Powerups powerup: gameWorld.getPowerups()) {
-            if (powerup.collision(playerCharacter.getBounds()))
-                gameStateManager.set(new MenuState());
-        }*/
+        for(Powerups powerup : gameWorld.getPowerups()) {
+            if (powerup.collision(playerCharacter.getBounds())) {
+                powerup.activate(playerCharacter);
+                gameWorld.removeGameElements(powerup);
+            }
+        }
     }
 
     /**
@@ -230,6 +231,6 @@ public class FlightStateController extends AbstractStateController{
 
         powerup.setPosition(new Vector2(xLocation, yLocation));
         gameWorld.addGameElements(powerup);
-        gameWorld.getPowerupsArray().add(powerup);
+        gameWorld.getPowerups().add(powerup);
     }
 }

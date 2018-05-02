@@ -2,10 +2,8 @@ package com.mygdx.game.sprites.enemies;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.sprites.*;
 import com.mygdx.game.sprites.Character;
-import com.mygdx.game.sprites.GameWorld;
-import com.mygdx.game.sprites.PlayerCharacter;
-import com.mygdx.game.sprites.Rock;
 
 public abstract class Enemy extends Character{
     protected int spawnRate;
@@ -36,9 +34,10 @@ public abstract class Enemy extends Character{
             float xDifference = xLocation - getPosition().x;
             float yDifference = yLocation - getPosition().y;
             Vector2 distance = new Vector2(xDifference, yDifference);
-            Vector2 unitVector = new Vector2(xDifference / distance.len(), yDifference / distance.len());
-            Vector2 newVelocity = unitVector.scl((float) speed);
-            setDirection(newVelocity);
+            direction.set(xDifference / distance.len(), yDifference / distance.len());
+            //Vector2 unitVector = new Vector2(xDifference / distance.len(), yDifference / distance.len());
+            //Vector2 newVelocity = unitVector.scl((float) speed);
+            //setDirection(newVelocity);
     }
 
 //    public void update(Rectangle enemy)
@@ -77,4 +76,5 @@ public abstract class Enemy extends Character{
     public void attack(Vector2 positionToBeAttacked){
         attackStrategy.attack(positionToBeAttacked);
     }
+
 }

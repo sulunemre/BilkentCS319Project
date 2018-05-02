@@ -64,9 +64,9 @@ public class GameWorld implements Serializable {
         this.playerCharacter = playerCharacter;
     }
 
-    public Array<PlayerCharacter> getplayerCharacterArray() {
-        return playerCharacterArray;
-    }
+    public Array<PlayerCharacter> getPlayerCharacterArray() { return playerCharacterArray; }
+
+    public void addPlayerCharacter(PlayerCharacter... player) { playerCharacterArray.addAll(player); }
 
     public Array<Rock> getRocks() {
         return rocks;
@@ -124,7 +124,7 @@ public class GameWorld implements Serializable {
         this.backgroundPos2 = backgroundPos2;
     }
 
-    public Array<Powerups> getPowerupsArray() {
+    public Array<Powerups> getPowerups() {
         return powerupsArray;
     }
 }

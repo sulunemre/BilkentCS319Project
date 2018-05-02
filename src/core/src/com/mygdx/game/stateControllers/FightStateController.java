@@ -14,6 +14,7 @@ import com.mygdx.game.sprites.enemies.Enemy;
 import com.mygdx.game.sprites.enemies.EnemyFactory;
 import com.mygdx.game.sprites.enemies.Grunt;
 import com.mygdx.game.sprites.enemies.SkeletonWarrior;
+import com.mygdx.game.sprites.powerups.Powerups;
 import com.mygdx.game.states.PlayState;
 
 
@@ -71,16 +72,20 @@ public class FightStateController extends AbstractStateController {
         Input input = Gdx.input;
 
         if(input.isKeyPressed(Input.Keys.W)){
-            playerCharacter.moveUp();
+            if ( moveCheck(playerCharacter, 0, 1))
+                playerCharacter.moveUp();
         }
         if(input.isKeyPressed(Input.Keys.S)){
-            playerCharacter.moveDown();
+            if ( moveCheck(playerCharacter, 0, -1))
+                playerCharacter.moveDown();
         }
         if(input.isKeyPressed(Input.Keys.A)){
-            playerCharacter.moveLeft();
+            if ( moveCheck(playerCharacter, -1, 0))
+                playerCharacter.moveLeft();
         }
         if(input.isKeyPressed(Input.Keys.D)){
-            playerCharacter.moveRight();
+            if ( moveCheck(playerCharacter, 1, 0))
+                playerCharacter.moveRight();
         }
         if(Gdx.input.isKeyPressed(Input.Keys.Q)) {
             gameStateManager.set(new PlayState());
@@ -135,9 +140,15 @@ public class FightStateController extends AbstractStateController {
             wave++;
             sendNewWave();
         }
-        for(Enemy enemy : enemyArray){
-            enemy.chase( gameWorld.getPlayerCharacter().getPosition().x , gameWorld.getPlayerCharacter().getPosition().y);
+        //for(Enemy enemy : enemyArray){
+        for ( int i = 0; i < enemyArray.size; i++){
+            enemyArray.get(i).chase( gameWorld.getPlayerCharacter().getPosition().x , gameWorld.getPlayerCharacter().getPosition().y);
+            if (moveCheck(enemyArray.get(i))){
+            }
+            else
+                enemyArray.get(i).setDirection(0,0);
         }
+
         if (gameWorld.getPlayerCharacter().getPosition().x < initialPos - 100)
             gameWorld.getPlayerCharacter().getPosition().x = initialPos - 100;
         if (gameWorld.getPlayerCharacter().getPosition().x > initialPos + 500)
@@ -217,26 +228,25 @@ public class FightStateController extends AbstractStateController {
             }
         }
         for(HolyLight ep : gameWorld.getEnemyProjectiles()) {
-            for(PlayerCharacter player : gameWorld.getplayerCharacterArray()) {
+            for(PlayerCharacter player : gameWorld.getPlayerCharacterArray()) {
                 if (ep.collision(player.getBounds())){
                     player.reduceHealth(ep.getDamage());
                     gameWorld.removeGameElements(ep);
                 }
             }
         }
-        /**
-         * Powerups need to extend GameElement.
-         */
-        /*for(Powerups powerup: gameWorld.getPowerups()) {
-            if (powerup.collision(playerCharacter.getBounds()))
-                gameStateManager.set(new MenuState());
+        for(Powerups powerup : gameWorld.getPowerups()) {
+            if (powerup.collision(playerCharacter.getBounds())) {
+                powerup.activate(playerCharacter);
                 gameWorld.removeGameElements(powerup);
-        }*/
+            }
+        }
     }
 
-    public boolean moveCheck(GameElement element, float x, float y){
+   public boolean moveCheck(Enemy element){
         Rectangle temp = new Rectangle (element.getBounds());
-        temp.setPosition( temp.getX() + x, temp.getY() + y);
+        Vector2 newVelocity = (element.getDirection()).scl((float)element.getSpeed());
+        temp.setPosition( temp.getX() + newVelocity.x, temp.getY() + newVelocity.y);
 
         for (Enemy enemy : gameWorld.getEnemyArray()){
             if ( enemy != element) {
@@ -248,7 +258,26 @@ public class FightStateController extends AbstractStateController {
             if ( rock.collision(temp))
                 return false;
         }
-        for (PlayerCharacter player : gameWorld.getplayerCharacterArray()){
+        for (PlayerCharacter player : gameWorld.getPlayerCharacterArray()){
+                if (player.collision(temp))
+                    return false;
+        }
+        return true;
+    }
+
+    public boolean moveCheck(PlayerCharacter element, float x, float y){
+        Rectangle temp = new Rectangle (element.getBounds());
+        temp.setPosition( temp.getX() + x, temp.getY() + y);
+
+        for (Enemy enemy : gameWorld.getEnemyArray()){
+                if (enemy.collision(temp))
+                    return false;
+        }
+        for (Rock rock : gameWorld.getRocks()){
+            if ( rock.collision(temp))
+                return false;
+        }
+        for (PlayerCharacter player : gameWorld.getPlayerCharacterArray()){
             if ( player != element) {
                 if (player.collision(temp))
                     return false;

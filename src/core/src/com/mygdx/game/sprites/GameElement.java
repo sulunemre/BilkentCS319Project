@@ -71,6 +71,10 @@ public abstract class GameElement {
     public void setDirection(Vector2 direction) {
         this.direction = direction;
     }
+    public void setDirection(float x, float y) {
+        direction.x = x;
+        direction.y = y;
+    }
 
     public Texture getElementTexture() {
         return elementTexture;
@@ -97,7 +101,7 @@ public abstract class GameElement {
     }
 
     public boolean collision(Rectangle victim){
-        return victim.overlaps(bounds);
+        return bounds.overlaps(victim);
     }
 
     public boolean collision(Rectangle victim1, Rectangle victim2){
