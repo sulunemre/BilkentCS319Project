@@ -16,9 +16,8 @@ import com.mygdx.game.stateControllers.FightStateController;
 
 public class PlayStateFight extends State {
 
-    private BitmapFont scoreText;
-    private BitmapFont waveText;
-    private BitmapFont healthText;
+    private BitmapFont scoreText, waveText, healthText, manaText;
+
     private double score;
     private Texture backgroundImage;
     private Vector2 backgroundPos1, backgroundPos2;
@@ -31,7 +30,9 @@ public class PlayStateFight extends State {
         controller.getCam().setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         scoreText = new BitmapFont();
         waveText = new BitmapFont();
-        healthText=new BitmapFont();
+        healthText = new BitmapFont();
+        manaText = new BitmapFont();
+
         backgroundPos1 = GameWorld.getInstance().getBackgroundPos1();
         backgroundPos2 = GameWorld.getInstance().getBackgroundPos2();
         player=GameWorld.getInstance().getPlayerCharacter();
@@ -60,9 +61,11 @@ public class PlayStateFight extends State {
             scoreText.getData().setScale(0.5f);
             waveText.getData().setScale(0.5f);
             healthText.getData().setScale(0.5f);
+            manaText.getData().setScale(0.5f);
             scoreText.draw(sb, "Score:" + score, player.getPosition().x - 120, 10);
             waveText.draw(sb, "Wave:" + ((FightStateController) controller).getWave(), player.getPosition().x - 70, 10);
             healthText.draw(sb, "Health:" + player.getHealth(), player.getPosition().x - 20, 10);
+            manaText.draw(sb, "Mana:" + player.getMana(), player.getPosition().x + 20, 10);
             sb.end();
 
     }

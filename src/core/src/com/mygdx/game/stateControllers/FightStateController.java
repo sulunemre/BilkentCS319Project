@@ -4,9 +4,7 @@ package com.mygdx.game.stateControllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameManager;
 import com.mygdx.game.sprites.*;
@@ -80,12 +78,16 @@ public class FightStateController extends AbstractStateController {
                 playerCharacter.moveDown();
         }
         if(input.isKeyPressed(Input.Keys.A)){
-            if ( moveCheck(playerCharacter, -10, 0))
+            if ( moveCheck(playerCharacter, -10, 0)) {
+                playerCharacter.setDirection(new Vector2(-1,0));
                 playerCharacter.moveLeft();
-        }
+            }
+            }
         if(input.isKeyPressed(Input.Keys.D)){
-            if ( moveCheck(playerCharacter, 10, 0))
+            if ( moveCheck(playerCharacter, 10, 0)) {
+                playerCharacter.setDirection(new Vector2(1, 0));
                 playerCharacter.moveRight();
+            }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.Q)) {
             gameStateManager.set(new PlayState());
@@ -96,7 +98,7 @@ public class FightStateController extends AbstractStateController {
             // Firstly, they are transformed.
             Vector3 unprojected3DClick = cam.unproject(new Vector3(input.getX(), input.getY(), 0));
             Vector2 unprojected2DClick = new Vector2(unprojected3DClick.x, unprojected3DClick.y);
-            if(gameWorld.getPlayerCharacter().getMana()> 10) {
+            if(gameWorld.getPlayerCharacter().getMana() >= 10) {
                 // Calculate the direction
                 HolyLight holyLight = new HolyLight(playerCharacter.getPosition().x, playerCharacter.getPosition().y, playerCharacter.getDamage());
                 Vector2 holyLightDirection = unprojected2DClick.mulAdd(playerCharacter.getPosition(), -1).nor();
@@ -109,8 +111,29 @@ public class FightStateController extends AbstractStateController {
                 gameWorld.getPlayerCharacter().decreaseMana(10);
             }
         }
+        // Melee attack implementation
+        if(input.isKeyPressed(Input.Keys.SPACE)){
+            Vector2 circleCenterCoordinates;
+            if(playerCharacter.getDirection().x < 0)
+                circleCenterCoordinates = new Vector2(playerCharacter.getPosition().x, playerCharacter.getPosition().y + 10);
+            else
+                circleCenterCoordinates = new Vector2(playerCharacter.getPosition().x + playerCharacter.getBounds().width, playerCharacter.getPosition().y + 10);
 
-    }
+                int meleeRange = 10;
+                Circle meleeRangeBounds = new Circle(circleCenterCoordinates, meleeRange);
+
+                for(Enemy enemy : enemyArray){
+                    Rectangle enemyBound = enemy.getBounds();
+                    if(Intersector.overlaps(meleeRangeBounds, enemyBound)){
+                        enemy.reduceHealth(10);
+                        System.out.println("melee oldu");
+                    }
+                }
+
+            }
+        }
+
+    
 
     @Override
     public void update(float dt) {
@@ -169,8 +192,6 @@ public class FightStateController extends AbstractStateController {
         // If all enemies are dead, send new wave
         if(enemyArray.size == 0)
             waveCleared = true;
-
-        System.out.println(wave);
     }
 
    private void updateBackground(){
