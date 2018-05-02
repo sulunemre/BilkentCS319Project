@@ -69,26 +69,40 @@ public class FightStateController extends AbstractStateController {
     public void handleInput() {
         Input input = Gdx.input;
 
-        if(input.isKeyPressed(Input.Keys.W)){
-            if ( moveCheck(playerCharacter, 0, 10))
+         if(input.isKeyPressed(Input.Keys.W)){
+             playerCharacter.setSpeed(10);
+           //  playerCharacter.setDirection(new Vector2(0,1));
+            if ( moveCheck(playerCharacter, 0, 10)) {
                 playerCharacter.moveUp();
+            }
         }
-        if(input.isKeyPressed(Input.Keys.S)){
-            if ( moveCheck(playerCharacter, 0, -10))
+          if(input.isKeyPressed(Input.Keys.S)){
+             playerCharacter.setSpeed(10);
+          //   playerCharacter.setDirection(new Vector2(0,-1));
+            if ( moveCheck(playerCharacter, 0, -10)){
                 playerCharacter.moveDown();
-        }
-        if(input.isKeyPressed(Input.Keys.A)){
+            }
+         }
+          if(input.isKeyPressed(Input.Keys.A)){
+
+
+             playerCharacter.setMeleeDirection(new Vector2(-1,0));
             if ( moveCheck(playerCharacter, -10, 0)) {
-                playerCharacter.setDirection(new Vector2(-1,0));
                 playerCharacter.moveLeft();
             }
             }
-        if(input.isKeyPressed(Input.Keys.D)){
+          if(input.isKeyPressed(Input.Keys.D)){
+             playerCharacter.setSpeed(10);
+          //   playerCharacter.setDirection(new Vector2(1,0));
+              playerCharacter.setMeleeDirection(new Vector2(1,0));
             if ( moveCheck(playerCharacter, 10, 0)) {
-                playerCharacter.setDirection(new Vector2(1, 0));
                 playerCharacter.moveRight();
             }
-        }
+         }
+//        else{
+//           playerCharacter.setSpeed(0);
+//         }
+
         if(Gdx.input.isKeyPressed(Input.Keys.Q)) {
             gameStateManager.set(new PlayState());
         }
@@ -114,7 +128,7 @@ public class FightStateController extends AbstractStateController {
         // Melee attack implementation
         if(input.isKeyPressed(Input.Keys.SPACE)){
             Vector2 circleCenterCoordinates;
-            if(playerCharacter.getDirection().x < 0)
+            if(playerCharacter.getMeleeDirection().x < 0)
                 circleCenterCoordinates = new Vector2(playerCharacter.getPosition().x, playerCharacter.getPosition().y + 10);
             else
                 circleCenterCoordinates = new Vector2(playerCharacter.getPosition().x + playerCharacter.getBounds().width, playerCharacter.getPosition().y + 10);
@@ -133,7 +147,7 @@ public class FightStateController extends AbstractStateController {
             }
         }
 
-    
+
 
     @Override
     public void update(float dt) {
