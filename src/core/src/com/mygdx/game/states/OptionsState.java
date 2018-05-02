@@ -34,13 +34,14 @@ public class OptionsState extends State  {
     private Texture background;
     private GameManager gameManager;
     private  GameStateManager gsm;
-    private int num=0;
+    private int num;
     private TextButton back;
 
     protected OptionsState() {
         controller=new OptionsStateController();
         gameManager=GameManager.getInstance();
         gsm=GameStateManager.getInstance();
+        num=gameManager.getCount();
         stage =new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();

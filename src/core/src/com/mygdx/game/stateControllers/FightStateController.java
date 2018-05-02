@@ -53,13 +53,10 @@ public class FightStateController extends AbstractStateController {
         gameWorld.setBackgroundPos2(backgroundPos2);
 
         playerCharacter.setDirection(new Vector2(0,0)); // At the beginning of the state, player stops
-        if(!gameManager.isFirstClicked() )
+        if(gameManager.getCount()%2==0)
         {
             gameManager.getCurrentMusic().pause();
             gameManager.setMusic("flightStageMusic.mp3");
-            //gameManager.getCurrentMusic().play();
-
-
         }
     }
 
@@ -156,12 +153,8 @@ public class FightStateController extends AbstractStateController {
 
         cam.position.x = playerCharacter.getPosition().x + 80;
         Gdx.gl.glClearColor(1, 0, 0, 1);
-        //&& !gameManager.isSecondClicked()
-        if(!gameManager.isFirstClicked())
+        if(gameManager.getCount()%2==0)
         {
-
-            //gameManager.getCurrentMusic().pause();
-           //gameManager.setMusic("flightStageMusic.mp3");
             gameManager.getCurrentMusic().setLooping(true);
             gameManager.getCurrentMusic().play();
         }

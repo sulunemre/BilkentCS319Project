@@ -29,6 +29,7 @@ public class MenuStateController extends AbstractStateController {
         }
 
 
+
         Gdx.gl.glClearColor(1,0,0,1);
     }
 }

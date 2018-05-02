@@ -76,7 +76,7 @@ public class FlightStateController extends AbstractStateController{
         gameWorld.setBackgroundPos2(backgroundPos2);
 
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
-        if(!gameManager.isFirstClicked())
+        if(gameManager.getCount()%2==0)
         {
 
             gameManager.getCurrentMusic().pause();
@@ -127,7 +127,7 @@ public class FlightStateController extends AbstractStateController{
         flightSpeed++;
         playerCharacter.setSpeed((flightSpeed / 20));
         increaseScore();
-        if(!gameManager.isFirstClicked() )
+        if(gameManager.getCount()%2==0 )
         {
             gameManager.getCurrentMusic().setLooping(true);
             gameManager.getCurrentMusic().play();
