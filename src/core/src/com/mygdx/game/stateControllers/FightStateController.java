@@ -226,12 +226,12 @@ public class FightStateController extends AbstractStateController {
         }
 
         for (HolyLight projectile : gameWorld.getEnemyProjectiles()){
-            if ( projectile.getPositionx() <= initialPos - 100 || projectile.getPositionx() >= initialPos + 500 || projectile.getPositiony() <= 0 || projectile.getPositiony() >= initialPos + 100)
+            if ( projectile.getPositionx() <= initialPos - 100 || projectile.getPositionx() >= initialPos + 500 || projectile.getPositiony() <= 0 || projectile.getPositiony() >= 400)
                 gameWorld.removeGameElements(projectile);
         }
 
         for (HolyLight projectile : gameWorld.getPlayerProjectiles()){
-            if ( projectile.getPositionx() <= initialPos - 100 || projectile.getPositionx() >= initialPos + 500 || projectile.getPositiony() <= 0 || projectile.getPositiony() >= initialPos + 100)
+            if ( projectile.getPositionx() <= initialPos - 100 || projectile.getPositionx() >= initialPos + 500 || projectile.getPositiony() <= 0 || projectile.getPositiony() >= 400)
                 gameWorld.removeGameElements(projectile);
         }
 
