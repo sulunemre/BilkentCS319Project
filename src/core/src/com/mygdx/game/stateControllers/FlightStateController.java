@@ -224,8 +224,9 @@ public class FlightStateController extends AbstractStateController{
         for(Powerups powerup : gameWorld.getPowerups()) {
             if (powerup.collision(playerCharacter.getBounds())) {
                 powerupSound.play();
-                powerup.activate(playerCharacter);
+                playerCharacter.collectPowerup(powerup);
                 gameWorld.removeGameElements(powerup);
+                gameWorld.getPowerups().removeValue(powerup, true);
             }
         }
     }
