@@ -3,6 +3,7 @@ package com.mygdx.game.stateControllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.Array;
@@ -30,6 +31,7 @@ public class FightStateController extends AbstractStateController {
     private static final int ROCK_COUNT = 3;
     private static final int BACKGROUND_Y_OFFSET = -30;
     private Vector2 backgroundPos1, backgroundPos2;
+    private Sound effect;
 
     public FightStateController() {
         gameWorld = GameWorld.getInstance();
@@ -37,6 +39,8 @@ public class FightStateController extends AbstractStateController {
         playerCharacter = gameWorld.getPlayerCharacter();
         enemyArray = gameWorld.getEnemyArray();
         backgroundImage = new Texture("background1.png");
+        effect=Gdx.audio.newSound(Gdx.files.internal("EnemyDeath.ogg"));
+
         wave = 0;
         waveCleared = true;
         initialPos = (int)playerCharacter.getPosition().x;
@@ -116,7 +120,7 @@ public class FightStateController extends AbstractStateController {
                 // Add holy light to the game world
                 gameWorld.addGameElements(holyLight);
                 gameWorld.addPlayerProjectile(holyLight);
-
+                effect.play(0.5f);
                 gameWorld.getPlayerCharacter().decreaseMana(10);
             }
         }
@@ -211,6 +215,7 @@ public class FightStateController extends AbstractStateController {
 
         // Check player's health, if it is <= 0 game over
         if(!playerCharacter.isAlive()){
+            gameManager.getCurrentMusic().pause();
             gameStateManager.set(new MenuState());
         }
 

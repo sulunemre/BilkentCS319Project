@@ -2,6 +2,7 @@ package com.mygdx.game.stateControllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -26,6 +27,7 @@ public class FlightStateController extends AbstractStateController{
     private Array<Rock> rocks;
     private Array<RockMoving> rocksMoving;
 
+
     private Texture backgroundImage;
     private Vector2 backgroundPos1, backgroundPos2;
 
@@ -33,15 +35,21 @@ public class FlightStateController extends AbstractStateController{
     private static final int ROCK_COUNT = 3;
     private static final int ROCKMOVING_COUNT = 3;
     private static final int BACKGROUND_Y_OFFSET = -30;
+    private Sound effect;
+    private Sound powerupSound;
+    private Sound collisionSound;
 
     private double flightSpeed;
 
     public FlightStateController(){
         super();
+
         gameWorld = GameWorld.getInstance();
         gameManager = GameManager.getInstance();
         gameStateManager = GameStateManager.getInstance();
-
+        effect=Gdx.audio.newSound(Gdx.files.internal("EnemyDeath.ogg"));
+        powerupSound=Gdx.audio.newSound(Gdx.files.internal("Powerup.ogg"));
+        collisionSound=Gdx.audio.newSound(Gdx.files.internal("Collision8-Bit.ogg"));
         playerCharacter = gameWorld.getPlayerCharacter();
 
         if(playerCharacter == null) {
@@ -76,6 +84,7 @@ public class FlightStateController extends AbstractStateController{
         gameWorld.setBackgroundPos2(backgroundPos2);
 
         cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
+
         if(gameManager.getCount()%2==0)
         {
 
@@ -93,6 +102,7 @@ public class FlightStateController extends AbstractStateController{
     public void handleInput() {
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
             playerCharacter.moveUp();
+
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
             playerCharacter.moveDown();
@@ -104,12 +114,15 @@ public class FlightStateController extends AbstractStateController{
             playerCharacter.moveRight();
         }
         if(Gdx.input.isKeyPressed(Input.Keys.TAB)){
+
             gameStateManager.set(new PlayStateFight());
          //   for(int i = 0; i < game)
           //  gameWorld.removeGameElements(gameWorld.getEnemyArray());
 
         }
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            gameManager.getCurrentMusic().dispose();
+
             gameStateManager.set(new MenuState());
         }
     }
@@ -120,8 +133,8 @@ public class FlightStateController extends AbstractStateController{
         handleInput();
         updateBackground();
         gameWorld.updateAll(dt);
-
         cam.position.x = gameWorld.getPlayerCharacter().getPosition().x + 80;
+        //cam.position.x=cam2.position.x;
         Gdx.gl.glClearColor(1, 0, 0, 1);
 
         flightSpeed++;
@@ -193,14 +206,24 @@ public class FlightStateController extends AbstractStateController{
     private void collision(){
         for(Rock rock: gameWorld.getRocks()) {
             if (rock.collision(playerCharacter.getBounds()))
+            {
+                collisionSound.play();
+                gameManager.getCurrentMusic().pause();
                 gameStateManager.set(new MenuState());
+            }
+
         }
         for(Rock rock: gameWorld.getRocks()) {
             if (rock.collision(playerCharacter.getBounds()))
+            {
+                gameManager.getCurrentMusic().pause();
                 gameStateManager.set(new MenuState());
+            }
+
         }
         for(Powerups powerup : gameWorld.getPowerups()) {
             if (powerup.collision(playerCharacter.getBounds())) {
+                powerupSound.play();
                 powerup.activate(playerCharacter);
                 gameWorld.removeGameElements(powerup);
             }
@@ -233,4 +256,5 @@ public class FlightStateController extends AbstractStateController{
         gameWorld.addGameElements(powerup);
         gameWorld.getPowerups().add(powerup);
     }
+
 }
