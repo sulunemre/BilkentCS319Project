@@ -48,8 +48,8 @@ public class PlayStateFight extends State {
 
     @Override
     public void render(SpriteBatch sb) {
-
-            sb.setProjectionMatrix(controller.getCam().combined);
+         //   controller.getCam().update();
+          sb.setProjectionMatrix(controller.getCam().combined);
             sb.begin();
        //      sb.draw(backgroundImage, controller.getCam().position.x - (controller.getCam().viewportWidth /2 ), 0);
         sb.draw(backgroundImage, backgroundPos1.x, backgroundPos1.y);

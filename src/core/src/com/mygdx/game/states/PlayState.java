@@ -43,9 +43,7 @@ public class PlayState extends State {
         for(GameElement ge: gameWorld.getGameElementsArray()){
             sb.draw(ge.getElementTexture(), ge.getPosition().x, ge.getPosition().y);
         }
-
-        scoreText.getData().setScale(0.5f);
-        healthText.getData().setScale(0.5f);
+        
         scoreText.draw(sb, "Score:" + gameManager.getScore(), playerCharacter.getPosition().x - 90, 20);
         healthText.draw(sb, "Health:" + playerCharacter.getHealth(), playerCharacter.getPosition().x - 50, 20);
         sb.end();

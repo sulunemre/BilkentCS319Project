@@ -83,7 +83,7 @@ public class FlightStateController extends AbstractStateController{
         gameWorld.setBackgroundPos1(backgroundPos1);
         gameWorld.setBackgroundPos2(backgroundPos2);
 
-        cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
+        cam.setToOrtho(false, MyGdxGame.WIDTH  , MyGdxGame.HEIGHT  );
 
         if(gameManager.getCount()%2==0)
         {

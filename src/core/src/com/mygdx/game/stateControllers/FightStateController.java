@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameManager;
+import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.*;
 import com.mygdx.game.sprites.enemies.*;
 import com.mygdx.game.sprites.powerups.Powerups;
@@ -122,6 +123,7 @@ public class FightStateController extends AbstractStateController {
                 gameWorld.addPlayerProjectile(holyLight);
                 effect.play(0.5f);
                 gameWorld.getPlayerCharacter().decreaseMana(10);
+                cam.setToOrtho(false, MyGdxGame.WIDTH  , MyGdxGame.HEIGHT  );
             }
         }
         // Melee attack implementation
