@@ -46,6 +46,13 @@ public abstract class Character extends GameElement{
         return health > 0;
     }
 
+    public void increaseHealth(int increaseAmount){
+        health = health + increaseAmount;
+        if(health > maxHealth)
+            health = maxHealth;
+
+    }
+
     /*public void move(float x, float y, GameWorld world){
         if (moveCheck(x,y,world)){
             position.x = position.x + x;

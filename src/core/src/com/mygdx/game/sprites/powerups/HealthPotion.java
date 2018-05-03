@@ -20,6 +20,7 @@ public class HealthPotion extends Powerups {
      */
     public HealthPotion(float x, float y, int type) {
         super(x, y, "lesserHealthPotion.png");
+        this.type = type;
 
         String texturePath;
         if(type == 0) {
@@ -36,7 +37,7 @@ public class HealthPotion extends Powerups {
         }
 
         elementTexture = new Texture(texturePath);
-        this.type = type;
+
     }
 
     public int getHealthIncrease() {

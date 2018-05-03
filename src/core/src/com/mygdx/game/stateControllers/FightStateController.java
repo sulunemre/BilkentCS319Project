@@ -295,8 +295,9 @@ public class FightStateController extends AbstractStateController {
         // Colision between powerup and player
         for(Powerups powerup : gameWorld.getPowerups()) {
             if (powerup.collision(playerCharacter.getBounds())) {
-                powerup.activate(playerCharacter);
+                playerCharacter.collectPowerup(powerup);
                 gameWorld.removeGameElements(powerup);
+                gameWorld.getPowerups().removeValue(powerup, true);
             }
         }
     }
