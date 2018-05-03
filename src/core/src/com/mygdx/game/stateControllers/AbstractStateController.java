@@ -3,6 +3,7 @@ package com.mygdx.game.stateControllers;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.GameManager;
 import com.mygdx.game.states.GameStateManager;
+import com.mygdx.game.states.State;
 
 public abstract class AbstractStateController {
     protected OrthographicCamera cam;
@@ -10,13 +11,14 @@ public abstract class AbstractStateController {
     protected GameStateManager gameStateManager;
     protected GameManager gameManager;
 
+    protected State controlledState;
 
-
-    public AbstractStateController() {
+    public AbstractStateController(State state) {
         cam = new OrthographicCamera();
         cam2=new OrthographicCamera();
         gameStateManager = GameStateManager.getInstance();
         gameManager = GameManager.getInstance();
+        controlledState = state;
     }
 
     public abstract void handleInput();

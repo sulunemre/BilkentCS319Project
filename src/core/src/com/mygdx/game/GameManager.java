@@ -3,6 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.mygdx.game.sprites.GameWorld;
+import com.mygdx.game.states.GameOverState;
+import com.mygdx.game.states.GameStateManager;
 
 import java.io.IOException;
 
@@ -11,6 +13,7 @@ public class GameManager {
 
     private FileSystemManager fileSystemManager = FileSystemManager.getInstance();
     private GameWorld gameWorld = GameWorld.getInstance();
+    private GameStateManager gameStateManager = GameStateManager.getInstance();
 
     private String playerName;
     private Music currentMusic;
@@ -116,6 +119,8 @@ public class GameManager {
     }
 
     public void gameOver(){
-        //TODO: implement
+        gameWorld.removeEverything();
+        gameStateManager.set(new GameOverState());
+
     }
 }

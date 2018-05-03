@@ -23,7 +23,7 @@ public class PlayState extends State {
 
 
     public PlayState() {
-        controller = new FlightStateController();
+        controller = new FlightStateController(this);
         gameWorld = GameWorld.getInstance();
         scoreText = new BitmapFont();
         healthText=new BitmapFont();

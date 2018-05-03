@@ -35,7 +35,7 @@ public class HelpState extends State  {
     private Texture background;
 
     public HelpState() {
-        controller = new HelpStateController();
+        controller = new HelpStateController(this);
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();

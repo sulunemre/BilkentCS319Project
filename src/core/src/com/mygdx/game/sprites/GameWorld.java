@@ -129,6 +129,13 @@ public class GameWorld implements Serializable {
     }
 
     public void removeEverything(){
-
+        gameElementsArray.clear();
+        playerCharacterArray.clear();
+        rocks.clear();
+        rocksMoving.clear();
+        enemyArray.clear();
+        powerupsArray.clear();
+        playerProjectiles.clear();
+        enemyProjectiles.clear();
     }
 }

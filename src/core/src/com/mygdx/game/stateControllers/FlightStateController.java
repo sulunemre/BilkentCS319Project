@@ -14,10 +14,7 @@ import com.mygdx.game.sprites.Rock;
 import com.mygdx.game.sprites.RockMoving;
 import com.mygdx.game.sprites.powerups.PowerupFactory;
 import com.mygdx.game.sprites.powerups.Powerups;
-import com.mygdx.game.states.GameStateManager;
-import com.mygdx.game.states.MenuState;
-import com.mygdx.game.states.PlayState;
-import com.mygdx.game.states.PlayStateFight;
+import com.mygdx.game.states.*;
 
 public class FlightStateController extends AbstractStateController{
     private GameWorld gameWorld;
@@ -41,8 +38,8 @@ public class FlightStateController extends AbstractStateController{
 
     private double flightSpeed;
 
-    public FlightStateController(){
-        super();
+    public FlightStateController(State state){
+        super(state);
 
         gameWorld = GameWorld.getInstance();
         gameManager = GameManager.getInstance();

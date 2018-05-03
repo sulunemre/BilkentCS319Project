@@ -1,8 +1,13 @@
 package com.mygdx.game.stateControllers;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.states.State;
 
 public class HelpStateController extends AbstractStateController {
+    public HelpStateController(State state) {
+        super(state);
+    }
+
     @Override
     public void handleInput() {
 

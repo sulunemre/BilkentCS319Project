@@ -24,7 +24,7 @@ public class PlayStateFight extends State {
     private PlayerCharacter player;
 
     public PlayStateFight() {
-        controller = new FightStateController();
+        controller = new FightStateController(this);
         backgroundImage = new Texture("background1.png");
         controller.getCam().setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         scoreText = new BitmapFont();

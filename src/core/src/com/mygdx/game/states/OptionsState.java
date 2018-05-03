@@ -38,7 +38,7 @@ public class OptionsState extends State  {
     private TextButton back;
 
     protected OptionsState() {
-        controller=new OptionsStateController();
+        controller = new OptionsStateController(this);
         gameManager=GameManager.getInstance();
         gsm=GameStateManager.getInstance();
         num=gameManager.getCount();

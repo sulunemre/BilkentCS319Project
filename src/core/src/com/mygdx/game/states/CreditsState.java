@@ -21,7 +21,7 @@ public class CreditsState extends State{
 
     public CreditsState() {
         backgroundImage = new Texture("creditsBackground.png");
-        controller = new CreditsStateController();
+        controller = new CreditsStateController(this);
     }
 
 

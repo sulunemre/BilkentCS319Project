@@ -2,11 +2,13 @@ package com.mygdx.game.stateControllers;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.GameManager;
+import com.mygdx.game.states.State;
 
 public class OptionsStateController extends AbstractStateController {
     private GameManager gameManager;
 
-    public OptionsStateController() {
+    public OptionsStateController(State state) {
+        super(state);
         gameManager = GameManager.getInstance();
     }
 

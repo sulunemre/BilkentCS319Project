@@ -35,7 +35,7 @@ public class MenuState extends State {
     private Skin skin;
     private Stage stage;
     public MenuState() {
-        controller = new MenuStateController();
+        controller = new MenuStateController(this);
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);

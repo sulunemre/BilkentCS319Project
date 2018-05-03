@@ -1,10 +1,12 @@
 package com.mygdx.game.stateControllers;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.states.State;
 
 public class MenuStateController extends AbstractStateController {
 
-    public MenuStateController() {
+    public MenuStateController(State state) {
+        super(state);
         if(!gameManager.isFirstClicked())
         {
             gameManager.setMusic("stormwind.mp3");

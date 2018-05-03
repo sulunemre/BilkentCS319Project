@@ -14,7 +14,7 @@ import com.mygdx.game.sprites.enemies.*;
 import com.mygdx.game.sprites.powerups.Powerups;
 import com.mygdx.game.states.MenuState;
 import com.mygdx.game.states.PlayState;
-
+import com.mygdx.game.states.State;
 
 
 public class FightStateController extends AbstractStateController {
@@ -34,7 +34,8 @@ public class FightStateController extends AbstractStateController {
     private Vector2 backgroundPos1, backgroundPos2;
     private Sound effect;
 
-    public FightStateController() {
+    public FightStateController(State state) {
+        super(state);
         gameWorld = GameWorld.getInstance();
         gameManager = GameManager.getInstance();
         playerCharacter = gameWorld.getPlayerCharacter();
@@ -220,6 +221,7 @@ public class FightStateController extends AbstractStateController {
         // Check player's health, if it is <= 0 game over
         if(!playerCharacter.isAlive()){
             gameManager.getCurrentMusic().pause();
+            gameManager.gameOver();
             gameStateManager.set(new MenuState());
         }
 
