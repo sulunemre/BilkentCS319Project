@@ -89,6 +89,7 @@ public class MenuState extends State {
                 JFrame frame = new JFrame();
                 gameManager.setPlayerName(login(frame));
                 gsm.set(new PlayState());
+                dispose();
             }
 
         });
@@ -98,6 +99,7 @@ public class MenuState extends State {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gsm.set(new CreditsState());
+                dispose();
             }
         });
         helpBtn.addListener(new ClickListener()
@@ -105,6 +107,7 @@ public class MenuState extends State {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gsm.set(new HelpState());
+                dispose();
             }
         });
         optionsBtn.addListener(new ClickListener()
@@ -112,6 +115,7 @@ public class MenuState extends State {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gsm.set(new OptionsState());
+                dispose();
             }
         });
         exitBtn.addListener(new ClickListener()
@@ -136,6 +140,7 @@ public class MenuState extends State {
 
         stage.act();
         stage.draw();
+
     }
 
     @Override
