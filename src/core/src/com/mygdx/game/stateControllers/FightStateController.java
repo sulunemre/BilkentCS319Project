@@ -12,6 +12,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.*;
 import com.mygdx.game.sprites.enemies.*;
 import com.mygdx.game.sprites.powerups.Powerups;
+import com.mygdx.game.states.GameOverState;
 import com.mygdx.game.states.MenuState;
 import com.mygdx.game.states.PlayState;
 import com.mygdx.game.states.State;
@@ -222,7 +223,7 @@ public class FightStateController extends AbstractStateController {
         if(!playerCharacter.isAlive()){
             gameManager.getCurrentMusic().pause();
             gameManager.gameOver();
-            gameStateManager.set(new MenuState());
+            gameStateManager.set(new GameOverState());
         }
 
         for (HolyLight projectile : gameWorld.getEnemyProjectiles()){
