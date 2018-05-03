@@ -11,7 +11,7 @@ public class MeleeAttack implements AttackStrategy {
     public void attack(Enemy attacker, PlayerCharacter victim, int damage) {
         Vector2 circleCenterCoordinates;
 
-        circleCenterCoordinates = new Vector2(attacker.getPositionx(), attacker.getPositiony());
+        circleCenterCoordinates = new Vector2(attacker.getPosition());
 
         int meleeRange = attacker.getWidth() * 2;
         Circle meleeRangeBounds = new Circle(circleCenterCoordinates, meleeRange);

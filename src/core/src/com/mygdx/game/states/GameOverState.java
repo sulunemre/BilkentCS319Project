@@ -19,7 +19,7 @@ public class GameOverState extends State {
         ab.flush();
         BitmapFont scoreText = new BitmapFont();
         controller.getCam().position.set(new Vector2(MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2), 0);
-        scoreText.draw(ab, "Score: " + gameManager.getScore(), controller.getCam().position.x, controller.getCam().position.y);
+        scoreText.draw(ab, "Dear " + gameManager.getPlayerName() + "\nYour score: " + gameManager.getScore(), controller.getCam().position.x, controller.getCam().position.y);
         ab.end();
 
     }

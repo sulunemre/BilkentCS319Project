@@ -34,6 +34,12 @@ public class FightStateController extends AbstractStateController {
     private static final int BACKGROUND_Y_OFFSET = -30;
     private Vector2 backgroundPos1, backgroundPos2;
     private Sound effect;
+    private int coolDownTimer;
+    private String playerSentence;
+    private static String[] waveClearedSentences = new String[]{"Victory!", "I killed them all", "In the name of the Light \nI have defeated my enemies", "You bastards!"};
+    private String waveClearedSentence;
+    private String waveIncomingSentence;
+    private static String[] waveIncomingSentences = new String[]{"Oh no! Here they come again!", "fuk this shit m8", "What else can they put in my way?", "Light... Help me...", "Do they ever stop coming?"};
 
     public FightStateController(State state) {
         super(state);
@@ -43,12 +49,13 @@ public class FightStateController extends AbstractStateController {
         enemyArray = gameWorld.getEnemyArray();
         backgroundImage = new Texture("background1.png");
         effect=Gdx.audio.newSound(Gdx.files.internal("holylightCast.mp3"));
-
+        coolDownTimer = 100;
         wave = 0;
         waveCleared = true;
         initialPos = (int)playerCharacter.getPosition().x;
         rocks = new Array<Rock>();
         rocksM = new Array<RockMoving>();
+        playerSentence = "";
         for(int i =1; i < ROCK_COUNT; i++){
 
             rocks.add(new Rock(i * (ROCK_SPACING + Rock.TUBE_WIDTH), 5));
@@ -106,8 +113,14 @@ public class FightStateController extends AbstractStateController {
 //           playerCharacter.setSpeed(0);
 //         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.Q)) {
+        if(input.isKeyPressed(Input.Keys.Q) && waveCleared) {
             gameStateManager.set(new PlayState());
+        }
+        else if(input.isKeyPressed(Input.Keys.Q) && !waveCleared){
+             playerSentence = "I can't run away without killing them all!";
+        }
+        else{
+             playerSentence = "";
         }
 
         if(input.justTouched()){
@@ -177,9 +190,22 @@ public class FightStateController extends AbstractStateController {
 
 
         if(waveCleared) {
-            wave++;
-            sendNewWave();
+            coolDownTimer--;
+            if(coolDownTimer > 300){
+                playerSentence = waveClearedSentence;
+            }
+            else if(coolDownTimer < 200 && wave != 0){
+                playerSentence = waveIncomingSentence;
+            }
         }
+        else{
+            coolDownTimer = 500;
+        }
+        if(coolDownTimer <= 0){
+            wave++;
+            sendNewWave();}
+        System.out.println("cooldown: " + coolDownTimer);
+
         //for(Enemy enemy : enemyArray){
         for ( int i = 0; i < enemyArray.size; i++){
             enemyArray.get(i).chase( gameWorld.getPlayerCharacter().getPosition().x , gameWorld.getPlayerCharacter().getPosition().y);
@@ -247,7 +273,7 @@ public class FightStateController extends AbstractStateController {
     private void sendNewWave() {
         int leftEdge = initialPos - 100;
         int rightEdge = initialPos + 300;
-
+      //  int
 
         EnemyFactory enemyFactory = new EnemyFactory();
 
@@ -282,8 +308,9 @@ public class FightStateController extends AbstractStateController {
             }
         }
 
+        waveClearedSentence = randomPick(waveClearedSentences);
+        waveIncomingSentence = randomPick(waveIncomingSentences);
         waveCleared = false;
-
     }
 
     public void collisionTrigger(){
@@ -360,5 +387,13 @@ public class FightStateController extends AbstractStateController {
 
     public int getWave() {
         return wave;
+    }
+
+    public String getPlayerSentence() {
+        return playerSentence;
+    }
+
+    private String randomPick(String[] strings){
+        return strings[(int)(System.currentTimeMillis() % strings.length)];
     }
 }
