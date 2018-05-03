@@ -18,6 +18,8 @@ import com.mygdx.game.MyGdxGame;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.mygdx.game.stateControllers.MenuStateController;
+import javax.swing.*;
+import java.awt.*;
 
 public class MenuState extends State {
 
@@ -84,6 +86,8 @@ public class MenuState extends State {
 //
 //                    }
 //                }, "Type your name", "", "");
+                JFrame frame = new JFrame();
+                gameManager.setPlayerName(login(frame));
                 gsm.set(new PlayState());
             }
 
@@ -164,4 +168,25 @@ public class MenuState extends State {
         textButtonStyle.font = skin.getFont("default");
         skin.add("default", textButtonStyle);
     }
+
+    public String login(JFrame frame) {
+        String input = new String();
+
+        JPanel panel = new JPanel(new BorderLayout(5, 5));
+
+        JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+        label.add(new JLabel("Player Name", SwingConstants.RIGHT));
+        panel.add(label, BorderLayout.WEST);
+
+        JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+        JTextField username = new JTextField();
+        controls.add(username);
+        panel.add(controls, BorderLayout.CENTER);
+
+        JOptionPane.showMessageDialog(frame, panel, "", JOptionPane.QUESTION_MESSAGE);
+
+        input = username.getText();
+        return input;
+    }
 }
+
