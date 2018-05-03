@@ -3,6 +3,7 @@ package com.mygdx.game.sprites.enemies;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.Character;
+import com.mygdx.game.sprites.PlayerCharacter;
 
 public abstract class Enemy extends Character{
     protected int spawnRate;
@@ -73,9 +74,9 @@ public abstract class Enemy extends Character{
 
     }
 
-    public void attack(Vector2 positionToBeAttacked){
+    public void attack(PlayerCharacter victim){
         if(coolDown == 0)
-            attackStrategy.attack(getPosition(), positionToBeAttacked, damage);
+            attackStrategy.attack(this, victim, damage);
     }
 
     public AttackStrategy getAttackStrategy() {

@@ -107,4 +107,6 @@ public abstract class GameElement {
     public boolean collision(Rectangle victim1, Rectangle victim2){
         return victim1.overlaps(victim2);
     }
+
+    public int getWidth () { return elementTexture.getWidth();}
 }

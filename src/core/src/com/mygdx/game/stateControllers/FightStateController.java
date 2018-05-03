@@ -213,9 +213,7 @@ public class FightStateController extends AbstractStateController {
             enemy.decrementCooldown();
             System.out.println(enemy.getCoolDown());
             if(enemy.getCoolDown() == 0){
-                enemy.attack(playerCharacter.getPosition());
-                enemy.resetCooldown();
-
+                enemy.attack(playerCharacter);
             }
         }
 
