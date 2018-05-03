@@ -44,8 +44,8 @@ public class PlayState extends State {
             sb.draw(ge.getElementTexture(), ge.getPosition().x, ge.getPosition().y);
         }
         
-        scoreText.draw(sb, "Score:" + gameManager.getScore(), playerCharacter.getPosition().x - 90, 20);
-        healthText.draw(sb, "Health:" + playerCharacter.getHealth(), playerCharacter.getPosition().x - 50, 20);
+        scoreText.draw(sb, "Score:" + gameManager.getScore(), playerCharacter.getPosition().x - 300, 20);
+        healthText.draw(sb, "Health:" + playerCharacter.getHealth(), playerCharacter.getPosition().x - 200, 20);
         sb.end();
     }
 

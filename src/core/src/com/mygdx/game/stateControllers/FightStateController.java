@@ -40,7 +40,7 @@ public class FightStateController extends AbstractStateController {
         playerCharacter = gameWorld.getPlayerCharacter();
         enemyArray = gameWorld.getEnemyArray();
         backgroundImage = new Texture("background1.png");
-        effect=Gdx.audio.newSound(Gdx.files.internal("EnemyDeath.ogg"));
+        effect=Gdx.audio.newSound(Gdx.files.internal("holylightCast.mp3"));
 
         wave = 0;
         waveCleared = true;
@@ -61,7 +61,8 @@ public class FightStateController extends AbstractStateController {
         if(gameManager.getCount()%2==0)
         {
             gameManager.getCurrentMusic().pause();
-            gameManager.setMusic("flightStageMusic.mp3");
+            gameManager.setMusic("fightStateMusic.mp3");
+            gameManager.getCurrentMusic().setVolume(0.8f);
         }
     }
 
@@ -121,7 +122,7 @@ public class FightStateController extends AbstractStateController {
                 // Add holy light to the game world
                 gameWorld.addGameElements(holyLight);
                 gameWorld.addPlayerProjectile(holyLight);
-                effect.play(0.5f);
+                effect.play();
                 gameWorld.getPlayerCharacter().decreaseMana(10);
                 cam.setToOrtho(false, MyGdxGame.WIDTH  , MyGdxGame.HEIGHT  );
             }
@@ -195,6 +196,7 @@ public class FightStateController extends AbstractStateController {
         // Remove dead enemies
         for(Enemy enemy : enemyArray){
             if(enemy.getHealth() <= 0){
+                gameManager.increseScore(enemy.getKillingReward());
                 gameWorld.removeGameElements(enemy);
                 enemyArray.removeValue(enemy, false);
             }

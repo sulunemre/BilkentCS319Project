@@ -25,7 +25,6 @@ public class PlayStateFight extends State {
 
     public PlayStateFight() {
         controller = new FightStateController();
-        score = GameManager.getInstance().getScore();
         backgroundImage = new Texture("background1.png");
         controller.getCam().setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         scoreText = new BitmapFont();
@@ -58,14 +57,10 @@ public class PlayStateFight extends State {
                 sb.draw(ge.getElementTexture(), ge.getPosition().x, ge.getPosition().y);
             }
 
-            scoreText.getData().setScale(0.5f);
-            waveText.getData().setScale(0.5f);
-            healthText.getData().setScale(0.5f);
-            manaText.getData().setScale(0.5f);
-            scoreText.draw(sb, "Score:" + score, player.getPosition().x - 120, 10);
-            waveText.draw(sb, "Wave:" + ((FightStateController) controller).getWave(), player.getPosition().x - 70, 10);
-            healthText.draw(sb, "Health:" + player.getHealth(), player.getPosition().x - 20, 10);
-            manaText.draw(sb, "Mana:" + player.getMana(), player.getPosition().x + 20, 10);
+            scoreText.draw(sb, "Score:" + GameManager.getInstance().getScore(), player.getPosition().x - 300, 10);
+            waveText.draw(sb, "Wave:" + ((FightStateController) controller).getWave(), player.getPosition().x - 200, 10);
+            healthText.draw(sb, "Health:" + player.getHealth(), player.getPosition().x - 100, 10);
+            manaText.draw(sb, "Mana:" + player.getMana(), player.getPosition().x, 10);
             sb.end();
 
     }

@@ -127,4 +127,8 @@ public class GameWorld implements Serializable {
     public Array<Powerups> getPowerups() {
         return powerupsArray;
     }
+
+    public void removeEverything(){
+
+    }
 }

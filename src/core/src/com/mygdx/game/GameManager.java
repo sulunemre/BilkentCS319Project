@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.mygdx.game.sprites.GameWorld;
 
 import java.io.IOException;
 
@@ -9,6 +10,7 @@ public class GameManager {
     private static GameManager gameManager = new GameManager();
 
     private FileSystemManager fileSystemManager = FileSystemManager.getInstance();
+    private GameWorld gameWorld = GameWorld.getInstance();
 
     private String playerName;
     private Music currentMusic;
@@ -107,5 +109,13 @@ public class GameManager {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    public void increseScore(int increaseAmount){
+        score = score + increaseAmount;
+    }
+
+    public void gameOver(){
+        //TODO: implement
     }
 }

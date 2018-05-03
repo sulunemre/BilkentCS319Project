@@ -92,4 +92,9 @@ public abstract class Enemy extends Character{
 
 
     }
+    public int getKillingReward(){
+
+        return damage * maxHealth;
+
+    }
 }

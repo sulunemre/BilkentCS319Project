@@ -30,10 +30,10 @@ public class PlayerCharacter extends Character{
         meleeDirection = new Vector2(1,0);
     }
 
-    public void moveUp(){ position.y += (speed / 10); }
+    public void moveUp(){ position.y += (speed / 2); }
 
     public void moveDown(){
-        position.y -= (speed / 10);
+        position.y -= (speed / 2);
     }
 
     public void moveRight(){
