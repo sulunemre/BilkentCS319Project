@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.mygdx.game.sprites.GameWorld;
+import com.mygdx.game.sprites.PlayerCharacter;
 import com.mygdx.game.states.GameOverState;
 import com.mygdx.game.states.GameStateManager;
 
@@ -116,6 +117,11 @@ public class GameManager {
 
     public void increseScore(int increaseAmount){
         score = score + increaseAmount;
+    }
+
+    public void setUpNewGame(){
+        gameWorld.setPlayerCharacter(new PlayerCharacter(50,100));
+        setScore(0);
     }
 
     public void gameOver(){

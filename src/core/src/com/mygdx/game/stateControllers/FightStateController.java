@@ -11,6 +11,7 @@ import com.mygdx.game.GameManager;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.*;
 import com.mygdx.game.sprites.enemies.*;
+import com.mygdx.game.sprites.powerups.PowerupFactory;
 import com.mygdx.game.sprites.powerups.Powerups;
 import com.mygdx.game.states.GameOverState;
 import com.mygdx.game.states.MenuState;
@@ -196,6 +197,10 @@ public class FightStateController extends AbstractStateController {
             }
             else if(coolDownTimer < 200 && wave != 0){
                 playerSentence = waveIncomingSentence;
+            }
+
+            if(coolDownTimer % 100 == 0){
+                createPowerup(0);
             }
         }
         else{
@@ -395,5 +400,32 @@ public class FightStateController extends AbstractStateController {
 
     private String randomPick(String[] strings){
         return strings[(int)(System.currentTimeMillis() % strings.length)];
+    }
+
+    /**
+     * @param level 0 for low level, 1 for medium, 2 for high level powerups
+     */
+    private void createPowerup(int level){
+        int yLocation = (int) (Math.random()*260);
+        int xLocation = (int) (Math.random()*400 + (initialPos - 100));
+        PowerupFactory powerupFactory = new PowerupFactory();
+        Powerups powerup;
+
+        if(level == 0){
+            powerup = powerupFactory.getLowLevelPowerup();
+        }
+        else if(level == 1){
+            powerup = powerupFactory.getMediumLevelPowerup();
+        }
+        else if(level == 2){
+            powerup = powerupFactory.getHighLevelPowerup();
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
+
+        powerup.setPosition(new Vector2(xLocation, yLocation));
+        gameWorld.addGameElements(powerup);
+        gameWorld.getPowerups().add(powerup);
     }
 }

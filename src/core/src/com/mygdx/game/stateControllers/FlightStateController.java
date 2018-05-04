@@ -197,7 +197,7 @@ public class FlightStateController extends AbstractStateController{
     }
 
     private void increaseScore(){
-        gameManager.setScore(gameManager.getScore() + flightSpeed);
+        gameManager.increseScore((int) flightSpeed);
     }
 
     private void collision(){
@@ -206,15 +206,15 @@ public class FlightStateController extends AbstractStateController{
             {
                 collisionSound.play();
                 gameManager.getCurrentMusic().pause();
-                gameStateManager.set(new MenuState());
+
             }
 
         }
-        for(Rock rock: gameWorld.getRocks()) {
+        for(Rock rock: gameWorld.getRocksMoving()) {
             if (rock.collision(playerCharacter.getBounds()))
             {
                 gameManager.getCurrentMusic().pause();
-                gameStateManager.set(new MenuState());
+                gameManager.gameOver();
             }
 
         }

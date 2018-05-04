@@ -71,23 +71,9 @@ public class MenuState extends State {
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //dispose();
-//                Gdx.input.getTextInput(new Input.TextInputListener() {
-//                    @Override
-//                    public void input(String text) {
-//                        gameManager.setPlayerName(text);
-//                        Thread.currentThread().interrupt();
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void canceled() {
-//
-//                    }
-//                }, "Type your name", "", "");
                 JFrame frame = new JFrame();
                 gameManager.setPlayerName(login(frame));
+                gameManager.setUpNewGame();
                 gsm.set(new PlayState());
                 dispose();
             }
