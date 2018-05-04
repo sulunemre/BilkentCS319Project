@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.sprites.GameWorld;
 import com.mygdx.game.stateControllers.GameOverStateController;
 
 import java.io.IOException;
@@ -24,12 +23,12 @@ public class GameOverState extends State {
     @Override
     public void render(SpriteBatch ab) {
         //ab.setProjectionMatrix(controller.getCam().combined);
-        ab.begin();
-        ab.flush();
+        menuBatch.begin();
+        menuBatch.draw(background, 0, 0);
         BitmapFont scoreText = new BitmapFont();
         controller.getCam().position.set(new Vector2(MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2), 0);
-        scoreText.draw(ab, "Dear " + gameManager.getPlayerName() + "\nYour score: " + gameManager.getScore(), controller.getCam().position.x, controller.getCam().position.y);
-        ab.end();
+        scoreText.draw(menuBatch, "Dear " + gameManager.getPlayerName() + "\nYour score: " + gameManager.getScore(), 350, 300);
+        menuBatch.end();
 
     }
 

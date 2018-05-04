@@ -15,9 +15,10 @@ public class HighScoreState extends State {
 
     @Override
     public void render(SpriteBatch ab) {
-        ab.begin();
-        highScoreListText.draw(ab, ((HighScoreStateController) controller).getScoreListString(), 150, 150);
-        ab.end();
+        menuBatch.begin();
+        menuBatch.draw(background, 0, 0);
+        highScoreListText.draw(menuBatch, ((HighScoreStateController) controller).getScoreListString(), 350, 500);
+        menuBatch.end();
     }
 
     @Override

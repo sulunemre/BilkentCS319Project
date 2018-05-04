@@ -28,9 +28,9 @@ public class CreditsState extends State{
 
     @Override
     public void render(SpriteBatch sb) {
-        sb.begin();
-        sb.draw(backgroundImage, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        sb.end();
+        menuBatch.begin();
+        menuBatch.draw(backgroundImage, 0, 0);
+        menuBatch.end();
     }
 
     @Override

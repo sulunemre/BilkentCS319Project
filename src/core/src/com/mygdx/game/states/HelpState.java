@@ -61,9 +61,9 @@ public class HelpState extends State  {
 
     @Override
     public void render(SpriteBatch ab) {
-        ab.begin();
-        ab.draw(background, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        ab.end();
+        menuBatch.begin();
+        menuBatch.draw(background, 0, 0);
+        menuBatch.end();
         stage.act();
         stage.draw();
 

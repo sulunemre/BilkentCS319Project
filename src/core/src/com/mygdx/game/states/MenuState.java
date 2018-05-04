@@ -1,29 +1,23 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.MyGdxGame;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.mygdx.game.stateControllers.MenuStateController;
 import javax.swing.*;
 import java.awt.*;
 
 public class MenuState extends State {
 
-    private Texture background;
 
     private TextButton playBtn;
     private TextButton highScoresBtn;
@@ -40,8 +34,6 @@ public class MenuState extends State {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         createBasicSkin();
-
-        background = new Texture("menuBackground.png");
 
         playBtn = new TextButton("Play", skin);
         highScoresBtn = new TextButton("High scores", skin);
@@ -128,9 +120,9 @@ public class MenuState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
-        sb.begin();
-        sb.draw(background, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        sb.end();
+        menuBatch.begin();
+        menuBatch.draw(background, 0, 0);
+        menuBatch.end();
 
         stage.act();
         stage.draw();
