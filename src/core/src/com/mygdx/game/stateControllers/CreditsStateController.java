@@ -15,6 +15,7 @@ public class CreditsStateController extends AbstractStateController {
     @Override
     public void handleInput() {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            controlledState.dispose();
             gameStateManager.set(new MenuState());
         }
 

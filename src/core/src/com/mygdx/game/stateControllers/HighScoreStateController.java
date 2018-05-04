@@ -1,9 +1,13 @@
 package com.mygdx.game.stateControllers;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.mygdx.game.Score;
+import com.mygdx.game.states.MenuState;
 import com.mygdx.game.states.State;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class HighScoreStateController extends AbstractStateController {
@@ -23,7 +27,10 @@ public class HighScoreStateController extends AbstractStateController {
 
     @Override
     public void handleInput() {
-
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            controlledState.dispose();
+            gameStateManager.set(new MenuState());
+        }
     }
 
     @Override
@@ -35,8 +42,9 @@ public class HighScoreStateController extends AbstractStateController {
         return scoreList;
     }
 
-    public void updateScoreList() throws IOException, ClassNotFoundException {
+    private void updateScoreList() throws IOException, ClassNotFoundException {
         scoreList = gameManager.getHighScoreList();
+        Collections.sort(scoreList, Collections.<Score>reverseOrder()); // Sort high score list
         scoreListString = "";
         for(int i=0; i< scoreList.size(); i++){
             scoreListString = scoreListString + (i+1) + ") " + scoreList.get(i) + "\n";
