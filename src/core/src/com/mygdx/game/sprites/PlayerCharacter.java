@@ -123,6 +123,7 @@ public class PlayerCharacter extends Character{
         else if(powerup instanceof  LightswornArmor){
             maxHealth = maxHealth + LightswornArmor.getMaxHealthIncrease();
             damage = damage + LightswornArmor.getHolyLightDamage();
+            elementTexture = new Texture("LightSwornArmorPaladinRight.png");
             rightProfile = new Texture("LightSwornArmorPaladinRight.png");
             leftProfile = new Texture("LightSwornArmorPaladinLeft.png");
             rightProfileAttack = new Texture("LightSwornArmorPaladinAttackRight.png");

@@ -15,7 +15,7 @@ public class LightswornArmor extends PaladinArmor {
      * @param y           Spawn location y coordinate
      */
     public LightswornArmor(float x, float y) {
-        super(x, y, "lesserHealthPotion.png");
+        super(x, y, "ArmorBox.png");
     }
 
     public static int getMaxHealthIncrease() {
