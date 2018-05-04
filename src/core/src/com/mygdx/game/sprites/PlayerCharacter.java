@@ -114,18 +114,19 @@ public class PlayerCharacter extends Character{
         else if(powerup instanceof JudgementArmor){
             maxHealth = maxHealth + JudgementArmor.getMaxHealthIncrease();
             damage = damage + JudgementArmor.getHolyLightIncrese();
+            elementTexture = new Texture("JudgementArmorPaladinRight.png");
             rightProfile = new Texture("JudgementArmorPaladinRight.png");
             leftProfile = new Texture("JudgementArmorPaladinLeft.png");
-            rightProfileAttack = new Texture("JudgementArmorPaladinAttackRight");
-            leftProfileAttack = new Texture("JudgementArmorPaladinAttackLeft");
+            rightProfileAttack = new Texture("JudgementArmorPaladinAttackRight.png");
+            leftProfileAttack = new Texture("JudgementArmorPaladinAttackLeft.png");
         }
         else if(powerup instanceof  LightswornArmor){
             maxHealth = maxHealth + LightswornArmor.getMaxHealthIncrease();
             damage = damage + LightswornArmor.getHolyLightDamage();
             rightProfile = new Texture("LightSwornArmorPaladinRight.png");
             leftProfile = new Texture("LightSwornArmorPaladinLeft.png");
-            rightProfileAttack = new Texture("LightSwornArmorPaladinAttackRight");
-            leftProfileAttack = new Texture("LightSwornArmorPaladinAttackLeft");
+            rightProfileAttack = new Texture("LightSwornArmorPaladinAttackRight.png");
+            leftProfileAttack = new Texture("LightSwornArmorPaladinAttackLeft.png");
         }
         else{
             throw new IllegalArgumentException("No such powerup error!");

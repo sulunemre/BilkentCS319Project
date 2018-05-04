@@ -14,7 +14,7 @@ public class JudgementArmor extends PaladinArmor {
      * @param y           Spawn location y coordinate
      */
     public JudgementArmor(float x, float y) {
-        super(x, y, "judgementArmor.png");
+        super(x, y, "lesserHealthPotion.png");
     }
 
     public static int getMaxHealthIncrease() {
