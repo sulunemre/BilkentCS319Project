@@ -35,6 +35,7 @@ public class FightStateController extends AbstractStateController {
     private static final int BACKGROUND_Y_OFFSET = -30;
     private Vector2 backgroundPos1, backgroundPos2;
     private Sound effect;
+    private Texture paladinAttackRight;
     private int coolDownTimer;
     private String playerSentence;
     private static String[] waveClearedSentences = new String[]{"Victory!", "I killed them all", "In the name of the Light \nI have defeated my enemies", "You bastards!"};
@@ -49,6 +50,7 @@ public class FightStateController extends AbstractStateController {
         playerCharacter = gameWorld.getPlayerCharacter();
         enemyArray = gameWorld.getEnemyArray();
         backgroundImage = new Texture("background1.png");
+        paladinAttackRight = new Texture("paladinAttackRight.png");
         effect=Gdx.audio.newSound(Gdx.files.internal("holylightCast.mp3"));
         coolDownTimer = 100;
         wave = 0;
@@ -144,8 +146,14 @@ public class FightStateController extends AbstractStateController {
             }
         }
         // Melee attack implementation
-        if(input.isKeyPressed(Input.Keys.SPACE)){
+        if(input.isKeyJustPressed(Input.Keys.SPACE)){
             Vector2 circleCenterCoordinates;
+            if(playerCharacter.getMeleeDirection().x < 0)
+                playerCharacter.setElementTexture(playerCharacter.getLeftProfileAttack());
+            else
+                playerCharacter.setElementTexture(playerCharacter.getRightProfileAttack());
+
+
             if(playerCharacter.getMeleeDirection().x < 0)
                 circleCenterCoordinates = new Vector2(playerCharacter.getPosition().x, playerCharacter.getPosition().y + 10);
             else
@@ -163,6 +171,12 @@ public class FightStateController extends AbstractStateController {
                 }
 
             }
+            else{
+                if(playerCharacter.getMeleeDirection().x < 0)
+                    playerCharacter.setElementTexture(playerCharacter.getLeftProfile());
+                else
+                    playerCharacter.setElementTexture(playerCharacter.getRightProfile());
+         }
         }
 
 

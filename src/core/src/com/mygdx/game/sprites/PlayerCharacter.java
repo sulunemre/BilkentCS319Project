@@ -9,9 +9,38 @@ import com.mygdx.game.sprites.powerups.*;
 
 public class PlayerCharacter extends Character{
     private int mana, maxMana;
+
+    public static Texture getRightProfile() {
+        return rightProfile;
+    }
+
+    public static Texture getLeftProfile() {
+        return leftProfile;
+    }
+
     private static Texture rightProfile = new Texture("paladin.png");
     private static Texture leftProfile = new Texture("paladinReverse.png");
+
+    public static Texture getRightProfileAttack() {
+        return rightProfileAttack;
+    }
+
+    public static Texture getLeftProfileAttack() {
+        return leftProfileAttack;
+    }
+
+    private static Texture rightProfileAttack = new Texture("paladinAttackRight.png");
+    private static Texture leftProfileAttack = new Texture("paladinAttackLeft.png");
+    private static Texture rightProfileJudgementArmor = new Texture("paladin.png");
+    private static Texture leftProfileJudgementArmor = new Texture("paladinReverse.png");
+    private static Texture rightProfileJudgementArmorAttack = new Texture("paladin.png");
+    private static Texture leftProfileJudgementArmorAttack = new Texture("paladinReverse.png");
+    private static Texture rightProfileLightswornArmor = new Texture("paladin.png");
+    private static Texture leftProfileLightswornArmor = new Texture("paladinReverse.png");
+    private static Texture rightProfileLightswornArmorAttack = new Texture("paladin.png");
+    private static Texture leftProfileLightswornArmorAttack = new Texture("paladinReverse.png");
     private Vector2 meleeDirection;
+    private int armorType;
 
     public Vector2 getMeleeDirection() {
         return meleeDirection;
@@ -23,6 +52,7 @@ public class PlayerCharacter extends Character{
 
     public PlayerCharacter(float x, float y){
         super(x, y, "paladin.png",100);
+        armorType = 0;
         damage = 25;
         speed = 10;
         maxMana = 100;
@@ -36,14 +66,17 @@ public class PlayerCharacter extends Character{
         position.y -= (speed / 2);
     }
 
-    public void moveRight(){
+    public void moveRight() {
         position.x += speed;
+
         elementTexture = rightProfile;
     }
 
     public void moveLeft(){
         position.x -= speed;
-        elementTexture = leftProfile;
+
+            elementTexture = leftProfile;
+
     }
 
     public boolean collides(Rectangle enemy){
@@ -83,10 +116,16 @@ public class PlayerCharacter extends Character{
             damage = damage + JudgementArmor.getHolyLightIncrese();
             rightProfile = new Texture("JudgementArmorPaladinRight.png");
             leftProfile = new Texture("JudgementArmorPaladinLeft.png");
+            rightProfileAttack = new Texture("JudgementArmorPaladinAttackRight");
+            leftProfileAttack = new Texture("JudgementArmorPaladinAttackLeft");
         }
         else if(powerup instanceof  LightswornArmor){
             maxHealth = maxHealth + LightswornArmor.getMaxHealthIncrease();
             damage = damage + LightswornArmor.getHolyLightDamage();
+            rightProfile = new Texture("LightSwornArmorPaladinRight.png");
+            leftProfile = new Texture("LightSwornArmorPaladinLeft.png");
+            rightProfileAttack = new Texture("LightSwornArmorPaladinAttackRight");
+            leftProfileAttack = new Texture("LightSwornArmorPaladinAttackLeft");
         }
         else{
             throw new IllegalArgumentException("No such powerup error!");
