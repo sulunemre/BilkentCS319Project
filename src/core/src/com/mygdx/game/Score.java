@@ -3,8 +3,10 @@ package com.mygdx.game;
 import java.io.Serializable;
 
 public class Score implements Comparable<Score>, Serializable{
-    String playerName;
-    double score;
+    private String playerName;
+    private double score;
+    private static final long serialVersionUID = -7201852659754802949L; // Something about serializing, I don't know
+
 
     public Score(String playerName, double score) {
         this.playerName = playerName;
@@ -19,5 +21,10 @@ public class Score implements Comparable<Score>, Serializable{
             return -1;
         else
             return 0;
+    }
+
+    @Override
+    public String toString() {
+        return playerName + " " + score;
     }
 }

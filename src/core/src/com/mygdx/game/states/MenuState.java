@@ -80,6 +80,14 @@ public class MenuState extends State {
 
         });
 
+        highScoresBtn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                gsm.set(new HighScoreState());
+                dispose();
+            }
+        });
+
         creditsBtn.addListener(new ClickListener()
         {
             @Override

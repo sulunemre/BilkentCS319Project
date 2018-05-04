@@ -98,30 +98,28 @@ public class FlightStateController extends AbstractStateController{
 
     @Override
     public void handleInput() {
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+        Input input = Gdx.input;
+        if(input.isKeyPressed(Input.Keys.W)){
             playerCharacter.moveUp();
-
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)){
+        if(input.isKeyPressed(Input.Keys.S)){
             playerCharacter.moveDown();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){ //TODO: test için yazıldı, sonra sil
+        if(input.isKeyPressed(Input.Keys.A)){ //TODO: test için yazıldı, sonra sil
             playerCharacter.moveLeft();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){ //TODO: test için yazıldı, sonra sil
+        if(input.isKeyPressed(Input.Keys.D)){ //TODO: test için yazıldı, sonra sil
             playerCharacter.moveRight();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.TAB)){
-
+        if(input.isKeyPressed(Input.Keys.TAB)){
             gameStateManager.set(new PlayStateFight());
-         //   for(int i = 0; i < game)
-          //  gameWorld.removeGameElements(gameWorld.getEnemyArray());
-
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+        if(input.isKeyPressed(Input.Keys.ESCAPE)){
             gameManager.getCurrentMusic().dispose();
-
             gameStateManager.set(new MenuState());
+        }
+        if(input.isKeyJustPressed(Input.Keys.F5)){
+            //TODO: implement save game
         }
     }
 

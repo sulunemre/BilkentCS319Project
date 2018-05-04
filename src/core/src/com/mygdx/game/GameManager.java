@@ -8,6 +8,7 @@ import com.mygdx.game.states.GameOverState;
 import com.mygdx.game.states.GameStateManager;
 
 import java.io.IOException;
+import java.util.List;
 
 public class GameManager {
     private static GameManager gameManager = new GameManager();
@@ -65,8 +66,8 @@ public class GameManager {
         fileSystemManager.saveScoreToTxt(scoreToBeSaved);
     }
 
-    public void loadHighScoreTable(){
-        //TODO: implement
+    public List<Score> getHighScoreList() throws IOException, ClassNotFoundException {
+        return fileSystemManager.loadHighScoreTableFromTxt();
     }
 
     /**

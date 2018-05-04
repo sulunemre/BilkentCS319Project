@@ -7,9 +7,18 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.GameWorld;
 import com.mygdx.game.stateControllers.GameOverStateController;
 
+import java.io.IOException;
+
 public class GameOverState extends State {
     public GameOverState() {
         controller = new GameOverStateController(this);
+        try {
+            gameManager.saveHighScore();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

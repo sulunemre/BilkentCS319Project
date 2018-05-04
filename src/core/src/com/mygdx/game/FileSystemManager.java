@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.mygdx.game.sprites.GameWorld;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FileSystemManager {
@@ -38,13 +39,15 @@ public class FileSystemManager {
      * @param score score record that holds name and score
      */
     public void saveScoreToTxt(Score score) throws IOException, ClassNotFoundException {
-        // Convert txt to list and append the score
+        //Convert txt to list and append the score
         ObjectInputStream ois = new ObjectInputStream((new FileInputStream("highScores.txt")));
         List<Score> highScoreList = (List<Score>) ois.readObject();
+       // List<Score> highScoreList = new ArrayList<Score>(); //TODO: test için yazıldı, sil!
         highScoreList.add(score);
 
+
         // Write new highScoreList to txt
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("savedGameWorld.txt"));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("highScores.txt"));
         oos.writeObject(highScoreList);
     }
 
