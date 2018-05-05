@@ -257,6 +257,7 @@ public class FightStateController extends AbstractStateController {
         // Check player's health, if it is <= 0 game over
         if(!playerCharacter.isAlive()){
             gameManager.getCurrentMusic().pause();
+            
             gameManager.gameOver();
         }
 

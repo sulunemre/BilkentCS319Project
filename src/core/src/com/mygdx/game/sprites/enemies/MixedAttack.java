@@ -19,7 +19,7 @@ public class MixedAttack implements AttackStrategy {
         Circle meleeRangeBounds = new Circle(circleCenterCoordinates, meleeRange);
 
         if (Intersector.overlaps(meleeRangeBounds,victim.getBounds())) {
-            victim.reduceHealth(damage);
+            victim.reduceHealth(50);
             attacker.resetCooldown();
         }
         else{

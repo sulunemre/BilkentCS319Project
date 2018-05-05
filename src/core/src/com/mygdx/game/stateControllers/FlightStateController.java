@@ -190,6 +190,7 @@ public class FlightStateController extends AbstractStateController{
             if (rock.collision(playerCharacter.getBounds())) {
 
                 gameManager.getCurrentMusic().pause();
+                resetRockTrigger();
                 gameManager.gameOver();
             }
 
@@ -231,5 +232,7 @@ public class FlightStateController extends AbstractStateController{
         gameWorld.getPowerups().add(powerup);
     }
 
-
+    public void resetRockTrigger(){
+        rocktrigger = 450;
+    }
 }
