@@ -34,7 +34,7 @@ public class FlightStateController extends AbstractStateController{
 
     private Sound effect;
     private Sound powerupSound;
-    private Sound collisionSound;
+    //private Sound collisionSound;
 
     private double flightSpeed;
 
@@ -46,7 +46,7 @@ public class FlightStateController extends AbstractStateController{
         gameStateManager = GameStateManager.getInstance();
         effect=Gdx.audio.newSound(Gdx.files.internal("EnemyDeath.ogg"));
         powerupSound=Gdx.audio.newSound(Gdx.files.internal("Powerup.ogg"));
-        collisionSound=Gdx.audio.newSound(Gdx.files.internal("Collision8-Bit.ogg"));
+        //collisionSound=Gdx.audio.newSound(Gdx.files.internal("Collision8-Bit.ogg"));
         playerCharacter = gameWorld.getPlayerCharacter();
         rand = new Random();
 
@@ -180,7 +180,7 @@ public class FlightStateController extends AbstractStateController{
         /*for(Rock rock: gameWorld.getRocks()) {
             for (PlayerCharacter player: gameWorld.getPlayerCharacterArray()) {
                 if (rock.collision(player.getBounds())) {
-                    collisionSound.play();
+                    //collisionSound.play();
                     gameManager.getCurrentMusic().pause();
                     gameWorld.removeGameElements(player);
                 }
