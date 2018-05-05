@@ -17,7 +17,7 @@ public class ManaPotion extends Powerups {
      * @param x           Spawn location x coordinate
      * @param y           Spawn location y coordinate
      */
-    public ManaPotion(float x, float y, int type) {
+    ManaPotion(float x, float y, int type) {
         super(x, y, "lesserManaPotion.png");
 
         String texturePath;

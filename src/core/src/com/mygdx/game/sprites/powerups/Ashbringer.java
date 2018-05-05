@@ -10,7 +10,7 @@ public class Ashbringer extends PaladinArmor {
      * @param x           Spawn location x coordinate
      * @param y           Spawn location y coordinate
      */
-    public Ashbringer(float x, float y) {
+    Ashbringer(float x, float y) {
         super(x, y, "ashbringer.png");
     }
 

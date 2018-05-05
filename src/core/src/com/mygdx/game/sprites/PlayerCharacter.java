@@ -109,7 +109,7 @@ public class PlayerCharacter extends Character{
             mana = maxMana;
         }
         else if(powerup instanceof Ashbringer){
-            damage = damage + 25;
+            damage = damage + Ashbringer.getMeleeDamageIncrease();
             elementTexture = new Texture("paladinWithAshbringerRight.png");
             rightProfile = new Texture("paladinWithAshbringerRight.png");
             leftProfile = new Texture("paladinWithAshbringerLeft.png");

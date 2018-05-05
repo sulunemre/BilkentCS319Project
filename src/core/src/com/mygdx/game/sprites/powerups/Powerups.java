@@ -14,6 +14,4 @@ public abstract class Powerups extends GameElement{
     public Powerups(float x, float y, String texturePath) {
         super(x, y, texturePath);
     }
-
-    public void activate(PlayerCharacter player){};
 }

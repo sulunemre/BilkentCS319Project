@@ -18,7 +18,7 @@ public class HealthPotion extends Powerups {
      * @param x           Spawn location x coordinate
      * @param y           Spawn location y coordinate
      */
-    public HealthPotion(float x, float y, int type) {
+    HealthPotion(float x, float y, int type) {
         super(x, y, "lesserHealthPotion.png");
         this.type = type;
 
@@ -42,9 +42,5 @@ public class HealthPotion extends Powerups {
 
     public int getHealthIncrease() {
         return healthIncrease;
-    }
-
-    public void activate(PlayerCharacter player) {
-        player.setHealth( healthIncrease);
     }
 }

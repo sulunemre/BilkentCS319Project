@@ -13,7 +13,7 @@ public class JudgementArmor extends PaladinArmor {
      * @param x           Spawn location x coordinate
      * @param y           Spawn location y coordinate
      */
-    public JudgementArmor(float x, float y) {
+    JudgementArmor(float x, float y) {
         super(x, y, "ArmorBox.png");
     }
 

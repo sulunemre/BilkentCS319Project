@@ -14,7 +14,7 @@ public class LightswornArmor extends PaladinArmor {
      * @param x           Spawn location x coordinate
      * @param y           Spawn location y coordinate
      */
-    public LightswornArmor(float x, float y) {
+    LightswornArmor(float x, float y) {
         super(x, y, "ArmorBox.png");
     }
 
