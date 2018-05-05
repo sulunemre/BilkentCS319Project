@@ -169,12 +169,21 @@ public class FlightStateController extends AbstractStateController{
     }
 
     private void collision(){
+        /*for(Rock rock: gameWorld.getRocks()) {
+            for (PlayerCharacter player: gameWorld.getPlayerCharacterArray()) {
+                if (rock.collision(player.getBounds())) {
+                    collisionSound.play();
+                    gameManager.getCurrentMusic().pause();
+                    gameWorld.removeGameElements(player);
+                }
+            }
+
+        }*/
         for(Rock rock: gameWorld.getRocks()) {
-            if (rock.collision(playerCharacter.getBounds()))
-            {
+            if (rock.collision(playerCharacter.getBounds())) {
                 collisionSound.play();
                 gameManager.getCurrentMusic().pause();
-
+                gameManager.gameOver();
             }
 
         }
@@ -214,5 +223,6 @@ public class FlightStateController extends AbstractStateController{
         gameWorld.addGameElements(powerup);
         gameWorld.getPowerups().add(powerup);
     }
+
 
 }
