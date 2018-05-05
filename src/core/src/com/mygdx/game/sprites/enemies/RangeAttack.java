@@ -6,6 +6,14 @@ import com.mygdx.game.sprites.HolyLight;
 import com.mygdx.game.sprites.PlayerCharacter;
 
 public class RangeAttack implements AttackStrategy {
+    /**
+     * Finds the direction of the projectile(holy light) by some
+     * vector calculation and creates a projectile that starts
+     * moving from attacker and towards to victim.
+     * @param attacker enemy that attacks
+     * @param victim   player to be attacked
+     * @param damage   hit power of the attack
+     */
     @Override
     public void attack(Enemy attacker, PlayerCharacter victim, int damage) {
         // Calculate the direction

@@ -1,6 +1,5 @@
 package com.mygdx.game.sprites.enemies;
 
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.PlayerCharacter;
 
 public class MixedAttack implements AttackStrategy {

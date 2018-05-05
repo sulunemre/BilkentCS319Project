@@ -1,16 +1,22 @@
 package com.mygdx.game.sprites.enemies;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.Character;
 import com.mygdx.game.sprites.PlayerCharacter;
 
 public abstract class Enemy extends Character{
-    protected int spawnRate;
-    protected int coolDown;
-    protected int maxCoolDown;
-    protected AttackStrategy attackStrategy;
+    private int coolDown;
+    private int maxCoolDown;
+    private AttackStrategy attackStrategy;
 
+    /**
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param maxCoolDown the time interval between attacks. The longer cooldown, the less frequent attack
+     * @param texturePath filename of the default texture in the assets folder
+     * @param attackStrategy the type of the attack
+     * @param maxHealth initial health
+     */
     public Enemy(float x, float y, int maxCoolDown, String texturePath, AttackStrategy attackStrategy, int maxHealth){
         super(x, y, texturePath, maxHealth);
         this.maxCoolDown = maxCoolDown;
@@ -18,69 +24,30 @@ public abstract class Enemy extends Character{
         this.attackStrategy = attackStrategy;
     }
 
-    public int getSpawnRate() {
-        return spawnRate;
-    }
-
-    public void setSpawnRate(int spawnRate) {
-        this.spawnRate = spawnRate;
-    }
-
     public int getCoolDown() {
         return coolDown;
     }
 
-
+    /**
+     * Sets the direction of the enemy
+     * according to target location
+     * @param xLocation target x coordinates
+     * @param yLocation target y coordinates
+     */
     public void chase(float xLocation, float yLocation) {
-            float xDifference = xLocation - getPosition().x;
-            float yDifference = yLocation - getPosition().y;
-            Vector2 distance = new Vector2(xDifference, yDifference);
-            direction.set(xDifference / distance.len(), yDifference / distance.len());
-            //Vector2 unitVector = new Vector2(xDifference / distance.len(), yDifference / distance.len());
-            //Vector2 newVelocity = unitVector.scl((float) speed);
-            //setDirection(newVelocity);
+        float xDifference = xLocation - getPosition().x;
+        float yDifference = yLocation - getPosition().y;
+        Vector2 distance = new Vector2(xDifference, yDifference);
+        direction.set(xDifference / distance.len(), yDifference / distance.len());
     }
 
-//    public void update(Rectangle enemy)
-//    {
-//        //position.add(direction);
-//
-//        Vector2 positionTemp = new Vector2(position);
-//        Rectangle boundsTemp = new Rectangle(bounds);
-//
-//        positionTemp.add(direction);
-//
-//        if ( !enemy.overlaps( boundsTemp.setPosition(positionTemp))) {
-//            position.add(direction);
-//            bounds.setPosition(position);
-//        }
-//        if (position.y < 0)
-//            position.y = 0;
-//        if (position.y > 260)
-//            position.y = 260;
-//        if (position.x < 0)
-//            position.x = 0;
-//        if (position.x > 500)
-//            position.x = 500;
-//    }
-
-    public void setCoolDown(int coolDown) {
-        this.coolDown = coolDown;
-    }
-
-    public boolean collides(Rectangle enemy){
-        //TODO: collision detection, controller classa taşınacak
-        return enemy.overlaps(bounds);
-
-    }
-
+    /**
+     * An enemy attacks only if cooldown is zero
+     * @param victim player object that enemy attacks on
+     */
     public void attack(PlayerCharacter victim){
         if(coolDown == 0)
             attackStrategy.attack(this, victim, damage);
-    }
-
-    public AttackStrategy getAttackStrategy() {
-        return attackStrategy;
     }
 
     public void decrementCooldown(){
@@ -88,14 +55,16 @@ public abstract class Enemy extends Character{
         if(coolDown < 0)
             coolDown = maxCoolDown;
     }
+
     public void resetCooldown(){
         coolDown = maxCoolDown;
-
-
     }
+
+    /**
+     * @return the increase amount of the score
+     * when a player kills this enemy
+     */
     public int getKillingReward(){
-
         return damage * maxHealth;
-
     }
 }

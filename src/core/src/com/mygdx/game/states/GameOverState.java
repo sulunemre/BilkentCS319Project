@@ -22,14 +22,15 @@ public class GameOverState extends State {
 
     @Override
     public void render(SpriteBatch ab) {
-        //ab.setProjectionMatrix(controller.getCam().combined);
         menuBatch.begin();
         menuBatch.draw(background, 0, 0);
         BitmapFont scoreText = new BitmapFont();
         controller.getCam().position.set(new Vector2(MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2), 0);
-        scoreText.draw(menuBatch, "Dear " + gameManager.getPlayerName() + "\nYour score: " + gameManager.getScore(), 350, 300);
+        scoreText.draw(menuBatch, "Game over "
+                + gameManager.getPlayerName()
+                + "\nYour score: " + gameManager.getScore()
+                + "\n\nPress ENTER to continue", 350, 300);
         menuBatch.end();
-
     }
 
     @Override
