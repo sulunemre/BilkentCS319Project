@@ -37,7 +37,7 @@ public class FightStateController extends AbstractStateController {
     private static String[] waveClearedSentences = new String[]{"Victory!", "I killed them all", "In the name of the Light \nI have defeated my enemies", "You bastards!"};
     private String waveClearedSentence;
     private String waveIncomingSentence;
-    private static String[] waveIncomingSentences = new String[]{"Oh no! Here they come again!", "fuk this shit m8", "What else can they put in my way?", "Light... Help me...", "Do they ever stop coming?"};
+    private static String[] waveIncomingSentences = new String[]{"To the last. Kill them all!", "Is this all they can muster?", "What else can they put in my way?", "Blood for the blood god!", "Do they ever stop coming?"};
 
     public FightStateController(State state) {
         super(state);
@@ -257,7 +257,7 @@ public class FightStateController extends AbstractStateController {
         // Check player's health, if it is <= 0 game over
         if(!playerCharacter.isAlive()){
             gameManager.getCurrentMusic().pause();
-            
+
             gameManager.gameOver();
         }
 
@@ -292,7 +292,7 @@ public class FightStateController extends AbstractStateController {
         EnemyFactory enemyFactory = new EnemyFactory();
 
         // In all levels, there are skeleton warriors and grunts
-        int enemyCount = wave * 2;
+        int enemyCount = wave * 5;
         float yLocation = 0;
         for (int i = 0; i < enemyCount; i++) {
            // float yLocation = (float) Math.random() * 260;
@@ -300,9 +300,9 @@ public class FightStateController extends AbstractStateController {
             int random = (int) (Math.random() * 2);
             Enemy enemy;
             if (random == 0)
-                enemy = enemyFactory.getEnemy("SKELETON_WARRIOR", leftEdge, yLocation);
+                enemy = enemyFactory.getEnemy("Boss", leftEdge, yLocation);
             else
-                enemy = enemyFactory.getEnemy("SKELETON_WARRIOR", leftEdge, yLocation);
+                enemy = enemyFactory.getEnemy("Boss", leftEdge, yLocation);
 
             enemy.setDirection(new Vector2(1, 0));
             enemyArray.addAll(enemy);
