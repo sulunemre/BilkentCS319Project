@@ -11,7 +11,6 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.GameWorld;
 import com.mygdx.game.sprites.PlayerCharacter;
 import com.mygdx.game.sprites.Rock;
-import com.mygdx.game.sprites.RockMoving;
 import com.mygdx.game.sprites.powerups.PowerupFactory;
 import com.mygdx.game.sprites.powerups.Powerups;
 import com.mygdx.game.states.*;
@@ -57,7 +56,6 @@ public class FlightStateController extends AbstractStateController{
         gameWorld.addGameElements(playerCharacter);
 
         rocks = new Array<Rock>();
-        //rocksMoving = new Array<RockMoving>();
         for(int i =1; i < ROCK_COUNT; i++){
             Rock tempRock = new Rock(i * ( ROCK_SPACING + 52), 5);
             rocks.add(tempRock);

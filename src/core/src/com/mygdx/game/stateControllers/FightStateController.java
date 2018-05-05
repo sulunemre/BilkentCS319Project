@@ -29,7 +29,6 @@ public class FightStateController extends AbstractStateController {
     private Texture backgroundImage;
     private int initialPos;
     private Array<Rock> rocks;
-    //private Array<RockMoving> rocksM;
     private static final int ROCK_SPACING = 125;
     private static final int ROCK_COUNT = 3;
     private static final int BACKGROUND_Y_OFFSET = -30;

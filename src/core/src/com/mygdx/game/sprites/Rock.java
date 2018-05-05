@@ -19,6 +19,7 @@ public class Rock extends GameElement{
         position = new Vector2(x, rand.nextInt(FLUCTUATION) + LOWEST_OPENING);
         bounds = new Rectangle(position.x, position.y, elementTexture.getWidth(), elementTexture.getHeight());
         direction = new Vector2(0,0);
+        speed = 0;
     }
 
     public Rock(float x, float y, int speed) {
