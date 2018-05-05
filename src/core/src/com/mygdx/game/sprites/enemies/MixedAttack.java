@@ -8,6 +8,7 @@ import com.mygdx.game.sprites.HolyLight;
 import com.mygdx.game.sprites.PlayerCharacter;
 
 public class MixedAttack implements AttackStrategy {
+    //TODO: javadoc
     @Override
     public void attack(Enemy attacker, PlayerCharacter victim, int damage) {
         Vector2 circleCenterCoordinates;
@@ -31,7 +32,7 @@ public class MixedAttack implements AttackStrategy {
             GameWorld gameWorld = GameWorld.getInstance();
             gameWorld.addGameElements(holyLight);
             gameWorld.addEnemyProjectile(holyLight);
-            attacker.setCooldown(20);
+            attacker.setCoolDown(20);
         }
     }
 }

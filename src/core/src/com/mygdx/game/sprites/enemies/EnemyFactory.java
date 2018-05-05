@@ -1,6 +1,15 @@
 package com.mygdx.game.sprites.enemies;
 
 public class EnemyFactory {
+
+    /**
+     * Returns an enemy at a given point and type.
+     * Implements factory pattern.
+     * @param enemyType name of the desired enemy
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return an enemy object
+     */
     public Enemy getEnemy(String enemyType, float x ,  float y){
         if(enemyType == null){
             return null;

@@ -2,8 +2,8 @@ package com.mygdx.game.sprites.enemies;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class SkeletonWarrior extends Enemy {
-    public SkeletonWarrior(float x, float y) {
+class SkeletonWarrior extends Enemy {
+    SkeletonWarrior(float x, float y) {
         super(x, y, 160, "skeletonWarriorRight.png",  new MeleeAttack(), 80);
         speed = 1.5;
         damage = 10;
