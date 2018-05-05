@@ -294,22 +294,19 @@ public class FightStateController extends AbstractStateController {
     private void sendNewWave() {
         int leftEdge = initialPos - 100;
         int rightEdge = initialPos + 300;
-      //  int
 
         EnemyFactory enemyFactory = new EnemyFactory();
 
         // In all levels, there are skeleton warriors and grunts
-        int enemyCount = wave * 1;
+        int enemyCount = wave * 5;
         float yLocation = 0;
         for (int i = 0; i < enemyCount; i++) {
-           // float yLocation = (float) Math.random() * 260;
-
             int random = (int) (Math.random() * 2);
             Enemy enemy;
             if (random == 0)
-                enemy = enemyFactory.getEnemy("ABOMINATION", leftEdge, yLocation);
+                enemy = enemyFactory.getEnemy("GRUNT", leftEdge, yLocation);
             else
-                enemy = enemyFactory.getEnemy("ABOMINATION", leftEdge, yLocation);
+                enemy = enemyFactory.getEnemy("SKELETON_WARRIOR", leftEdge, yLocation);
 
             enemy.setDirection(new Vector2(1, 0));
             enemyArray.addAll(enemy);
@@ -317,16 +314,36 @@ public class FightStateController extends AbstractStateController {
             yLocation = yLocation + 150;
         }
 
-        if(wave > 3){
-            int abominationCount = (int) (Math.random() * wave);
-            for(int i=0; i < abominationCount; i++){
-                yLocation = (float) Math.random() * 260;
-                Enemy enemy = enemyFactory.getEnemy("abomination", rightEdge, yLocation);
-
-                enemy.setDirection(new Vector2(-1, 0));
-                enemyArray.addAll(enemy);
-                gameWorld.addGameElements(enemy);
+        if(wave > 2){
+            // Create random number of gargoyles
+            int gargoyleNumber = (int) (Math.random() * wave);
+            for(int i=0; i<gargoyleNumber; i++){
+                Enemy gargoyle = enemyFactory.getEnemy("GARGOYLE", rightEdge, yLocation);
+                gargoyle.setDirection(new Vector2(-1, 0));
+                enemyArray.addAll(gargoyle);
+                gameWorld.addGameElements(gargoyle);
+                yLocation = yLocation + 150;
             }
+        }
+
+        if(wave > 3){
+            // Create one abomination
+            Enemy enemy = enemyFactory.getEnemy("abomination", rightEdge, yLocation);
+            enemy.setDirection(new Vector2(-1, 0));
+            enemyArray.addAll(enemy);
+            gameWorld.addGameElements(enemy);
+            yLocation = yLocation + 150;
+        }
+
+        if (wave % 5 == 0) {
+            // Create one boss
+            Enemy boss = enemyFactory.getEnemy("BOSS", leftEdge, yLocation);
+            boss.setDirection(new Vector2(1, 0));
+            enemyArray.addAll(boss);
+            gameWorld.addGameElements(boss);
+            yLocation = yLocation + 150;
+
+            playerSentence = "WHAT IS THIS NEW DEVILRY?!??";
         }
 
         waveClearedSentence = randomPick(waveClearedSentences);

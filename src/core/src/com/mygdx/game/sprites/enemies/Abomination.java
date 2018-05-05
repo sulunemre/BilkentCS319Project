@@ -12,6 +12,8 @@ public class Abomination extends Enemy {
         speed = 1;
         leftProfile = new Texture("abominationReverse.png");
         rightProfile = new Texture("abomination.png");
+        leftProfileAttack = new Texture("abominationAttackLeft.png");
+        rightProfileAttack = new Texture("abominationAttackRight.png");
     }
 
     public void hook(PlayerCharacter playerCharacter){
