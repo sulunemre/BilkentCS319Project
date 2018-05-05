@@ -110,6 +110,11 @@ public class PlayerCharacter extends Character{
         }
         else if(powerup instanceof Ashbringer){
             damage = damage + 25;
+            elementTexture = new Texture("paladinWithAshbringerRight.png");
+            rightProfile = new Texture("paladinWithAshbringerRight.png");
+            leftProfile = new Texture("paladinWithAshbringerLeft.png");
+            rightProfileAttack = new Texture("paladinWithAshbringerAttackRight.png");
+            leftProfileAttack = new Texture("paladinWithAshbringerAttackLeft.png");
         }
         else if(powerup instanceof JudgementArmor){
             maxHealth = maxHealth + JudgementArmor.getMaxHealthIncrease();

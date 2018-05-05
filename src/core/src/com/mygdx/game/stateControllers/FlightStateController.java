@@ -95,12 +95,7 @@ public class FlightStateController extends AbstractStateController{
         if(input.isKeyPressed(Input.Keys.S)){
             playerCharacter.moveDown();
         }
-        if(input.isKeyPressed(Input.Keys.A)){ //TODO: test için yazıldı, sonra sil
-            playerCharacter.moveLeft();
-        }
-        if(input.isKeyPressed(Input.Keys.D)){ //TODO: test için yazıldı, sonra sil
-            playerCharacter.moveRight();
-        }
+
         if(input.isKeyPressed(Input.Keys.TAB)){
             gameStateManager.set(new PlayStateFight());
         }
@@ -162,6 +157,10 @@ public class FlightStateController extends AbstractStateController{
         // Powerup cration logic
         if(flightSpeed < 500 && flightSpeed % 100 == 0)
             createPowerup(0 );
+        if(flightSpeed > 500 && flightSpeed < 1000 && flightSpeed % 100 == 0)
+            createPowerup(1 );
+        if(flightSpeed > 1000  && flightSpeed % 100 == 0)
+            createPowerup(2 );
     }
 
     private void updateBackground(){
@@ -189,7 +188,7 @@ public class FlightStateController extends AbstractStateController{
         }*/
         for(Rock rock: gameWorld.getRocks()) {
             if (rock.collision(playerCharacter.getBounds())) {
-                collisionSound.play();
+
                 gameManager.getCurrentMusic().pause();
                 gameManager.gameOver();
             }

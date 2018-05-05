@@ -5,7 +5,7 @@ public class PowerupFactory {
         int random = (int) (Math.random() * 3);
 
         if(random == 0)
-            return new LightswornArmor(0,0);
+            return new HealthPotion(0,0, 0);
         else if(random == 1)
             return new ManaPotion(0,0,0);
         else if(random == 2)
