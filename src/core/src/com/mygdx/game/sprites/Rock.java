@@ -3,6 +3,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Rectangle;
 import java.util.Random;
+
 public class Rock extends GameElement{
     public static final int TUBE_WIDTH = 52;
 

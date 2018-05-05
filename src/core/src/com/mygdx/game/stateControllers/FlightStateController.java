@@ -14,6 +14,7 @@ import com.mygdx.game.sprites.Rock;
 import com.mygdx.game.sprites.powerups.PowerupFactory;
 import com.mygdx.game.sprites.powerups.Powerups;
 import com.mygdx.game.states.*;
+import java.util.Random;
 
 public class FlightStateController extends AbstractStateController{
     private GameWorld gameWorld;
@@ -31,6 +32,9 @@ public class FlightStateController extends AbstractStateController{
     private static final int ROCKMOVING_COUNT = 3;
     private static final int BACKGROUND_Y_OFFSET = -30;
     private int rocktrigger = 450;
+
+    private Random rand;
+
     private Sound effect;
     private Sound powerupSound;
     private Sound collisionSound;
@@ -47,6 +51,7 @@ public class FlightStateController extends AbstractStateController{
         powerupSound=Gdx.audio.newSound(Gdx.files.internal("Powerup.ogg"));
         collisionSound=Gdx.audio.newSound(Gdx.files.internal("Collision8-Bit.ogg"));
         playerCharacter = gameWorld.getPlayerCharacter();
+        rand = new Random();
 
         if(playerCharacter == null) {
             playerCharacter = new PlayerCharacter(50, 100);
@@ -138,7 +143,12 @@ public class FlightStateController extends AbstractStateController{
         }
 
         if (cam.position.x >= rocktrigger){
-            Rock rock = new Rock (cam.position.x + cam.viewportWidth, 5);
+            int type = rand.nextInt(3);
+            Rock rock;
+            if ( type == 2 )
+                rock = new Rock (cam.position.x + cam.viewportWidth + 20, 5, 10);
+            else
+                rock = new Rock (cam.position.x + cam.viewportWidth + 20, 5);
             rocks.add(rock);
             gameWorld.addGameElements(rock);
             rocktrigger =  rocktrigger + 250;
