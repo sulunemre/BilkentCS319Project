@@ -40,11 +40,14 @@ public class FileSystemManager {
      */
     public void saveScoreToTxt(Score score) throws IOException, ClassNotFoundException {
         //Convert txt to list and append the score
-        ObjectInputStream ois = new ObjectInputStream((new FileInputStream("highScores.txt")));
-        List<Score> highScoreList = (List<Score>) ois.readObject();
-       // List<Score> highScoreList = new ArrayList<Score>(); //TODO: test için yazıldı, sil!
+        List<Score> highScoreList;
+        try {
+            ObjectInputStream ois = new ObjectInputStream((new FileInputStream("highScores.txt")));
+            highScoreList = (List<Score>) ois.readObject();
+        }catch (Exception e){
+            highScoreList = new ArrayList<Score>();
+        }
         highScoreList.add(score);
-
 
         // Write new highScoreList to txt
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("highScores.txt"));
@@ -55,8 +58,17 @@ public class FileSystemManager {
      * Read txt file and returns the array of scores
      * @return
      */
-    public List<Score> loadHighScoreTableFromTxt() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream((new FileInputStream("highScores.txt")));
-        return (List<Score>) ois.readObject();
+    public List<Score> loadHighScoreTableFromTxt() throws IOException{
+        ObjectInputStream ois;
+        List<Score> highScoreTable;
+        try {
+            ois = new ObjectInputStream((new FileInputStream("highScores.txt")));
+            return (List<Score>) ois.readObject();
+        }catch (Exception e){
+            highScoreTable = new ArrayList<Score>();
+            return highScoreTable;
+        }
+
+
     }
 }

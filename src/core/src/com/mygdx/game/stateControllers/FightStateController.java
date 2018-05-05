@@ -149,9 +149,9 @@ public class FightStateController extends AbstractStateController {
         if(input.isKeyJustPressed(Input.Keys.SPACE)){
             Vector2 circleCenterCoordinates;
             if(playerCharacter.getMeleeDirection().x < 0)
-                playerCharacter.setElementTexture(playerCharacter.getLeftProfileAttack());
+                playerCharacter.setElementTexture(PlayerCharacter.getLeftProfileAttack());
             else
-                playerCharacter.setElementTexture(playerCharacter.getRightProfileAttack());
+                playerCharacter.setElementTexture(PlayerCharacter.getRightProfileAttack());
 
 
             if(playerCharacter.getMeleeDirection().x < 0)
@@ -266,7 +266,6 @@ public class FightStateController extends AbstractStateController {
         if(!playerCharacter.isAlive()){
             gameManager.getCurrentMusic().pause();
             gameManager.gameOver();
-            gameStateManager.set(new GameOverState());
         }
 
         for (HolyLight projectile : gameWorld.getEnemyProjectiles()){
