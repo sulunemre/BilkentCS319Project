@@ -70,6 +70,7 @@ public class GameManager {
         return fileSystemManager.loadHighScoreTableFromTxt();
     }
 
+
     /**
      * Mutes the music of the game.
      */

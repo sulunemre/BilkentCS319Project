@@ -44,20 +44,15 @@ public class HelpState extends State  {
         stage.act();
         backBtn.setPosition(340 , 90);
         stage.addActor(backBtn);
-
         backBtn.addListener(new ClickListener()
         {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                gameManager.getCurrentMusic().dispose();
                 gsm.set(new MenuState());
             }
         });
-
     }
-
-
-
-
 
     @Override
     public void render(SpriteBatch ab) {

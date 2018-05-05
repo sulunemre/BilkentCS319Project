@@ -29,6 +29,7 @@ public class HighScoreStateController extends AbstractStateController {
     public void handleInput() {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             controlledState.dispose();
+            gameManager.getCurrentMusic().pause();
             gameStateManager.set(new MenuState());
         }
     }
@@ -36,6 +37,13 @@ public class HighScoreStateController extends AbstractStateController {
     @Override
     public void update(float dt) {
         handleInput();
+        if (gameManager.getCount() % 2 == 1) {
+            gameManager.getCurrentMusic().pause();
+        }
+        else {
+            gameManager.getCurrentMusic().play();
+        }
+
     }
 
     public List<Score> getScoreList() {

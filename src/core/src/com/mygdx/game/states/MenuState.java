@@ -133,6 +133,7 @@ public class MenuState extends State {
     public void dispose() {
        background.dispose();
        stage.dispose();
+       //gameManager.getCurrentMusic().dispose();
     }
 
 

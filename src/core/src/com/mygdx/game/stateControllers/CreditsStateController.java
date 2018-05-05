@@ -16,6 +16,7 @@ public class CreditsStateController extends AbstractStateController {
     public void handleInput() {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             controlledState.dispose();
+            gameManager.getCurrentMusic().pause();
             gameStateManager.set(new MenuState());
         }
 
@@ -23,5 +24,10 @@ public class CreditsStateController extends AbstractStateController {
     @Override
     public void update(float dt) {
         handleInput();
+        if(gameManager.getCount()%2==0 )
+        {
+            gameManager.getCurrentMusic().setLooping(true);
+            gameManager.getCurrentMusic().play();
+        }
     }
 }

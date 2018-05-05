@@ -22,11 +22,10 @@ public class OptionsStateController extends AbstractStateController {
         handleInput();
         if (gameManager.getCount() % 2 == 1) {
             gameManager.setFirstClicked(true);
-            //gameManager.setSecondClicked(false);
             gameManager.getCurrentMusic().pause();
-        } else {
+        }
+        else {
             gameManager.setSecondClicked(true);
-            //gameManager.setFirstClicked(false);
             gameManager.getCurrentMusic().play();
         }
         Gdx.gl.glClearColor(1, 0, 0, 0);
