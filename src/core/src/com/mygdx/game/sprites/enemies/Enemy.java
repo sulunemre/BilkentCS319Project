@@ -1,5 +1,6 @@
 package com.mygdx.game.sprites.enemies;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.Character;
@@ -10,6 +11,7 @@ public abstract class Enemy extends Character{
     protected int coolDown;
     protected int maxCoolDown;
     protected AttackStrategy attackStrategy;
+    protected Texture leftProfile, rightProfile, leftProfileAttack, rightProfileAttack;
 
     public Enemy(float x, float y, int maxCoolDown, String texturePath, AttackStrategy attackStrategy, int maxHealth){
         super(x, y, texturePath, maxHealth);
@@ -32,13 +34,15 @@ public abstract class Enemy extends Character{
 
 
     public void chase(float xLocation, float yLocation) {
-            float xDifference = xLocation - getPosition().x;
-            float yDifference = yLocation - getPosition().y;
-            Vector2 distance = new Vector2(xDifference, yDifference);
-            direction.set(xDifference / distance.len(), yDifference / distance.len());
-            //Vector2 unitVector = new Vector2(xDifference / distance.len(), yDifference / distance.len());
-            //Vector2 newVelocity = unitVector.scl((float) speed);
-            //setDirection(newVelocity);
+        float xDifference = xLocation - getPosition().x;
+        float yDifference = yLocation - getPosition().y;
+        Vector2 distance = new Vector2(xDifference, yDifference);
+        direction.set(xDifference / distance.len(), yDifference / distance.len());
+
+        if(direction.x  < 0)
+            elementTexture = leftProfile;
+        else
+            elementTexture = rightProfile;
     }
 
 //    public void update(Rectangle enemy)

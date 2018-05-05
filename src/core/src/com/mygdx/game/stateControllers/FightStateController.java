@@ -267,6 +267,9 @@ public class FightStateController extends AbstractStateController {
             if ( projectile.getPositionx() <= initialPos - 100 || projectile.getPositionx() >= initialPos + 500 || projectile.getPositiony() <= 0 || projectile.getPositiony() >= 400)
                 gameWorld.removeGameElements(projectile);
         }
+//        for(Enemy enemy : gameWorld.getEnemyArray()){
+//            if(enemy.)
+//        }
 
     }
 
@@ -294,7 +297,7 @@ public class FightStateController extends AbstractStateController {
             int random = (int) (Math.random() * 2);
             Enemy enemy;
             if (random == 0)
-                enemy = enemyFactory.getEnemy("gargoyle", leftEdge, yLocation);
+                enemy = enemyFactory.getEnemy("skeleton_warrior", leftEdge, yLocation);
             else
                 enemy = enemyFactory.getEnemy("skeleton_warrior", leftEdge, yLocation);
 

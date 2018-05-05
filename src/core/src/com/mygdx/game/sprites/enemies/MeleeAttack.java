@@ -1,5 +1,6 @@
 package com.mygdx.game.sprites.enemies;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
@@ -19,6 +20,11 @@ public class MeleeAttack implements AttackStrategy {
         if (Intersector.overlaps(meleeRangeBounds,victim.getBounds())) {
             victim.reduceHealth(damage);
             attacker.resetCooldown();
+
+            if(attacker.getDirection().x < 0)
+                attacker.setElementTexture(attacker.leftProfileAttack);
+            else
+                attacker.setElementTexture(attacker.rightProfileAttack);
         }
     }
 }
