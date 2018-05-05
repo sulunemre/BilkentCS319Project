@@ -59,6 +59,8 @@ public class FightStateController extends AbstractStateController {
         gameWorld.setBackgroundPos1(backgroundPos1);
         gameWorld.setBackgroundPos2(backgroundPos2);
 
+        gameWorld.removeRocks();
+
         playerCharacter.setDirection(new Vector2(0,0)); // At the beginning of the state, player stops
         if(gameManager.getCount()%2==0)
         {
@@ -289,7 +291,7 @@ public class FightStateController extends AbstractStateController {
         EnemyFactory enemyFactory = new EnemyFactory();
 
         // In all levels, there are skeleton warriors and grunts
-        int enemyCount = wave * 5;
+        int enemyCount = wave * 2;
         float yLocation = 0;
         for (int i = 0; i < enemyCount; i++) {
            // float yLocation = (float) Math.random() * 260;
@@ -297,14 +299,14 @@ public class FightStateController extends AbstractStateController {
             int random = (int) (Math.random() * 2);
             Enemy enemy;
             if (random == 0)
-                enemy = enemyFactory.getEnemy("skeleton_warrior", leftEdge, yLocation);
+                enemy = enemyFactory.getEnemy("SKELETON_WARRIOR", leftEdge, yLocation);
             else
-                enemy = enemyFactory.getEnemy("skeleton_warrior", leftEdge, yLocation);
+                enemy = enemyFactory.getEnemy("SKELETON_WARRIOR", leftEdge, yLocation);
 
             enemy.setDirection(new Vector2(1, 0));
             enemyArray.addAll(enemy);
             gameWorld.addGameElements(enemy);
-            yLocation = yLocation + 50;
+            yLocation = yLocation + 150;
         }
 
         if(wave > 3){

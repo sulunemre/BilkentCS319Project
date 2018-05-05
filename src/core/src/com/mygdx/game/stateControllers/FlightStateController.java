@@ -28,7 +28,7 @@ public class FlightStateController extends AbstractStateController{
     private Vector2 backgroundPos1, backgroundPos2;
 
     private static final int BACKGROUND_Y_OFFSET = -30;
-    private int rocktrigger = 450;
+    private static int rocktrigger = 450;
 
     private Random rand;
 
