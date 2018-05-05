@@ -8,10 +8,10 @@ We are inspired by 2D sidescrolling shooters and runner games.
 
 [Pixel Gladiators](http://store.steampowered.com/app/542400/Pixel_Gladiator/) A 2D sidescroller shooter game.
 ## People
-* Emre Sülün - [GitHub](https://github.com/sulunemre)
-* Adahan Yalçýnkaya - [GitHub](https://github.com/adahan96)
+* Emre SÃ¼lÃ¼n - [GitHub](https://github.com/sulunemre)
+* Adahan YalÃ§Ä±nkaya - [GitHub](https://github.com/adahan96)
 * Mihri Nur Ceren - [GitHub](https://github.com/mncrn)
 * Berk Erzin - [GitHub](https://github.com/BerkErzin)
-  * **Instructor:** Eray Tüzün
-  * **TA:** Gülden Olgun
+  * **Instructor:** Eray TÃ¼zÃ¼n
+  * **TA:** GÃ¼lden Olgun
 
