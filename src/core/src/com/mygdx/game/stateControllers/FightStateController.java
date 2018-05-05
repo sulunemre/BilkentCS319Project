@@ -28,9 +28,6 @@ public class FightStateController extends AbstractStateController {
     private boolean waveCleared;
     private Texture backgroundImage;
     private int initialPos;
-    private Array<Rock> rocks;
-    private static final int ROCK_SPACING = 125;
-    private static final int ROCK_COUNT = 3;
     private static final int BACKGROUND_Y_OFFSET = -30;
     private Vector2 backgroundPos1, backgroundPos2;
     private Sound effect;
@@ -55,12 +52,7 @@ public class FightStateController extends AbstractStateController {
         wave = 0;
         waveCleared = true;
         initialPos = (int)playerCharacter.getPosition().x;
-        rocks = new Array<Rock>();
         playerSentence = "";
-        for(int i =1; i < ROCK_COUNT; i++){
-
-            rocks.add(new Rock(i * (ROCK_SPACING + Rock.TUBE_WIDTH), 5));
-        }
 
         backgroundPos1 = new Vector2(cam.position.x - cam.viewportWidth / 2, BACKGROUND_Y_OFFSET);
         backgroundPos2 = new Vector2((cam.position.x - cam.viewportWidth / 2) + backgroundImage.getWidth(), BACKGROUND_Y_OFFSET);
