@@ -44,8 +44,8 @@ public abstract class GameElement {
         // Check bounds
         if (position.y < 0)
             position.y = 0;
-        if (position.y > 400) //TODO: sayılar düzenlenecek
-            position.y = 400;
+        if (position.y > 500) //TODO: sayılar düzenlenecek
+            position.y = 500;
     }
 
     public Vector2 getPosition() {

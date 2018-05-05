@@ -30,6 +30,7 @@ public class FlightStateController extends AbstractStateController{
     private static final int ROCK_COUNT = 3;
     private static final int ROCKMOVING_COUNT = 3;
     private static final int BACKGROUND_Y_OFFSET = -30;
+    private int rocktrigger = 450;
     private Sound effect;
     private Sound powerupSound;
     private Sound collisionSound;
@@ -56,14 +57,14 @@ public class FlightStateController extends AbstractStateController{
         gameWorld.addGameElements(playerCharacter);
 
         rocks = new Array<Rock>();
-        for(int i =1; i < ROCK_COUNT; i++){
+        /*for(int i =1; i < ROCK_COUNT; i++){
             Rock tempRock = new Rock(i * ( ROCK_SPACING + 52), 5);
             rocks.add(tempRock);
             gameWorld.addGameElements(tempRock);
         }
         for(int i =1; i < ROCKMOVING_COUNT; i++){
 
-        }
+        }*/
         gameWorld.setRocks(rocks);
 
         backgroundImage = new Texture("background1.png");
@@ -136,16 +137,31 @@ public class FlightStateController extends AbstractStateController{
             gameManager.getCurrentMusic().play();
         }
 
+        if (cam.position.x >= rocktrigger){
+            Rock rock = new Rock (cam.position.x + cam.viewportWidth, 5);
+            rocks.add(rock);
+            gameWorld.addGameElements(rock);
+            rocktrigger =  rocktrigger + 250;
+        }
+
+
+        for ( Rock rock : rocks){
+            if ( rock.getPositionx() <= cam.position.x - cam.viewportWidth){
+                gameWorld.removeGameElements(rock);
+                rocks.removeValue(rock,false);
+            }
+        }
+
 
 
         Gdx.gl.glClearColor(1,0,0,1);
 
-        for(Rock rock : rocks){
+        /*for(Rock rock : rocks){
 
             if(cam.position.x - (cam.viewportWidth / 2)> rock.getPosition().x + rock.getElementTexture().getWidth()){
                 rock.reposition(rock.getPosition().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
             }
-        }
+        }*/
 
         collision();
 
@@ -183,7 +199,7 @@ public class FlightStateController extends AbstractStateController{
             if (rock.collision(playerCharacter.getBounds())) {
                 collisionSound.play();
                 gameManager.getCurrentMusic().pause();
-                gameManager.gameOver();
+                //gameManager.gameOver();
             }
 
         }

@@ -8,8 +8,8 @@ public class Rock extends GameElement{
 
 
     private Random rand;
-    private static final int FLUCTUATION = 130;
-    private static final int LOWEST_OPENING = 120;
+    private static final int FLUCTUATION = 580;
+    private static final int LOWEST_OPENING = 10;
   //  private Rectangle rock1Bounds;
 
     public Rock(float x, float y) {
@@ -44,8 +44,8 @@ public class Rock extends GameElement{
             direction.y = 1;
             position.y = 0;
         }
-        if (position.y >= 400) { //TODO: sayılar düzenlenecek
-            position.y = 400;
+        if (position.y >= 500) { //TODO: sayılar düzenlenecek
+            position.y = 500;
             direction.y = -1;
         }
     }
