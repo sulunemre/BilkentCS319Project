@@ -21,10 +21,10 @@ public class MixedAttack implements AttackStrategy {
         if (Intersector.overlaps(meleeRangeBounds,victim.getBounds())) {
             victim.reduceHealth(50);
             attacker.resetCooldown();
-            if(attacker.getDirection().x < 0)
-                attacker.setElementTexture(attacker.leftProfileAttack);
-            else
-                attacker.setElementTexture(attacker.rightProfileAttack);
+//            if(attacker.getDirection().x < 0)
+//                attacker.setElementTexture(attacker.leftProfileAttack);
+//            else
+//                attacker.setElementTexture(attacker.rightProfileAttack);
         }
         else{
             Vector2 targetPosition = new Vector2(victim.getPosition());

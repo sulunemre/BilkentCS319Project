@@ -253,6 +253,13 @@ public class FightStateController extends AbstractStateController {
                 enemy.attack(playerCharacter);
             }
         }
+        for(Enemy enemy : enemyArray){
+            enemy.decrementCooldown();
+           // System.out.println(enemy.getCoolDown());
+            if(enemy.getCoolDown() == 0 && enemy instanceof Abomination){
+                enemy.hook(gameWorld.getPlayerCharacter());
+            }
+        }
 
         // Check player's health, if it is <= 0 game over
         if(!playerCharacter.isAlive()){
@@ -292,7 +299,7 @@ public class FightStateController extends AbstractStateController {
         EnemyFactory enemyFactory = new EnemyFactory();
 
         // In all levels, there are skeleton warriors and grunts
-        int enemyCount = wave * 5;
+        int enemyCount = wave * 1;
         float yLocation = 0;
         for (int i = 0; i < enemyCount; i++) {
            // float yLocation = (float) Math.random() * 260;
@@ -300,9 +307,9 @@ public class FightStateController extends AbstractStateController {
             int random = (int) (Math.random() * 2);
             Enemy enemy;
             if (random == 0)
-                enemy = enemyFactory.getEnemy("Boss", leftEdge, yLocation);
+                enemy = enemyFactory.getEnemy("ABOMINATION", leftEdge, yLocation);
             else
-                enemy = enemyFactory.getEnemy("Boss", leftEdge, yLocation);
+                enemy = enemyFactory.getEnemy("ABOMINATION", leftEdge, yLocation);
 
             enemy.setDirection(new Vector2(1, 0));
             enemyArray.addAll(enemy);
