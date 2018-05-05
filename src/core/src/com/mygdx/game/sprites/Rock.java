@@ -45,8 +45,8 @@ public class Rock extends GameElement{
             direction.y = 1;
             position.y = 0;
         }
-        if (position.y >= 500) { //TODO: sayılar düzenlenecek
-            position.y = 500;
+        if (position.y >= 580) { //TODO: sayılar düzenlenecek
+            position.y = 580;
             direction.y = -1;
         }
     }
