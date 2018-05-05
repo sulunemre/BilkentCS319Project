@@ -1,0 +1,39 @@
+Date: 25/02/2018
+Location: Lab
+Participants: Everybody
+
+Results:
+- System decompositions completed.
+- Half of the report written.
+- Readings assigned.
+
+Date: 28/02/2018
+Location: Library
+Participants: Everybody
+
+Results:
+- Final object design distributed among members.
+- Subsystems will be explained in the report.
+
+Date: 03/03/2018
+Location: Lab
+Participants: Everybody
+
+Results:
+- Design report (1st iteration) completed and uploaded.
+
+Date: 25/03/2018
+Location: Lab
+Participants: Everybody
+
+Results:
+- Moving rocks are implemented.
+- Class hierarchy is an absolute mess. Plans to fix it are made.
+
+Date: 30/03/2018
+Location: Library
+Participants: Everybody
+
+Results: 
+- Work distribution is made for 2nd iteration analysis report.
+- Deadline is set as Monday 02.04.2018
