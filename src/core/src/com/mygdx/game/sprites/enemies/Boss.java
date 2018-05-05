@@ -8,7 +8,7 @@ class Boss extends Enemy {
         speed = 1.5;
         damage = 20;
         coolDown = 0;
-        speed = 1.5;
+        speed = 3;
         damage = 20;
         leftProfile = new Texture("bossLeft.png");
         rightProfile = new Texture("bossRight.png");

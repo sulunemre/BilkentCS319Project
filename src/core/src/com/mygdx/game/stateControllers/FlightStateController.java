@@ -84,6 +84,7 @@ public class FlightStateController extends AbstractStateController{
 
         flightSpeed = 1;
         playerCharacter.setDirection(1,0);
+        playerCharacter.setElementTexture(PlayerCharacter.getRightProfile());
     }
 
     @Override

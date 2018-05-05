@@ -55,7 +55,8 @@ public class HighScoreStateController extends AbstractStateController {
         Collections.sort(scoreList, Collections.<Score>reverseOrder()); // Sort high score list
         scoreListString = "";
         for(int i=0; i< scoreList.size(); i++){
-            scoreListString = scoreListString + (i+1) + ") " + scoreList.get(i) + "\n";
+            if(i < 20) // Show only first 20 scoress
+                scoreListString = scoreListString + (i+1) + ") " + scoreList.get(i) + "\n";
         }
     }
 

@@ -8,8 +8,9 @@ import com.mygdx.game.sprites.PlayerCharacter;
 
 public class Abomination extends Enemy {
     Abomination(float x, float y){
-        super(x, y, 300, "abomination.png", new MixedAttack(), 175);
-        speed = 1;
+        super(x, y, 300, "abomination.png", new MeleeAttack(), 175);
+        speed = 2;
+        damage = 20;
         leftProfile = new Texture("abominationReverse.png");
         rightProfile = new Texture("abomination.png");
         leftProfileAttack = new Texture("abominationAttackLeft.png");

@@ -31,14 +31,7 @@ public class PlayerCharacter extends Character{
 
     private static Texture rightProfileAttack = new Texture("paladinAttackRight.png");
     private static Texture leftProfileAttack = new Texture("paladinAttackLeft.png");
-    private static Texture rightProfileJudgementArmor = new Texture("paladin.png");
-    private static Texture leftProfileJudgementArmor = new Texture("paladinReverse.png");
-    private static Texture rightProfileJudgementArmorAttack = new Texture("paladin.png");
-    private static Texture leftProfileJudgementArmorAttack = new Texture("paladinReverse.png");
-    private static Texture rightProfileLightswornArmor = new Texture("paladin.png");
-    private static Texture leftProfileLightswornArmor = new Texture("paladinReverse.png");
-    private static Texture rightProfileLightswornArmorAttack = new Texture("paladin.png");
-    private static Texture leftProfileLightswornArmorAttack = new Texture("paladinReverse.png");
+
     private Vector2 meleeDirection;
     private int armorType;
 

@@ -15,7 +15,6 @@ public class GameOverStateController extends AbstractStateController {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
             controlledState.dispose();
             gameStateManager.set(new MenuState());
-
         }
     }
 

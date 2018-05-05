@@ -16,7 +16,7 @@ import com.mygdx.game.stateControllers.FightStateController;
 
 public class PlayStateFight extends State {
 
-    private BitmapFont scoreText, waveText, healthText, manaText, playerSentenceText;
+    private BitmapFont scoreText, waveText, healthText, manaText, playerSentenceText, damageText;
 
     private double score;
     private Texture backgroundImage;
@@ -26,11 +26,12 @@ public class PlayStateFight extends State {
     public PlayStateFight() {
         controller = new FightStateController(this);
         backgroundImage = new Texture("background1.png");
-        controller.getCam().setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
+        controller.getCam().setToOrtho(false, MyGdxGame.WIDTH , MyGdxGame.HEIGHT);
         scoreText = new BitmapFont();
         waveText = new BitmapFont();
         healthText = new BitmapFont();
         manaText = new BitmapFont();
+        damageText = new BitmapFont();
         playerSentenceText = new BitmapFont();
 
         backgroundPos1 = GameWorld.getInstance().getBackgroundPos1();
@@ -58,10 +59,11 @@ public class PlayStateFight extends State {
                 sb.draw(ge.getElementTexture(), ge.getPosition().x, ge.getPosition().y);
             }
 
-            scoreText.draw(sb, "Score:" + GameManager.getInstance().getScore(), player.getPosition().x - 300, 10);
-            waveText.draw(sb, "Wave:" + ((FightStateController) controller).getWave(), player.getPosition().x - 200, 10);
-            healthText.draw(sb, "Health:" + player.getHealth(), player.getPosition().x - 100, 10);
-            manaText.draw(sb, "Mana:" + player.getMana(), player.getPosition().x, 10);
+            scoreText.draw(sb, "Score: " + (int) (GameManager.getInstance().getScore()), player.getPosition().x - 300, 20);
+            waveText.draw(sb, "Wave: " + ((FightStateController) controller).getWave(), player.getPosition().x - 175, 20);
+            healthText.draw(sb, "Health: " + player.getHealth(), player.getPosition().x - 100, 20);
+            manaText.draw(sb, "Mana: " + player.getMana(), player.getPosition().x, 20);
+            damageText.draw(sb, "Damage: " + player.getDamage(), player.getPosition().x + 100, 20);
             playerSentenceText.draw(sb, ((FightStateController) controller).getPlayerSentence(), player.getPosition().x + 50, player.getPosition().y + 45);
             sb.end();
 

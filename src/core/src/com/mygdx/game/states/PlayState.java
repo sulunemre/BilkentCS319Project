@@ -17,16 +17,16 @@ public class PlayState extends State {
     private Texture backgroundImage;
     private Vector2 backgroundPos1, backgroundPos2;
     private GameWorld gameWorld;
-    private BitmapFont healthText;
-
-    private BitmapFont scoreText;
+    private BitmapFont healthText, manaText, scoreText, damageText;
 
 
     public PlayState() {
         controller = new FlightStateController(this);
         gameWorld = GameWorld.getInstance();
         scoreText = new BitmapFont();
-        healthText=new BitmapFont();
+        healthText = new BitmapFont();
+        manaText = new BitmapFont();
+        damageText = new BitmapFont();
         playerCharacter = gameWorld.getPlayerCharacter();
         backgroundPos1 = gameWorld.getBackgroundPos1();
         backgroundPos2 = gameWorld.getBackgroundPos2();
@@ -44,8 +44,10 @@ public class PlayState extends State {
             sb.draw(ge.getElementTexture(), ge.getPosition().x, ge.getPosition().y);
         }
         
-        scoreText.draw(sb, "Score:" + gameManager.getScore(), playerCharacter.getPosition().x - 300, 20);
-        healthText.draw(sb, "Health:" + playerCharacter.getHealth(), playerCharacter.getPosition().x - 200, 20);
+        scoreText.draw(sb, "Score: " + (int) (gameManager.getScore()), playerCharacter.getPosition().x - 300, 20);
+        healthText.draw(sb, "Health: " + playerCharacter.getHealth(), playerCharacter.getPosition().x - 150, 20);
+        healthText.draw(sb, "Mana: " + playerCharacter.getMana(), playerCharacter.getPosition().x - 50, 20);
+        damageText.draw(sb, "Damage: " + playerCharacter.getDamage(), playerCharacter.getPosition().x + 50, 20);
         sb.end();
     }
 

@@ -79,14 +79,14 @@ public class FightStateController extends AbstractStateController {
            //  playerCharacter.setDirection(new Vector2(0,1));
             if ( moveCheck(playerCharacter, 0, 10)) {
                 playerCharacter.moveUp();
-            }
+           }
         }
           if(input.isKeyPressed(Input.Keys.S)){
              playerCharacter.setSpeed(10);
           //   playerCharacter.setDirection(new Vector2(0,-1));
-            if ( moveCheck(playerCharacter, 0, -10)){
+              if ( moveCheck(playerCharacter, 0, -10)){
                 playerCharacter.moveDown();
-            }
+           }
          }
           if(input.isKeyPressed(Input.Keys.A)){
 
@@ -157,7 +157,7 @@ public class FightStateController extends AbstractStateController {
                 for(Enemy enemy : enemyArray){
                     Rectangle enemyBound = enemy.getBounds();
                     if(Intersector.overlaps(meleeRangeBounds, enemyBound)){
-                        enemy.reduceHealth(10);
+                        enemy.reduceHealth(playerCharacter.getDamage());
                         System.out.println("melee oldu");
                     }
                 }
@@ -220,10 +220,10 @@ public class FightStateController extends AbstractStateController {
         //for(Enemy enemy : enemyArray){
         for ( int i = 0; i < enemyArray.size; i++){
             enemyArray.get(i).chase( gameWorld.getPlayerCharacter().getPosition().x , gameWorld.getPlayerCharacter().getPosition().y);
-            if (moveCheck(enemyArray.get(i))){
-            }
-            else
-                enemyArray.get(i).setDirection(0,0);
+          //  if (moveCheck(enemyArray.get(i))){                // MOVECHECKI KALDIRIYORUM SIMDILIK
+          //  }
+          //  else
+                //enemyArray.get(i).setDirection(0,0);
         }
 
         if (gameWorld.getPlayerCharacter().getPosition().x < initialPos - 100)
@@ -269,12 +269,12 @@ public class FightStateController extends AbstractStateController {
         }
 
         for (HolyLight projectile : gameWorld.getEnemyProjectiles()){
-            if ( projectile.getPositionx() <= initialPos - 100 || projectile.getPositionx() >= initialPos + 500 || projectile.getPositiony() <= 0 || projectile.getPositiony() >= 400)
+            if ( projectile.getPositionx() <= initialPos - 100 || projectile.getPositionx() >= initialPos + 500 || projectile.getPositiony() <= 0 || projectile.getPositiony() >= 650)
                 gameWorld.removeGameElements(projectile);
         }
 
         for (HolyLight projectile : gameWorld.getPlayerProjectiles()){
-            if ( projectile.getPositionx() <= initialPos - 100 || projectile.getPositionx() >= initialPos + 500 || projectile.getPositiony() <= 0 || projectile.getPositiony() >= 400)
+            if ( projectile.getPositionx() <= initialPos - 100 || projectile.getPositionx() >= initialPos + 500 || projectile.getPositiony() <= 0 || projectile.getPositiony() >= 650)
                 gameWorld.removeGameElements(projectile);
         }
 //        for(Enemy enemy : gameWorld.getEnemyArray()){
@@ -335,7 +335,7 @@ public class FightStateController extends AbstractStateController {
             yLocation = yLocation + 150;
         }
 
-        if (wave % 5 == 0) {
+        if (wave % 3 == 0) {
             // Create one boss
             Enemy boss = enemyFactory.getEnemy("BOSS", leftEdge, yLocation);
             boss.setDirection(new Vector2(1, 0));
@@ -395,10 +395,10 @@ public class FightStateController extends AbstractStateController {
             if ( rock.collision(temp))
                 return false;
         }
-        for (PlayerCharacter player : gameWorld.getPlayerCharacterArray()){
-                if (player.collision(temp))
-                    return false;
-        }
+      ///  for (PlayerCharacter player : gameWorld.getPlayerCharacterArray()){
+       //         if (player.collision(temp))
+      //              return false;
+     //   }
         return true;
     }
 
@@ -406,10 +406,10 @@ public class FightStateController extends AbstractStateController {
         Rectangle temp = new Rectangle (element.getBounds());
         temp.setPosition( temp.getX() + x, temp.getY() + y);
 
-        for (Enemy enemy : gameWorld.getEnemyArray()){
-                if (enemy.collision(temp))
-                    return false;
-        }
+       // for (Enemy enemy : gameWorld.getEnemyArray()){
+     //           if (enemy.collision(temp))
+      //              return false;
+       // }
         for (Rock rock : gameWorld.getRocks()){
             if ( rock.collision(temp))
                 return false;

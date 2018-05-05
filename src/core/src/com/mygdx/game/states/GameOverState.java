@@ -29,7 +29,7 @@ public class GameOverState extends State {
         controller.getCam().position.set(new Vector2(MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2), 0);
         scoreText.draw(menuBatch, "Game over "
                 + gameManager.getPlayerName()
-                + "\nYour score: " + gameManager.getScore()
+                + "\nYour score: " + (int) (gameManager.getScore())
                 + "\n\nPress ENTER to continue", 350, 300);
         menuBatch.end();
     }
