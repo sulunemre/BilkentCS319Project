@@ -29,7 +29,7 @@ public class FightStateController extends AbstractStateController {
     private Texture backgroundImage;
     private int initialPos;
     private Array<Rock> rocks;
-    private Array<RockMoving> rocksM;
+    //private Array<RockMoving> rocksM;
     private static final int ROCK_SPACING = 125;
     private static final int ROCK_COUNT = 3;
     private static final int BACKGROUND_Y_OFFSET = -30;
@@ -57,7 +57,6 @@ public class FightStateController extends AbstractStateController {
         waveCleared = true;
         initialPos = (int)playerCharacter.getPosition().x;
         rocks = new Array<Rock>();
-        rocksM = new Array<RockMoving>();
         playerSentence = "";
         for(int i =1; i < ROCK_COUNT; i++){
 

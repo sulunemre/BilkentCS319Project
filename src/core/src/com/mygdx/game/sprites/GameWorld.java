@@ -14,7 +14,6 @@ public class GameWorld implements Serializable {
     private PlayerCharacter playerCharacter;
     private Array<PlayerCharacter> playerCharacterArray = new Array<PlayerCharacter>();
     private Array<Rock> rocks = new Array<Rock>();;
-    private Array<RockMoving> rocksMoving = new Array<RockMoving>();;
     private Array<Enemy> enemyArray = new Array<Enemy>();;
     private Array<Powerups> powerupsArray = new Array<Powerups>();
     private Array<HolyLight> playerProjectiles = new Array<HolyLight>();
@@ -76,14 +75,6 @@ public class GameWorld implements Serializable {
         this.rocks = rocks;
     }
 
-    public Array<RockMoving> getRocksMoving() {
-        return rocksMoving;
-    }
-
-    public void setRocksMoving(Array<RockMoving> rocksMoving) {
-        this.rocksMoving = rocksMoving;
-    }
-
     public Array<Enemy> getEnemyArray() {
         return enemyArray;
     }
@@ -132,7 +123,6 @@ public class GameWorld implements Serializable {
         gameElementsArray.clear();
         playerCharacterArray.clear();
         rocks.clear();
-        rocksMoving.clear();
         enemyArray.clear();
         powerupsArray.clear();
         playerProjectiles.clear();

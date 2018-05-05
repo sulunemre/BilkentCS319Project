@@ -18,12 +18,36 @@ public class Rock extends GameElement{
         rand = new Random();
         position = new Vector2(x, rand.nextInt(FLUCTUATION) + LOWEST_OPENING);
         bounds = new Rectangle(position.x, position.y, elementTexture.getWidth(), elementTexture.getHeight());
-
+        direction = new Vector2(0,0);
     }
 
+    public Rock(float x, float y, int speed) {
+        super(x, y, "rock.png");
 
+        rand = new Random();
+        position = new Vector2(x, rand.nextInt(FLUCTUATION) + LOWEST_OPENING);
+        bounds = new Rectangle(position.x, position.y, elementTexture.getWidth(), elementTexture.getHeight());
+        this.speed = speed;
+        direction = new Vector2(0,1);
+    }
 
+    public void update(float dt){
+        Vector2 velocity = direction.scl((float) speed); // Transform unit vector to velocity
+        position.mulAdd(velocity, dt*10); // Add velocity to position
 
+        bounds.setPosition(position); // Update frame bounds accordingly
+        direction.nor(); // Transform direction vector to unit vector
+
+        // Check bounds
+        if (position.y <= 0){
+            direction.y = 1;
+            position.y = 0;
+        }
+        if (position.y >= 400) { //TODO: sayılar düzenlenecek
+            position.y = 400;
+            direction.y = -1;
+        }
+    }
 
 
 

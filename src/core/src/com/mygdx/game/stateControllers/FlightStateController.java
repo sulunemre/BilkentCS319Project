@@ -22,7 +22,6 @@ public class FlightStateController extends AbstractStateController{
     private GameStateManager gameStateManager;
     private PlayerCharacter playerCharacter;
     private Array<Rock> rocks;
-    private Array<RockMoving> rocksMoving;
 
 
     private Texture backgroundImage;
@@ -58,19 +57,16 @@ public class FlightStateController extends AbstractStateController{
         gameWorld.addGameElements(playerCharacter);
 
         rocks = new Array<Rock>();
-        rocksMoving = new Array<RockMoving>();
+        //rocksMoving = new Array<RockMoving>();
         for(int i =1; i < ROCK_COUNT; i++){
             Rock tempRock = new Rock(i * ( ROCK_SPACING + 52), 5);
             rocks.add(tempRock);
             gameWorld.addGameElements(tempRock);
         }
         for(int i =1; i < ROCKMOVING_COUNT; i++){
-            RockMoving tempRockMoving = new RockMoving((i * ( ROCK_SPACING + 52) + ROCK_SPACING/2), 5);
-            rocksMoving.add(tempRockMoving);
-            gameWorld.addGameElements(tempRockMoving);
+
         }
         gameWorld.setRocks(rocks);
-        gameWorld.setRocksMoving(rocksMoving);
 
         backgroundImage = new Texture("background1.png");
       //  backgroundPos1 = new Vector2(bgposx1, bgposy1);
@@ -155,30 +151,6 @@ public class FlightStateController extends AbstractStateController{
 
         collision();
 
-        for (RockMoving rock : rocksMoving ){
-            if(rock.getDirection().y == 0)
-                rock.setDirection(new Vector2(0,0));
-
-            if ((rock.getPosition()).y > 250){
-                rock.setDirection(new Vector2(0,0));
-            }
-
-            if ((rock.getPosition()).y < 15){
-                rock.setDirection(new Vector2(0,0));
-            }
-
-            if(cam.position.x - (cam.viewportWidth / 2)> rock.getPosition().x + rock.getElementTexture().getWidth()){
-                rock.reposition(rock.getPosition().x + ((Rock.TUBE_WIDTH + ROCK_SPACING) * ROCK_COUNT));
-            }
-
-            rock.move();
-            rock.setRockBound();
-
-            if(rock.collision(playerCharacter.getBounds()))
-                gameStateManager.set(new PlayState());
-
-        }
-
         cam.update();
 
         // Powerup cration logic
@@ -205,14 +177,6 @@ public class FlightStateController extends AbstractStateController{
                 collisionSound.play();
                 gameManager.getCurrentMusic().pause();
 
-            }
-
-        }
-        for(Rock rock: gameWorld.getRocksMoving()) {
-            if (rock.collision(playerCharacter.getBounds()))
-            {
-                gameManager.getCurrentMusic().pause();
-                gameManager.gameOver();
             }
 
         }

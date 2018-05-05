@@ -9,10 +9,24 @@ public class RockMoving extends Rock {
 
     public RockMoving(float x, float y) {
         super(x,y);
-        direction = new Vector2(0,0);
+        direction = new Vector2(0,1);
     }
 
+    public void update(float dt){
+        Vector2 velocity = direction.scl((float) speed); // Transform unit vector to velocity
+        position.mulAdd(velocity, dt*10); // Add velocity to position
 
+        bounds.setPosition(position); // Update frame bounds accordingly
+        direction.nor(); // Transform direction vector to unit vector
+
+        // Check bounds
+        if (position.y <= 0){
+
+        }
+            position.y = 0;
+        if (position.y >= 400) //TODO: sayılar düzenlenecek
+            position.y = 400;
+    }
 
 
 
