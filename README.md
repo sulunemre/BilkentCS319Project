@@ -14,4 +14,7 @@ We are inspired by 2D sidescrolling shooters and runner games.
 * Berk Erzin - [GitHub](https://github.com/BerkErzin)
   * **Instructor:** Eray Tüzün
   * **TA:** Gülden Olgun
+  
+  ## How to play
+  Download the latest version [jar](https://github.com/sulunemre/BilkentCS319Project/releases/download/1/Fight.or.Flight.jar) and enjoy!
 
